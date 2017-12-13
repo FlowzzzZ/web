@@ -1,0 +1,67 @@
+html,body,span,p,div{
+	margin: 0;
+	padding: 0;
+	
+	
+}
+.clearfix :after{
+	display: table
+	
+	
+}
+.box{
+	border: 1px solid #999;
+	margin: 20px;
+	padding: 20px;
+	background: #eee;
+}
+
+
+.left-box{
+	weight:200px;
+	float:left;
+	padding: 20px;
+	background: white;	
+	border: 1px solid #999;
+}
+.left-box span{
+	
+}
+.team-logo{
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	background: #dfdfdf;
+	border: 1px solid #999999;
+	
+	
+}
+.right-box{
+	weight:120px;
+	float:right;
+	background: white;
+	padding: 20px;
+	border: 1px solid #999;
+}
+.person-logo{
+	
+	border: 1px solid #999;
+	weight:80;
+	height: 80px;
+	margin: 20px;
+	background: #dfdfdf;
+	line-height: 80px;
+	
+	
+}
+.center-box{
+	margin:0 180px 0 220px;
+	background: white;
+	border: 1px solid #999;
+	
+	
+}
+.center-box p{
+	margin:20px 50px;
+	
+}

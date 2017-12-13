@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Image Gallery</title>
+		<link rel="stylesheet" href="css/layout.css" />
+	</head>
+	<body>
+		<h1>Snapshots</h1>
+		<ul id="imagegallery">
+			<li>
+				<a href="images/fireworks.jpg" onclick="showPic(this);return false;"  title="A fireworks display">
+				<img src="images/tumbnail/fireworks.jpg" alt="Fireworks" />
+				</a>
+			</li>
+			<li>
+				<a href="images/coffee.jpg" onclick="showPic(this);return false;" title="A cup of black coffee">
+				<img src="images/tumbnail/coffee.jpg" alt="Coffee" />
+				</a>
+			</li>
+			<li>
+				<a href="images/rose.jpg" onclick="showPic(this);return false;" title="A red,red rose">
+				<img src="images/tumbnail/rose.jpg" alt="Rose" />
+				</a>
+			</li>
+			<li>
+				<a href="images/bigben.jpg" onclick="showPic(this);return false;" title="The famous clock">
+				<img src="images/tumbnail/bigben.jpg" alt="Bigben" />
+				</a>
+			</li>
+		</ul>
+		<script type="text/javascript" src="js/showPic.js" ></script>
+	</body>
+</html>

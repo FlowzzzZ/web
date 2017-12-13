@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title> 2048-game </title>
+ <meta charset="utf-8" />
+ <style media="screen"></style>
+ <link href="css/2048.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+ <div id="game">
+ </div>
+ <div class="head clear"><!--这是两个类名 head和clear-->
+ <div class="scoreShow left">
+ <span>Score:</span>
+ <span id="score"></span>
+ </div>
+ <div class="selction right" onclick="getModel(event)">
+ <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="model" value="3">3X3</a>
+ <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="model" value="4">4X4</a>
+ <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="model" type="button">5X5</a>
+ <a href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" class="model" type="button">6X6</a>
+ <!-- <input type="text" id="model"> -->
+ <!-- <button type="button" name="button" id="set">设置游戏</button> -->
+ </div>
+ </div>
+ <div id="gridPanel">
+ </div>
+ <div id="gameover">
+ <h1 id="Score"></h1>
+ <a  href="#" id="again" onclick="obj.gameStart()">Try again</a>
+ </div>
+ <script src="js/2048.js"></script>
+ 
+ 
+</body>
+</html>

@@ -1,0 +1,54 @@
+body{
+	/*浏览器不支持则切换到下一个*/
+	font-family: helvetica,arial,serif;
+	color:#333;
+	background: #ccc;
+	margin: 1em 10%;
+	
+}
+h1{
+	color: #333;
+	/*背景透明*/
+	background-color: transparent;
+	
+}
+a{
+	color:#c60;
+	background-color: transparent;
+	/*加粗*/
+	font-weight: bold;
+	/*定义标准的文本*/
+	text-decoration: none;
+	
+	
+	
+		
+}
+ul{
+	padding:0;
+}
+li{
+	float: left;
+	padding:1em;
+	/*去掉list圆点*/
+	list-style: none;
+	
+	
+}
+
+#imagegallery{
+	list-style: none;
+}
+#imagegallery li{
+	display: inline;
+}
+#imagegallery li a img{
+	border:  0;
+}
+img{
+	clear: both;
+	display: block;
+	
+	
+	
+} 
