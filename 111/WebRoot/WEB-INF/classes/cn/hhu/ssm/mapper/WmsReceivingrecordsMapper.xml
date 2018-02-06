@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsReceivingrecordsMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsReceivingrecords" >
+    <id column="ReceivingRecords_ID" property="receivingrecordsId" jdbcType="INTEGER" />
+    <result column="ReceivingRecords_Number" property="receivingrecordsNumber" jdbcType="VARCHAR" />
+    <result column="IMOrder_ID" property="imorderId" jdbcType="INTEGER" />
+    <result column="ShipperName" property="shippername" jdbcType="VARCHAR" />
+    <result column="Registration" property="registration" jdbcType="VARCHAR" />
+    <result column="SpecifiationType" property="specifiationtype" jdbcType="VARCHAR" />
+    <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+    <result column="ProduceDate" property="producedate" jdbcType="TIMESTAMP" />
+    <result column="FailureDate" property="failuredate" jdbcType="TIMESTAMP" />
+    <result column="ArrivedGoodsNumber" property="arrivedgoodsnumber" jdbcType="REAL" />
+    <result column="IMDate" property="imdate" jdbcType="TIMESTAMP" />
+    <result column="StorageRequirement" property="storagerequirement" jdbcType="VARCHAR" />
+    <result column="SupplierName" property="suppliername" jdbcType="VARCHAR" />
+    <result column="CountNumber" property="countnumber" jdbcType="VARCHAR" />
+    <result column="LocationName" property="locationname" jdbcType="VARCHAR" />
+    <result column="ArrivedGoodsMan" property="arrivedgoodsman" jdbcType="VARCHAR" />
+    <result column="HitShelvesMan" property="hitshelvesman" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="RouteTemperature" property="routetemperature" jdbcType="VARCHAR" />
+    <result column="RecordTemperature" property="recordtemperature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ReceivingRecords_ID, ReceivingRecords_Number, IMOrder_ID, ShipperName, Registration, 
+    SpecifiationType, BatchNumber, ProduceDate, FailureDate, ArrivedGoodsNumber, IMDate, 
+    StorageRequirement, SupplierName, CountNumber, LocationName, ArrivedGoodsMan, HitShelvesMan, 
+    Remark, RouteTemperature, RecordTemperature
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsReceivingrecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_receivingrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_receivingrecords
+    where ReceivingRecords_ID = #{receivingrecordsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_receivingrecords
+    where ReceivingRecords_ID = #{receivingrecordsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsReceivingrecordsExample" >
+    delete from wms_receivingrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsReceivingrecords" >
+    insert into wms_receivingrecords (ReceivingRecords_ID, ReceivingRecords_Number, 
+      IMOrder_ID, ShipperName, Registration, 
+      SpecifiationType, BatchNumber, ProduceDate, 
+      FailureDate, ArrivedGoodsNumber, IMDate, 
+      StorageRequirement, SupplierName, CountNumber, 
+      LocationName, ArrivedGoodsMan, HitShelvesMan, 
+      Remark, RouteTemperature, RecordTemperature
+      )
+    values (#{receivingrecordsId,jdbcType=INTEGER}, #{receivingrecordsNumber,jdbcType=VARCHAR}, 
+      #{imorderId,jdbcType=INTEGER}, #{shippername,jdbcType=VARCHAR}, #{registration,jdbcType=VARCHAR}, 
+      #{specifiationtype,jdbcType=VARCHAR}, #{batchnumber,jdbcType=VARCHAR}, #{producedate,jdbcType=TIMESTAMP}, 
+      #{failuredate,jdbcType=TIMESTAMP}, #{arrivedgoodsnumber,jdbcType=REAL}, #{imdate,jdbcType=TIMESTAMP}, 
+      #{storagerequirement,jdbcType=VARCHAR}, #{suppliername,jdbcType=VARCHAR}, #{countnumber,jdbcType=VARCHAR}, 
+      #{locationname,jdbcType=VARCHAR}, #{arrivedgoodsman,jdbcType=VARCHAR}, #{hitshelvesman,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{routetemperature,jdbcType=VARCHAR}, #{recordtemperature,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsReceivingrecords" >
+    insert into wms_receivingrecords
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="receivingrecordsId != null" >
+        ReceivingRecords_ID,
+      </if>
+      <if test="receivingrecordsNumber != null" >
+        ReceivingRecords_Number,
+      </if>
+      <if test="imorderId != null" >
+        IMOrder_ID,
+      </if>
+      <if test="shippername != null" >
+        ShipperName,
+      </if>
+      <if test="registration != null" >
+        Registration,
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType,
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber,
+      </if>
+      <if test="producedate != null" >
+        ProduceDate,
+      </if>
+      <if test="failuredate != null" >
+        FailureDate,
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber,
+      </if>
+      <if test="imdate != null" >
+        IMDate,
+      </if>
+      <if test="storagerequirement != null" >
+        StorageRequirement,
+      </if>
+      <if test="suppliername != null" >
+        SupplierName,
+      </if>
+      <if test="countnumber != null" >
+        CountNumber,
+      </if>
+      <if test="locationname != null" >
+        LocationName,
+      </if>
+      <if test="arrivedgoodsman != null" >
+        ArrivedGoodsMan,
+      </if>
+      <if test="hitshelvesman != null" >
+        HitShelvesMan,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="routetemperature != null" >
+        RouteTemperature,
+      </if>
+      <if test="recordtemperature != null" >
+        RecordTemperature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="receivingrecordsId != null" >
+        #{receivingrecordsId,jdbcType=INTEGER},
+      </if>
+      <if test="receivingrecordsNumber != null" >
+        #{receivingrecordsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imorderId != null" >
+        #{imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="shippername != null" >
+        #{shippername,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnumber != null" >
+        #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="producedate != null" >
+        #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        #{arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="imdate != null" >
+        #{imdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storagerequirement != null" >
+        #{storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliername != null" >
+        #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="countnumber != null" >
+        #{countnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null" >
+        #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivedgoodsman != null" >
+        #{arrivedgoodsman,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesman != null" >
+        #{hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="routetemperature != null" >
+        #{routetemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="recordtemperature != null" >
+        #{recordtemperature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsReceivingrecordsExample" resultType="java.lang.Integer" >
+    select count(*) from wms_receivingrecords
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_receivingrecords
+    <set >
+      <if test="record.receivingrecordsId != null" >
+        ReceivingRecords_ID = #{record.receivingrecordsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receivingrecordsNumber != null" >
+        ReceivingRecords_Number = #{record.receivingrecordsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imorderId != null" >
+        IMOrder_ID = #{record.imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shippername != null" >
+        ShipperName = #{record.shippername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registration != null" >
+        Registration = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifiationtype != null" >
+        SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchnumber != null" >
+        BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producedate != null" >
+        ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failuredate != null" >
+        FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber = #{record.arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="record.imdate != null" >
+        IMDate = #{record.imdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storagerequirement != null" >
+        StorageRequirement = #{record.storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suppliername != null" >
+        SupplierName = #{record.suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countnumber != null" >
+        CountNumber = #{record.countnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationname != null" >
+        LocationName = #{record.locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrivedgoodsman != null" >
+        ArrivedGoodsMan = #{record.arrivedgoodsman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitshelvesman != null" >
+        HitShelvesMan = #{record.hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.routetemperature != null" >
+        RouteTemperature = #{record.routetemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordtemperature != null" >
+        RecordTemperature = #{record.recordtemperature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_receivingrecords
+    set ReceivingRecords_ID = #{record.receivingrecordsId,jdbcType=INTEGER},
+      ReceivingRecords_Number = #{record.receivingrecordsNumber,jdbcType=VARCHAR},
+      IMOrder_ID = #{record.imorderId,jdbcType=INTEGER},
+      ShipperName = #{record.shippername,jdbcType=VARCHAR},
+      Registration = #{record.registration,jdbcType=VARCHAR},
+      SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      ArrivedGoodsNumber = #{record.arrivedgoodsnumber,jdbcType=REAL},
+      IMDate = #{record.imdate,jdbcType=TIMESTAMP},
+      StorageRequirement = #{record.storagerequirement,jdbcType=VARCHAR},
+      SupplierName = #{record.suppliername,jdbcType=VARCHAR},
+      CountNumber = #{record.countnumber,jdbcType=VARCHAR},
+      LocationName = #{record.locationname,jdbcType=VARCHAR},
+      ArrivedGoodsMan = #{record.arrivedgoodsman,jdbcType=VARCHAR},
+      HitShelvesMan = #{record.hitshelvesman,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      RouteTemperature = #{record.routetemperature,jdbcType=VARCHAR},
+      RecordTemperature = #{record.recordtemperature,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsReceivingrecords" >
+    update wms_receivingrecords
+    <set >
+      <if test="receivingrecordsNumber != null" >
+        ReceivingRecords_Number = #{receivingrecordsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imorderId != null" >
+        IMOrder_ID = #{imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="shippername != null" >
+        ShipperName = #{shippername,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        Registration = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="producedate != null" >
+        ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber = #{arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="imdate != null" >
+        IMDate = #{imdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storagerequirement != null" >
+        StorageRequirement = #{storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliername != null" >
+        SupplierName = #{suppliername,jdbcType=VARCHAR},
+      </if>
+      <if test="countnumber != null" >
+        CountNumber = #{countnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null" >
+        LocationName = #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivedgoodsman != null" >
+        ArrivedGoodsMan = #{arrivedgoodsman,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesman != null" >
+        HitShelvesMan = #{hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="routetemperature != null" >
+        RouteTemperature = #{routetemperature,jdbcType=VARCHAR},
+      </if>
+      <if test="recordtemperature != null" >
+        RecordTemperature = #{recordtemperature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ReceivingRecords_ID = #{receivingrecordsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsReceivingrecords" >
+    update wms_receivingrecords
+    set ReceivingRecords_Number = #{receivingrecordsNumber,jdbcType=VARCHAR},
+      IMOrder_ID = #{imorderId,jdbcType=INTEGER},
+      ShipperName = #{shippername,jdbcType=VARCHAR},
+      Registration = #{registration,jdbcType=VARCHAR},
+      SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      ArrivedGoodsNumber = #{arrivedgoodsnumber,jdbcType=REAL},
+      IMDate = #{imdate,jdbcType=TIMESTAMP},
+      StorageRequirement = #{storagerequirement,jdbcType=VARCHAR},
+      SupplierName = #{suppliername,jdbcType=VARCHAR},
+      CountNumber = #{countnumber,jdbcType=VARCHAR},
+      LocationName = #{locationname,jdbcType=VARCHAR},
+      ArrivedGoodsMan = #{arrivedgoodsman,jdbcType=VARCHAR},
+      HitShelvesMan = #{hitshelvesman,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      RouteTemperature = #{routetemperature,jdbcType=VARCHAR},
+      RecordTemperature = #{recordtemperature,jdbcType=VARCHAR}
+    where ReceivingRecords_ID = #{receivingrecordsId,jdbcType=INTEGER}
+  </update>
+</mapper>

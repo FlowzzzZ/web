@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsImplanLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsImplanLog" >
+    <id column="IMPlan_LogID" property="implanLogid" jdbcType="INTEGER" />
+    <result column="IMPlan_ID" property="implanId" jdbcType="INTEGER" />
+    <result column="IMPlan_PreModifiedState" property="implanPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="IMPlan_ModifiedState" property="implanModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IMPlan_LogID, IMPlan_ID, IMPlan_PreModifiedState, IMPlan_ModifiedState, Employee_ID, 
+    ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsImplanLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_implan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_implan_log
+    where IMPlan_LogID = #{implanLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_implan_log
+    where IMPlan_LogID = #{implanLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsImplanLogExample" >
+    delete from wms_implan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsImplanLog" >
+    insert into wms_implan_log (IMPlan_LogID, IMPlan_ID, IMPlan_PreModifiedState, 
+      IMPlan_ModifiedState, Employee_ID, ModifyMan, 
+      ModifiedDate)
+    values (#{implanLogid,jdbcType=INTEGER}, #{implanId,jdbcType=INTEGER}, #{implanPremodifiedstate,jdbcType=VARCHAR}, 
+      #{implanModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsImplanLog" >
+    insert into wms_implan_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="implanLogid != null" >
+        IMPlan_LogID,
+      </if>
+      <if test="implanId != null" >
+        IMPlan_ID,
+      </if>
+      <if test="implanPremodifiedstate != null" >
+        IMPlan_PreModifiedState,
+      </if>
+      <if test="implanModifiedstate != null" >
+        IMPlan_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="implanLogid != null" >
+        #{implanLogid,jdbcType=INTEGER},
+      </if>
+      <if test="implanId != null" >
+        #{implanId,jdbcType=INTEGER},
+      </if>
+      <if test="implanPremodifiedstate != null" >
+        #{implanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="implanModifiedstate != null" >
+        #{implanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsImplanLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_implan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_implan_log
+    <set >
+      <if test="record.implanLogid != null" >
+        IMPlan_LogID = #{record.implanLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.implanId != null" >
+        IMPlan_ID = #{record.implanId,jdbcType=INTEGER},
+      </if>
+      <if test="record.implanPremodifiedstate != null" >
+        IMPlan_PreModifiedState = #{record.implanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.implanModifiedstate != null" >
+        IMPlan_ModifiedState = #{record.implanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_implan_log
+    set IMPlan_LogID = #{record.implanLogid,jdbcType=INTEGER},
+      IMPlan_ID = #{record.implanId,jdbcType=INTEGER},
+      IMPlan_PreModifiedState = #{record.implanPremodifiedstate,jdbcType=VARCHAR},
+      IMPlan_ModifiedState = #{record.implanModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsImplanLog" >
+    update wms_implan_log
+    <set >
+      <if test="implanId != null" >
+        IMPlan_ID = #{implanId,jdbcType=INTEGER},
+      </if>
+      <if test="implanPremodifiedstate != null" >
+        IMPlan_PreModifiedState = #{implanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="implanModifiedstate != null" >
+        IMPlan_ModifiedState = #{implanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IMPlan_LogID = #{implanLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsImplanLog" >
+    update wms_implan_log
+    set IMPlan_ID = #{implanId,jdbcType=INTEGER},
+      IMPlan_PreModifiedState = #{implanPremodifiedstate,jdbcType=VARCHAR},
+      IMPlan_ModifiedState = #{implanModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where IMPlan_LogID = #{implanLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsFunclistLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsFunclistLog" >
+    <id column="FuncList_LogID" property="funclistLogid" jdbcType="INTEGER" />
+    <result column="Func_ID" property="funcId" jdbcType="INTEGER" />
+    <result column="FuncList_ID" property="funclistId" jdbcType="INTEGER" />
+    <result column="FuncList_PreModifiedState" property="funclistPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="FuncList_ModifiedState" property="funclistModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FuncList_LogID, Func_ID, FuncList_ID, FuncList_PreModifiedState, FuncList_ModifiedState, 
+    Employee_ID, ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsFunclistLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_funclist_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_funclist_log
+    where FuncList_LogID = #{funclistLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_funclist_log
+    where FuncList_LogID = #{funclistLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsFunclistLogExample" >
+    delete from wms_funclist_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsFunclistLog" >
+    insert into wms_funclist_log (FuncList_LogID, Func_ID, FuncList_ID, 
+      FuncList_PreModifiedState, FuncList_ModifiedState, 
+      Employee_ID, ModifyMan, ModifiedDate
+      )
+    values (#{funclistLogid,jdbcType=INTEGER}, #{funcId,jdbcType=INTEGER}, #{funclistId,jdbcType=INTEGER}, 
+      #{funclistPremodifiedstate,jdbcType=VARCHAR}, #{funclistModifiedstate,jdbcType=VARCHAR}, 
+      #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, #{modifieddate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsFunclistLog" >
+    insert into wms_funclist_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="funclistLogid != null" >
+        FuncList_LogID,
+      </if>
+      <if test="funcId != null" >
+        Func_ID,
+      </if>
+      <if test="funclistId != null" >
+        FuncList_ID,
+      </if>
+      <if test="funclistPremodifiedstate != null" >
+        FuncList_PreModifiedState,
+      </if>
+      <if test="funclistModifiedstate != null" >
+        FuncList_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="funclistLogid != null" >
+        #{funclistLogid,jdbcType=INTEGER},
+      </if>
+      <if test="funcId != null" >
+        #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="funclistId != null" >
+        #{funclistId,jdbcType=INTEGER},
+      </if>
+      <if test="funclistPremodifiedstate != null" >
+        #{funclistPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="funclistModifiedstate != null" >
+        #{funclistModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsFunclistLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_funclist_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_funclist_log
+    <set >
+      <if test="record.funclistLogid != null" >
+        FuncList_LogID = #{record.funclistLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.funcId != null" >
+        Func_ID = #{record.funcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.funclistId != null" >
+        FuncList_ID = #{record.funclistId,jdbcType=INTEGER},
+      </if>
+      <if test="record.funclistPremodifiedstate != null" >
+        FuncList_PreModifiedState = #{record.funclistPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funclistModifiedstate != null" >
+        FuncList_ModifiedState = #{record.funclistModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_funclist_log
+    set FuncList_LogID = #{record.funclistLogid,jdbcType=INTEGER},
+      Func_ID = #{record.funcId,jdbcType=INTEGER},
+      FuncList_ID = #{record.funclistId,jdbcType=INTEGER},
+      FuncList_PreModifiedState = #{record.funclistPremodifiedstate,jdbcType=VARCHAR},
+      FuncList_ModifiedState = #{record.funclistModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsFunclistLog" >
+    update wms_funclist_log
+    <set >
+      <if test="funcId != null" >
+        Func_ID = #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="funclistId != null" >
+        FuncList_ID = #{funclistId,jdbcType=INTEGER},
+      </if>
+      <if test="funclistPremodifiedstate != null" >
+        FuncList_PreModifiedState = #{funclistPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="funclistModifiedstate != null" >
+        FuncList_ModifiedState = #{funclistModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FuncList_LogID = #{funclistLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsFunclistLog" >
+    update wms_funclist_log
+    set Func_ID = #{funcId,jdbcType=INTEGER},
+      FuncList_ID = #{funclistId,jdbcType=INTEGER},
+      FuncList_PreModifiedState = #{funclistPremodifiedstate,jdbcType=VARCHAR},
+      FuncList_ModifiedState = #{funclistModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where FuncList_LogID = #{funclistLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

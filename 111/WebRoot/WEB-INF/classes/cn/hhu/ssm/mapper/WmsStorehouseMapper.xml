@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsStorehouseMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsStorehouse" >
+    <id column="Storehouses_ID" property="storehousesId" jdbcType="INTEGER" />
+    <result column="Storehouses_Number" property="storehousesNumber" jdbcType="VARCHAR" />
+    <result column="ParentStorehouse_Number" property="parentstorehouseNumber" jdbcType="INTEGER" />
+    <result column="Abbreviation" property="abbreviation" jdbcType="VARCHAR" />
+    <result column="StorehouseName" property="storehousename" jdbcType="VARCHAR" />
+    <result column="RegistrationAddress" property="registrationaddress" jdbcType="VARCHAR" />
+    <result column="ReceiveGoodsAddress" property="receivegoodsaddress" jdbcType="VARCHAR" />
+    <result column="ResponsiblePerson" property="responsibleperson" jdbcType="VARCHAR" />
+    <result column="ContactTel" property="contacttel" jdbcType="VARCHAR" />
+    <result column="BusinessLicense" property="businesslicense" jdbcType="VARCHAR" />
+    <result column="BusinessAllowlance" property="businessallowlance" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Storehouses_ID, Storehouses_Number, ParentStorehouse_Number, Abbreviation, StorehouseName, 
+    RegistrationAddress, ReceiveGoodsAddress, ResponsiblePerson, ContactTel, BusinessLicense, 
+    BusinessAllowlance, Remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsStorehouseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_storehouse
+    where Storehouses_ID = #{storehousesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_storehouse
+    where Storehouses_ID = #{storehousesId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsStorehouseExample" >
+    delete from wms_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsStorehouse" >
+    insert into wms_storehouse (Storehouses_ID, Storehouses_Number, 
+      ParentStorehouse_Number, Abbreviation, StorehouseName, 
+      RegistrationAddress, ReceiveGoodsAddress, 
+      ResponsiblePerson, ContactTel, BusinessLicense, 
+      BusinessAllowlance, Remark)
+    values (#{storehousesId,jdbcType=INTEGER}, #{storehousesNumber,jdbcType=VARCHAR}, 
+      #{parentstorehouseNumber,jdbcType=INTEGER}, #{abbreviation,jdbcType=VARCHAR}, #{storehousename,jdbcType=VARCHAR}, 
+      #{registrationaddress,jdbcType=VARCHAR}, #{receivegoodsaddress,jdbcType=VARCHAR}, 
+      #{responsibleperson,jdbcType=VARCHAR}, #{contacttel,jdbcType=VARCHAR}, #{businesslicense,jdbcType=VARCHAR}, 
+      #{businessallowlance,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsStorehouse" >
+    insert into wms_storehouse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="storehousesId != null" >
+        Storehouses_ID,
+      </if>
+      <if test="storehousesNumber != null" >
+        Storehouses_Number,
+      </if>
+      <if test="parentstorehouseNumber != null" >
+        ParentStorehouse_Number,
+      </if>
+      <if test="abbreviation != null" >
+        Abbreviation,
+      </if>
+      <if test="storehousename != null" >
+        StorehouseName,
+      </if>
+      <if test="registrationaddress != null" >
+        RegistrationAddress,
+      </if>
+      <if test="receivegoodsaddress != null" >
+        ReceiveGoodsAddress,
+      </if>
+      <if test="responsibleperson != null" >
+        ResponsiblePerson,
+      </if>
+      <if test="contacttel != null" >
+        ContactTel,
+      </if>
+      <if test="businesslicense != null" >
+        BusinessLicense,
+      </if>
+      <if test="businessallowlance != null" >
+        BusinessAllowlance,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="storehousesId != null" >
+        #{storehousesId,jdbcType=INTEGER},
+      </if>
+      <if test="storehousesNumber != null" >
+        #{storehousesNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentstorehouseNumber != null" >
+        #{parentstorehouseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="abbreviation != null" >
+        #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="storehousename != null" >
+        #{storehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationaddress != null" >
+        #{registrationaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivegoodsaddress != null" >
+        #{receivegoodsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibleperson != null" >
+        #{responsibleperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contacttel != null" >
+        #{contacttel,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null" >
+        #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="businessallowlance != null" >
+        #{businessallowlance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsStorehouseExample" resultType="java.lang.Integer" >
+    select count(*) from wms_storehouse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_storehouse
+    <set >
+      <if test="record.storehousesId != null" >
+        Storehouses_ID = #{record.storehousesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.storehousesNumber != null" >
+        Storehouses_Number = #{record.storehousesNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentstorehouseNumber != null" >
+        ParentStorehouse_Number = #{record.parentstorehouseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.abbreviation != null" >
+        Abbreviation = #{record.abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storehousename != null" >
+        StorehouseName = #{record.storehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationaddress != null" >
+        RegistrationAddress = #{record.registrationaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivegoodsaddress != null" >
+        ReceiveGoodsAddress = #{record.receivegoodsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.responsibleperson != null" >
+        ResponsiblePerson = #{record.responsibleperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacttel != null" >
+        ContactTel = #{record.contacttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businesslicense != null" >
+        BusinessLicense = #{record.businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessallowlance != null" >
+        BusinessAllowlance = #{record.businessallowlance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_storehouse
+    set Storehouses_ID = #{record.storehousesId,jdbcType=INTEGER},
+      Storehouses_Number = #{record.storehousesNumber,jdbcType=VARCHAR},
+      ParentStorehouse_Number = #{record.parentstorehouseNumber,jdbcType=INTEGER},
+      Abbreviation = #{record.abbreviation,jdbcType=VARCHAR},
+      StorehouseName = #{record.storehousename,jdbcType=VARCHAR},
+      RegistrationAddress = #{record.registrationaddress,jdbcType=VARCHAR},
+      ReceiveGoodsAddress = #{record.receivegoodsaddress,jdbcType=VARCHAR},
+      ResponsiblePerson = #{record.responsibleperson,jdbcType=VARCHAR},
+      ContactTel = #{record.contacttel,jdbcType=VARCHAR},
+      BusinessLicense = #{record.businesslicense,jdbcType=VARCHAR},
+      BusinessAllowlance = #{record.businessallowlance,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsStorehouse" >
+    update wms_storehouse
+    <set >
+      <if test="storehousesNumber != null" >
+        Storehouses_Number = #{storehousesNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentstorehouseNumber != null" >
+        ParentStorehouse_Number = #{parentstorehouseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="abbreviation != null" >
+        Abbreviation = #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="storehousename != null" >
+        StorehouseName = #{storehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationaddress != null" >
+        RegistrationAddress = #{registrationaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivegoodsaddress != null" >
+        ReceiveGoodsAddress = #{receivegoodsaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibleperson != null" >
+        ResponsiblePerson = #{responsibleperson,jdbcType=VARCHAR},
+      </if>
+      <if test="contacttel != null" >
+        ContactTel = #{contacttel,jdbcType=VARCHAR},
+      </if>
+      <if test="businesslicense != null" >
+        BusinessLicense = #{businesslicense,jdbcType=VARCHAR},
+      </if>
+      <if test="businessallowlance != null" >
+        BusinessAllowlance = #{businessallowlance,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Storehouses_ID = #{storehousesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsStorehouse" >
+    update wms_storehouse
+    set Storehouses_Number = #{storehousesNumber,jdbcType=VARCHAR},
+      ParentStorehouse_Number = #{parentstorehouseNumber,jdbcType=INTEGER},
+      Abbreviation = #{abbreviation,jdbcType=VARCHAR},
+      StorehouseName = #{storehousename,jdbcType=VARCHAR},
+      RegistrationAddress = #{registrationaddress,jdbcType=VARCHAR},
+      ReceiveGoodsAddress = #{receivegoodsaddress,jdbcType=VARCHAR},
+      ResponsiblePerson = #{responsibleperson,jdbcType=VARCHAR},
+      ContactTel = #{contacttel,jdbcType=VARCHAR},
+      BusinessLicense = #{businesslicense,jdbcType=VARCHAR},
+      BusinessAllowlance = #{businessallowlance,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where Storehouses_ID = #{storehousesId,jdbcType=INTEGER}
+  </update>
+</mapper>

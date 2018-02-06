@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsImgoodsLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsImgoodsLog" >
+    <id column="GoodsID_LogID" property="goodsidLogid" jdbcType="INTEGER" />
+    <result column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="Goods_PreModifiedState" property="goodsPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="Goods_ModifiedState" property="goodsModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GoodsID_LogID, Goods_ID, Goods_PreModifiedState, Goods_ModifiedState, Employee_ID, 
+    ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsImgoodsLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_imgoods_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_imgoods_log
+    where GoodsID_LogID = #{goodsidLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_imgoods_log
+    where GoodsID_LogID = #{goodsidLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsImgoodsLogExample" >
+    delete from wms_imgoods_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsImgoodsLog" >
+    insert into wms_imgoods_log (GoodsID_LogID, Goods_ID, Goods_PreModifiedState, 
+      Goods_ModifiedState, Employee_ID, ModifyMan, 
+      ModifiedDate)
+    values (#{goodsidLogid,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{goodsPremodifiedstate,jdbcType=VARCHAR}, 
+      #{goodsModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsImgoodsLog" >
+    insert into wms_imgoods_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsidLogid != null" >
+        GoodsID_LogID,
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="goodsPremodifiedstate != null" >
+        Goods_PreModifiedState,
+      </if>
+      <if test="goodsModifiedstate != null" >
+        Goods_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsidLogid != null" >
+        #{goodsidLogid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPremodifiedstate != null" >
+        #{goodsPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsModifiedstate != null" >
+        #{goodsModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsImgoodsLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_imgoods_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_imgoods_log
+    <set >
+      <if test="record.goodsidLogid != null" >
+        GoodsID_LogID = #{record.goodsidLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsPremodifiedstate != null" >
+        Goods_PreModifiedState = #{record.goodsPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsModifiedstate != null" >
+        Goods_ModifiedState = #{record.goodsModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_imgoods_log
+    set GoodsID_LogID = #{record.goodsidLogid,jdbcType=INTEGER},
+      Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      Goods_PreModifiedState = #{record.goodsPremodifiedstate,jdbcType=VARCHAR},
+      Goods_ModifiedState = #{record.goodsModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsImgoodsLog" >
+    update wms_imgoods_log
+    <set >
+      <if test="goodsId != null" >
+        Goods_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPremodifiedstate != null" >
+        Goods_PreModifiedState = #{goodsPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsModifiedstate != null" >
+        Goods_ModifiedState = #{goodsModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where GoodsID_LogID = #{goodsidLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsImgoodsLog" >
+    update wms_imgoods_log
+    set Goods_ID = #{goodsId,jdbcType=INTEGER},
+      Goods_PreModifiedState = #{goodsPremodifiedstate,jdbcType=VARCHAR},
+      Goods_ModifiedState = #{goodsModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where GoodsID_LogID = #{goodsidLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

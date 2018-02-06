@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsImgoodsMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsImgoods" >
+    <id column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="Goods_Number" property="goodsNumber" jdbcType="VARCHAR" />
+    <result column="GoodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="IMOrder_ID" property="imorderId" jdbcType="INTEGER" />
+    <result column="Registration" property="registration" jdbcType="VARCHAR" />
+    <result column="SpecifiationType" property="specifiationtype" jdbcType="VARCHAR" />
+    <result column="BatcNumber" property="batcnumber" jdbcType="VARCHAR" />
+    <result column="SecondBatchNumber" property="secondbatchnumber" jdbcType="VARCHAR" />
+    <result column="SerialNumber_ID" property="serialnumberId" jdbcType="INTEGER" />
+    <result column="ProduceDate" property="producedate" jdbcType="TIMESTAMP" />
+    <result column="FailureDate" property="failuredate" jdbcType="TIMESTAMP" />
+    <result column="ArrivalGoodsNumber" property="arrivalgoodsnumber" jdbcType="REAL" />
+    <result column="ArrivedGoodsNumber" property="arrivedgoodsnumber" jdbcType="REAL" />
+    <result column="BasicUnit" property="basicunit" jdbcType="VARCHAR" />
+    <result column="PackingUnit" property="packingunit" jdbcType="VARCHAR" />
+    <result column="ConversionRate" property="conversionrate" jdbcType="REAL" />
+    <result column="Factory" property="factory" jdbcType="VARCHAR" />
+    <result column="Origin" property="origin" jdbcType="VARCHAR" />
+    <result column="GoodsBarCode" property="goodsbarcode" jdbcType="VARCHAR" />
+    <result column="Weight" property="weight" jdbcType="REAL" />
+    <result column="NetWeight" property="netweight" jdbcType="REAL" />
+    <result column="Volume" property="volume" jdbcType="REAL" />
+    <result column="PayableTon" property="payableton" jdbcType="REAL" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="MakeOrderDate" property="makeorderdate" jdbcType="TIMESTAMP" />
+    <result column="MakeOrderMan" property="makeorderman" jdbcType="INTEGER" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="INTEGER" />
+    <result column="HSLBM" property="hslbm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Goods_ID, Goods_Number, GoodsName, IMOrder_ID, Registration, SpecifiationType, BatcNumber, 
+    SecondBatchNumber, SerialNumber_ID, ProduceDate, FailureDate, ArrivalGoodsNumber, 
+    ArrivedGoodsNumber, BasicUnit, PackingUnit, ConversionRate, Factory, Origin, GoodsBarCode, 
+    Weight, NetWeight, Volume, PayableTon, Remark, MakeOrderDate, MakeOrderMan, IsDeleted, 
+    HSLBM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsImgoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_imgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_imgoods
+    where Goods_ID = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_imgoods
+    where Goods_ID = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsImgoodsExample" >
+    delete from wms_imgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsImgoods" >
+    insert into wms_imgoods (Goods_ID, Goods_Number, GoodsName, 
+      IMOrder_ID, Registration, SpecifiationType, 
+      BatcNumber, SecondBatchNumber, SerialNumber_ID, 
+      ProduceDate, FailureDate, ArrivalGoodsNumber, 
+      ArrivedGoodsNumber, BasicUnit, PackingUnit, 
+      ConversionRate, Factory, Origin, 
+      GoodsBarCode, Weight, NetWeight, 
+      Volume, PayableTon, Remark, 
+      MakeOrderDate, MakeOrderMan, IsDeleted, 
+      HSLBM)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, 
+      #{imorderId,jdbcType=INTEGER}, #{registration,jdbcType=VARCHAR}, #{specifiationtype,jdbcType=VARCHAR}, 
+      #{batcnumber,jdbcType=VARCHAR}, #{secondbatchnumber,jdbcType=VARCHAR}, #{serialnumberId,jdbcType=INTEGER}, 
+      #{producedate,jdbcType=TIMESTAMP}, #{failuredate,jdbcType=TIMESTAMP}, #{arrivalgoodsnumber,jdbcType=REAL}, 
+      #{arrivedgoodsnumber,jdbcType=REAL}, #{basicunit,jdbcType=VARCHAR}, #{packingunit,jdbcType=VARCHAR}, 
+      #{conversionrate,jdbcType=REAL}, #{factory,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{goodsbarcode,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{netweight,jdbcType=REAL}, 
+      #{volume,jdbcType=REAL}, #{payableton,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}, 
+      #{makeorderdate,jdbcType=TIMESTAMP}, #{makeorderman,jdbcType=INTEGER}, #{isdeleted,jdbcType=INTEGER}, 
+      #{hslbm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsImgoods" >
+    insert into wms_imgoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number,
+      </if>
+      <if test="goodsname != null" >
+        GoodsName,
+      </if>
+      <if test="imorderId != null" >
+        IMOrder_ID,
+      </if>
+      <if test="registration != null" >
+        Registration,
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType,
+      </if>
+      <if test="batcnumber != null" >
+        BatcNumber,
+      </if>
+      <if test="secondbatchnumber != null" >
+        SecondBatchNumber,
+      </if>
+      <if test="serialnumberId != null" >
+        SerialNumber_ID,
+      </if>
+      <if test="producedate != null" >
+        ProduceDate,
+      </if>
+      <if test="failuredate != null" >
+        FailureDate,
+      </if>
+      <if test="arrivalgoodsnumber != null" >
+        ArrivalGoodsNumber,
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber,
+      </if>
+      <if test="basicunit != null" >
+        BasicUnit,
+      </if>
+      <if test="packingunit != null" >
+        PackingUnit,
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate,
+      </if>
+      <if test="factory != null" >
+        Factory,
+      </if>
+      <if test="origin != null" >
+        Origin,
+      </if>
+      <if test="goodsbarcode != null" >
+        GoodsBarCode,
+      </if>
+      <if test="weight != null" >
+        Weight,
+      </if>
+      <if test="netweight != null" >
+        NetWeight,
+      </if>
+      <if test="volume != null" >
+        Volume,
+      </if>
+      <if test="payableton != null" >
+        PayableTon,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate,
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="hslbm != null" >
+        HSLBM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="imorderId != null" >
+        #{imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batcnumber != null" >
+        #{batcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbatchnumber != null" >
+        #{secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumberId != null" >
+        #{serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalgoodsnumber != null" >
+        #{arrivalgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        #{arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="basicunit != null" >
+        #{basicunit,jdbcType=VARCHAR},
+      </if>
+      <if test="packingunit != null" >
+        #{packingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="factory != null" >
+        #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbarcode != null" >
+        #{goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="netweight != null" >
+        #{netweight,jdbcType=REAL},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=REAL},
+      </if>
+      <if test="payableton != null" >
+        #{payableton,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="makeorderdate != null" >
+        #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="hslbm != null" >
+        #{hslbm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsImgoodsExample" resultType="java.lang.Integer" >
+    select count(*) from wms_imgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_imgoods
+    <set >
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNumber != null" >
+        Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null" >
+        GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imorderId != null" >
+        IMOrder_ID = #{record.imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registration != null" >
+        Registration = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifiationtype != null" >
+        SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batcnumber != null" >
+        BatcNumber = #{record.batcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondbatchnumber != null" >
+        SecondBatchNumber = #{record.secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialnumberId != null" >
+        SerialNumber_ID = #{record.serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.producedate != null" >
+        ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failuredate != null" >
+        FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.arrivalgoodsnumber != null" >
+        ArrivalGoodsNumber = #{record.arrivalgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="record.arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber = #{record.arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="record.basicunit != null" >
+        BasicUnit = #{record.basicunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packingunit != null" >
+        PackingUnit = #{record.packingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conversionrate != null" >
+        ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      </if>
+      <if test="record.factory != null" >
+        Factory = #{record.factory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null" >
+        Origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsbarcode != null" >
+        GoodsBarCode = #{record.goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null" >
+        Weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.netweight != null" >
+        NetWeight = #{record.netweight,jdbcType=REAL},
+      </if>
+      <if test="record.volume != null" >
+        Volume = #{record.volume,jdbcType=REAL},
+      </if>
+      <if test="record.payableton != null" >
+        PayableTon = #{record.payableton,jdbcType=REAL},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makeorderdate != null" >
+        MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.makeorderman != null" >
+        MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.hslbm != null" >
+        HSLBM = #{record.hslbm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_imgoods
+    set Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      IMOrder_ID = #{record.imorderId,jdbcType=INTEGER},
+      Registration = #{record.registration,jdbcType=VARCHAR},
+      SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      BatcNumber = #{record.batcnumber,jdbcType=VARCHAR},
+      SecondBatchNumber = #{record.secondbatchnumber,jdbcType=VARCHAR},
+      SerialNumber_ID = #{record.serialnumberId,jdbcType=INTEGER},
+      ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      ArrivalGoodsNumber = #{record.arrivalgoodsnumber,jdbcType=REAL},
+      ArrivedGoodsNumber = #{record.arrivedgoodsnumber,jdbcType=REAL},
+      BasicUnit = #{record.basicunit,jdbcType=VARCHAR},
+      PackingUnit = #{record.packingunit,jdbcType=VARCHAR},
+      ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      Factory = #{record.factory,jdbcType=VARCHAR},
+      Origin = #{record.origin,jdbcType=VARCHAR},
+      GoodsBarCode = #{record.goodsbarcode,jdbcType=VARCHAR},
+      Weight = #{record.weight,jdbcType=REAL},
+      NetWeight = #{record.netweight,jdbcType=REAL},
+      Volume = #{record.volume,jdbcType=REAL},
+      PayableTon = #{record.payableton,jdbcType=REAL},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{record.isdeleted,jdbcType=INTEGER},
+      HSLBM = #{record.hslbm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsImgoods" >
+    update wms_imgoods
+    <set >
+      <if test="goodsNumber != null" >
+        Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        GoodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="imorderId != null" >
+        IMOrder_ID = #{imorderId,jdbcType=INTEGER},
+      </if>
+      <if test="registration != null" >
+        Registration = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batcnumber != null" >
+        BatcNumber = #{batcnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbatchnumber != null" >
+        SecondBatchNumber = #{secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumberId != null" >
+        SerialNumber_ID = #{serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivalgoodsnumber != null" >
+        ArrivalGoodsNumber = #{arrivalgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="arrivedgoodsnumber != null" >
+        ArrivedGoodsNumber = #{arrivedgoodsnumber,jdbcType=REAL},
+      </if>
+      <if test="basicunit != null" >
+        BasicUnit = #{basicunit,jdbcType=VARCHAR},
+      </if>
+      <if test="packingunit != null" >
+        PackingUnit = #{packingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate = #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="factory != null" >
+        Factory = #{factory,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        Origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbarcode != null" >
+        GoodsBarCode = #{goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        Weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="netweight != null" >
+        NetWeight = #{netweight,jdbcType=REAL},
+      </if>
+      <if test="volume != null" >
+        Volume = #{volume,jdbcType=REAL},
+      </if>
+      <if test="payableton != null" >
+        PayableTon = #{payableton,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="hslbm != null" >
+        HSLBM = #{hslbm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Goods_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsImgoods" >
+    update wms_imgoods
+    set Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{goodsname,jdbcType=VARCHAR},
+      IMOrder_ID = #{imorderId,jdbcType=INTEGER},
+      Registration = #{registration,jdbcType=VARCHAR},
+      SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      BatcNumber = #{batcnumber,jdbcType=VARCHAR},
+      SecondBatchNumber = #{secondbatchnumber,jdbcType=VARCHAR},
+      SerialNumber_ID = #{serialnumberId,jdbcType=INTEGER},
+      ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      ArrivalGoodsNumber = #{arrivalgoodsnumber,jdbcType=REAL},
+      ArrivedGoodsNumber = #{arrivedgoodsnumber,jdbcType=REAL},
+      BasicUnit = #{basicunit,jdbcType=VARCHAR},
+      PackingUnit = #{packingunit,jdbcType=VARCHAR},
+      ConversionRate = #{conversionrate,jdbcType=REAL},
+      Factory = #{factory,jdbcType=VARCHAR},
+      Origin = #{origin,jdbcType=VARCHAR},
+      GoodsBarCode = #{goodsbarcode,jdbcType=VARCHAR},
+      Weight = #{weight,jdbcType=REAL},
+      NetWeight = #{netweight,jdbcType=REAL},
+      Volume = #{volume,jdbcType=REAL},
+      PayableTon = #{payableton,jdbcType=REAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{isdeleted,jdbcType=INTEGER},
+      HSLBM = #{hslbm,jdbcType=VARCHAR}
+    where Goods_ID = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

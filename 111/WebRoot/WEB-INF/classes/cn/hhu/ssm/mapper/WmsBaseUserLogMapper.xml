@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsBaseUserLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsBaseUserLog" >
+    <id column="User_LogID" property="userLogid" jdbcType="INTEGER" />
+    <result column="User_ID" property="userId" jdbcType="INTEGER" />
+    <result column="User_PreModifiedState" property="userPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="User_ModifiedState" property="userModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifedDate" property="modifeddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    User_LogID, User_ID, User_PreModifiedState, User_ModifiedState, Employee_ID, ModifyMan, 
+    ModifedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsBaseUserLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_base_user_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_base_user_log
+    where User_LogID = #{userLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_base_user_log
+    where User_LogID = #{userLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsBaseUserLogExample" >
+    delete from wms_base_user_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsBaseUserLog" >
+    insert into wms_base_user_log (User_LogID, User_ID, User_PreModifiedState, 
+      User_ModifiedState, Employee_ID, ModifyMan, 
+      ModifedDate)
+    values (#{userLogid,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userPremodifiedstate,jdbcType=VARCHAR}, 
+      #{userModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifeddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsBaseUserLog" >
+    insert into wms_base_user_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userLogid != null" >
+        User_LogID,
+      </if>
+      <if test="userId != null" >
+        User_ID,
+      </if>
+      <if test="userPremodifiedstate != null" >
+        User_PreModifiedState,
+      </if>
+      <if test="userModifiedstate != null" >
+        User_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifeddate != null" >
+        ModifedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userLogid != null" >
+        #{userLogid,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPremodifiedstate != null" >
+        #{userPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="userModifiedstate != null" >
+        #{userModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifeddate != null" >
+        #{modifeddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsBaseUserLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_base_user_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_base_user_log
+    <set >
+      <if test="record.userLogid != null" >
+        User_LogID = #{record.userLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        User_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPremodifiedstate != null" >
+        User_PreModifiedState = #{record.userPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userModifiedstate != null" >
+        User_ModifiedState = #{record.userModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifeddate != null" >
+        ModifedDate = #{record.modifeddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_base_user_log
+    set User_LogID = #{record.userLogid,jdbcType=INTEGER},
+      User_ID = #{record.userId,jdbcType=INTEGER},
+      User_PreModifiedState = #{record.userPremodifiedstate,jdbcType=VARCHAR},
+      User_ModifiedState = #{record.userModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifedDate = #{record.modifeddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsBaseUserLog" >
+    update wms_base_user_log
+    <set >
+      <if test="userId != null" >
+        User_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPremodifiedstate != null" >
+        User_PreModifiedState = #{userPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="userModifiedstate != null" >
+        User_ModifiedState = #{userModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifeddate != null" >
+        ModifedDate = #{modifeddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where User_LogID = #{userLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsBaseUserLog" >
+    update wms_base_user_log
+    set User_ID = #{userId,jdbcType=INTEGER},
+      User_PreModifiedState = #{userPremodifiedstate,jdbcType=VARCHAR},
+      User_ModifiedState = #{userModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifedDate = #{modifeddate,jdbcType=TIMESTAMP}
+    where User_LogID = #{userLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

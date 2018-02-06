@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsStockcountMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsStockcount" >
+    <id column="StockCounts_ID" property="stockcountsId" jdbcType="INTEGER" />
+    <result column="StockCounts_Number" property="stockcountsNumber" jdbcType="VARCHAR" />
+    <result column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="Goods_Number" property="goodsNumber" jdbcType="VARCHAR" />
+    <result column="GoodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="FailureDate" property="failuredate" jdbcType="TIMESTAMP" />
+    <result column="WarnDate" property="warndate" jdbcType="TIMESTAMP" />
+    <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+    <result column="ConversionRate" property="conversionrate" jdbcType="VARCHAR" />
+    <result column="Locked_Number" property="lockedNumber" jdbcType="REAL" />
+    <result column="StockCount" property="stockcount" jdbcType="REAL" />
+    <result column="AbledGoods" property="abledgoods" jdbcType="REAL" />
+    <result column="WarnStock" property="warnstock" jdbcType="REAL" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    StockCounts_ID, StockCounts_Number, Goods_ID, Goods_Number, GoodsName, FailureDate, 
+    WarnDate, BatchNumber, ConversionRate, Locked_Number, StockCount, AbledGoods, WarnStock, 
+    Remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsStockcountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_stockcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_stockcount
+    where StockCounts_ID = #{stockcountsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_stockcount
+    where StockCounts_ID = #{stockcountsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsStockcountExample" >
+    delete from wms_stockcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsStockcount" >
+    insert into wms_stockcount (StockCounts_ID, StockCounts_Number, 
+      Goods_ID, Goods_Number, GoodsName, 
+      FailureDate, WarnDate, BatchNumber, 
+      ConversionRate, Locked_Number, StockCount, 
+      AbledGoods, WarnStock, Remark
+      )
+    values (#{stockcountsId,jdbcType=INTEGER}, #{stockcountsNumber,jdbcType=VARCHAR}, 
+      #{goodsId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, 
+      #{failuredate,jdbcType=TIMESTAMP}, #{warndate,jdbcType=TIMESTAMP}, #{batchnumber,jdbcType=VARCHAR}, 
+      #{conversionrate,jdbcType=VARCHAR}, #{lockedNumber,jdbcType=REAL}, #{stockcount,jdbcType=REAL}, 
+      #{abledgoods,jdbcType=REAL}, #{warnstock,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsStockcount" >
+    insert into wms_stockcount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stockcountsId != null" >
+        StockCounts_ID,
+      </if>
+      <if test="stockcountsNumber != null" >
+        StockCounts_Number,
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number,
+      </if>
+      <if test="goodsname != null" >
+        GoodsName,
+      </if>
+      <if test="failuredate != null" >
+        FailureDate,
+      </if>
+      <if test="warndate != null" >
+        WarnDate,
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber,
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate,
+      </if>
+      <if test="lockedNumber != null" >
+        Locked_Number,
+      </if>
+      <if test="stockcount != null" >
+        StockCount,
+      </if>
+      <if test="abledgoods != null" >
+        AbledGoods,
+      </if>
+      <if test="warnstock != null" >
+        WarnStock,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stockcountsId != null" >
+        #{stockcountsId,jdbcType=INTEGER},
+      </if>
+      <if test="stockcountsNumber != null" >
+        #{stockcountsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="failuredate != null" >
+        #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warndate != null" >
+        #{warndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchnumber != null" >
+        #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        #{conversionrate,jdbcType=VARCHAR},
+      </if>
+      <if test="lockedNumber != null" >
+        #{lockedNumber,jdbcType=REAL},
+      </if>
+      <if test="stockcount != null" >
+        #{stockcount,jdbcType=REAL},
+      </if>
+      <if test="abledgoods != null" >
+        #{abledgoods,jdbcType=REAL},
+      </if>
+      <if test="warnstock != null" >
+        #{warnstock,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsStockcountExample" resultType="java.lang.Integer" >
+    select count(*) from wms_stockcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_stockcount
+    <set >
+      <if test="record.stockcountsId != null" >
+        StockCounts_ID = #{record.stockcountsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockcountsNumber != null" >
+        StockCounts_Number = #{record.stockcountsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNumber != null" >
+        Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null" >
+        GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.failuredate != null" >
+        FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.warndate != null" >
+        WarnDate = #{record.warndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.batchnumber != null" >
+        BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conversionrate != null" >
+        ConversionRate = #{record.conversionrate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockedNumber != null" >
+        Locked_Number = #{record.lockedNumber,jdbcType=REAL},
+      </if>
+      <if test="record.stockcount != null" >
+        StockCount = #{record.stockcount,jdbcType=REAL},
+      </if>
+      <if test="record.abledgoods != null" >
+        AbledGoods = #{record.abledgoods,jdbcType=REAL},
+      </if>
+      <if test="record.warnstock != null" >
+        WarnStock = #{record.warnstock,jdbcType=REAL},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_stockcount
+    set StockCounts_ID = #{record.stockcountsId,jdbcType=INTEGER},
+      StockCounts_Number = #{record.stockcountsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      WarnDate = #{record.warndate,jdbcType=TIMESTAMP},
+      BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      ConversionRate = #{record.conversionrate,jdbcType=VARCHAR},
+      Locked_Number = #{record.lockedNumber,jdbcType=REAL},
+      StockCount = #{record.stockcount,jdbcType=REAL},
+      AbledGoods = #{record.abledgoods,jdbcType=REAL},
+      WarnStock = #{record.warnstock,jdbcType=REAL},
+      Remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsStockcount" >
+    update wms_stockcount
+    <set >
+      <if test="stockcountsNumber != null" >
+        StockCounts_Number = #{stockcountsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        GoodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="failuredate != null" >
+        FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warndate != null" >
+        WarnDate = #{warndate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate = #{conversionrate,jdbcType=VARCHAR},
+      </if>
+      <if test="lockedNumber != null" >
+        Locked_Number = #{lockedNumber,jdbcType=REAL},
+      </if>
+      <if test="stockcount != null" >
+        StockCount = #{stockcount,jdbcType=REAL},
+      </if>
+      <if test="abledgoods != null" >
+        AbledGoods = #{abledgoods,jdbcType=REAL},
+      </if>
+      <if test="warnstock != null" >
+        WarnStock = #{warnstock,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where StockCounts_ID = #{stockcountsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsStockcount" >
+    update wms_stockcount
+    set StockCounts_Number = #{stockcountsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{goodsId,jdbcType=INTEGER},
+      Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{goodsname,jdbcType=VARCHAR},
+      FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      WarnDate = #{warndate,jdbcType=TIMESTAMP},
+      BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      ConversionRate = #{conversionrate,jdbcType=VARCHAR},
+      Locked_Number = #{lockedNumber,jdbcType=REAL},
+      StockCount = #{stockcount,jdbcType=REAL},
+      AbledGoods = #{abledgoods,jdbcType=REAL},
+      WarnStock = #{warnstock,jdbcType=REAL},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where StockCounts_ID = #{stockcountsId,jdbcType=INTEGER}
+  </update>
+</mapper>

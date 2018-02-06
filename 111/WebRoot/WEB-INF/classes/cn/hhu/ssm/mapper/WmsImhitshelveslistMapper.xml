@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsImhitshelveslistMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsImhitshelveslist" >
+    <id column="IMHitShelvesLists_ID" property="imhitshelveslistsId" jdbcType="INTEGER" />
+    <result column="IMHitShelvesLists_Number" property="imhitshelveslistsNumber" jdbcType="VARCHAR" />
+    <result column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="Locations_ID" property="locationsId" jdbcType="INTEGER" />
+    <result column="GoodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="Registration" property="registration" jdbcType="VARCHAR" />
+    <result column="SpecifiationType" property="specifiationtype" jdbcType="VARCHAR" />
+    <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+    <result column="SecondBatchNumber" property="secondbatchnumber" jdbcType="VARCHAR" />
+    <result column="SerialNumber_ID" property="serialnumberId" jdbcType="INTEGER" />
+    <result column="ProduceDate" property="producedate" jdbcType="TIMESTAMP" />
+    <result column="FailureDate" property="failuredate" jdbcType="TIMESTAMP" />
+    <result column="Number" property="number" jdbcType="INTEGER" />
+    <result column="Count" property="count" jdbcType="INTEGER" />
+    <result column="ConversionRate" property="conversionrate" jdbcType="REAL" />
+    <result column="HitShelvesNumber" property="hitshelvesnumber" jdbcType="REAL" />
+    <result column="HitShelvesCount" property="hitshelvescount" jdbcType="REAL" />
+    <result column="LocationName" property="locationname" jdbcType="VARCHAR" />
+    <result column="HitShelvesMan" property="hitshelvesman" jdbcType="VARCHAR" />
+    <result column="HitShelvesRemark" property="hitshelvesremark" jdbcType="VARCHAR" />
+    <result column="HitShelvesDate" property="hitshelvesdate" jdbcType="TIMESTAMP" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IMHitShelvesLists_ID, IMHitShelvesLists_Number, Goods_ID, Locations_ID, GoodsName, 
+    Registration, SpecifiationType, BatchNumber, SecondBatchNumber, SerialNumber_ID, 
+    ProduceDate, FailureDate, Number, Count, ConversionRate, HitShelvesNumber, HitShelvesCount, 
+    LocationName, HitShelvesMan, HitShelvesRemark, HitShelvesDate, Remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsImhitshelveslistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_imhitshelveslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_imhitshelveslist
+    where IMHitShelvesLists_ID = #{imhitshelveslistsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_imhitshelveslist
+    where IMHitShelvesLists_ID = #{imhitshelveslistsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsImhitshelveslistExample" >
+    delete from wms_imhitshelveslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsImhitshelveslist" >
+    insert into wms_imhitshelveslist (IMHitShelvesLists_ID, IMHitShelvesLists_Number, 
+      Goods_ID, Locations_ID, GoodsName, 
+      Registration, SpecifiationType, BatchNumber, 
+      SecondBatchNumber, SerialNumber_ID, ProduceDate, 
+      FailureDate, Number, Count, 
+      ConversionRate, HitShelvesNumber, HitShelvesCount, 
+      LocationName, HitShelvesMan, HitShelvesRemark, 
+      HitShelvesDate, Remark)
+    values (#{imhitshelveslistsId,jdbcType=INTEGER}, #{imhitshelveslistsNumber,jdbcType=VARCHAR}, 
+      #{goodsId,jdbcType=INTEGER}, #{locationsId,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, 
+      #{registration,jdbcType=VARCHAR}, #{specifiationtype,jdbcType=VARCHAR}, #{batchnumber,jdbcType=VARCHAR}, 
+      #{secondbatchnumber,jdbcType=VARCHAR}, #{serialnumberId,jdbcType=INTEGER}, #{producedate,jdbcType=TIMESTAMP}, 
+      #{failuredate,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
+      #{conversionrate,jdbcType=REAL}, #{hitshelvesnumber,jdbcType=REAL}, #{hitshelvescount,jdbcType=REAL}, 
+      #{locationname,jdbcType=VARCHAR}, #{hitshelvesman,jdbcType=VARCHAR}, #{hitshelvesremark,jdbcType=VARCHAR}, 
+      #{hitshelvesdate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsImhitshelveslist" >
+    insert into wms_imhitshelveslist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imhitshelveslistsId != null" >
+        IMHitShelvesLists_ID,
+      </if>
+      <if test="imhitshelveslistsNumber != null" >
+        IMHitShelvesLists_Number,
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="locationsId != null" >
+        Locations_ID,
+      </if>
+      <if test="goodsname != null" >
+        GoodsName,
+      </if>
+      <if test="registration != null" >
+        Registration,
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType,
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber,
+      </if>
+      <if test="secondbatchnumber != null" >
+        SecondBatchNumber,
+      </if>
+      <if test="serialnumberId != null" >
+        SerialNumber_ID,
+      </if>
+      <if test="producedate != null" >
+        ProduceDate,
+      </if>
+      <if test="failuredate != null" >
+        FailureDate,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="count != null" >
+        Count,
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate,
+      </if>
+      <if test="hitshelvesnumber != null" >
+        HitShelvesNumber,
+      </if>
+      <if test="hitshelvescount != null" >
+        HitShelvesCount,
+      </if>
+      <if test="locationname != null" >
+        LocationName,
+      </if>
+      <if test="hitshelvesman != null" >
+        HitShelvesMan,
+      </if>
+      <if test="hitshelvesremark != null" >
+        HitShelvesRemark,
+      </if>
+      <if test="hitshelvesdate != null" >
+        HitShelvesDate,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imhitshelveslistsId != null" >
+        #{imhitshelveslistsId,jdbcType=INTEGER},
+      </if>
+      <if test="imhitshelveslistsNumber != null" >
+        #{imhitshelveslistsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="locationsId != null" >
+        #{locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnumber != null" >
+        #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbatchnumber != null" >
+        #{secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumberId != null" >
+        #{serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="conversionrate != null" >
+        #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="hitshelvesnumber != null" >
+        #{hitshelvesnumber,jdbcType=REAL},
+      </if>
+      <if test="hitshelvescount != null" >
+        #{hitshelvescount,jdbcType=REAL},
+      </if>
+      <if test="locationname != null" >
+        #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesman != null" >
+        #{hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesremark != null" >
+        #{hitshelvesremark,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesdate != null" >
+        #{hitshelvesdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsImhitshelveslistExample" resultType="java.lang.Integer" >
+    select count(*) from wms_imhitshelveslist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_imhitshelveslist
+    <set >
+      <if test="record.imhitshelveslistsId != null" >
+        IMHitShelvesLists_ID = #{record.imhitshelveslistsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.imhitshelveslistsNumber != null" >
+        IMHitShelvesLists_Number = #{record.imhitshelveslistsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationsId != null" >
+        Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsname != null" >
+        GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registration != null" >
+        Registration = #{record.registration,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifiationtype != null" >
+        SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchnumber != null" >
+        BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondbatchnumber != null" >
+        SecondBatchNumber = #{record.secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialnumberId != null" >
+        SerialNumber_ID = #{record.serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.producedate != null" >
+        ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.failuredate != null" >
+        FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.number != null" >
+        Number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.count != null" >
+        Count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.conversionrate != null" >
+        ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      </if>
+      <if test="record.hitshelvesnumber != null" >
+        HitShelvesNumber = #{record.hitshelvesnumber,jdbcType=REAL},
+      </if>
+      <if test="record.hitshelvescount != null" >
+        HitShelvesCount = #{record.hitshelvescount,jdbcType=REAL},
+      </if>
+      <if test="record.locationname != null" >
+        LocationName = #{record.locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitshelvesman != null" >
+        HitShelvesMan = #{record.hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitshelvesremark != null" >
+        HitShelvesRemark = #{record.hitshelvesremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitshelvesdate != null" >
+        HitShelvesDate = #{record.hitshelvesdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_imhitshelveslist
+    set IMHitShelvesLists_ID = #{record.imhitshelveslistsId,jdbcType=INTEGER},
+      IMHitShelvesLists_Number = #{record.imhitshelveslistsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      Registration = #{record.registration,jdbcType=VARCHAR},
+      SpecifiationType = #{record.specifiationtype,jdbcType=VARCHAR},
+      BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      SecondBatchNumber = #{record.secondbatchnumber,jdbcType=VARCHAR},
+      SerialNumber_ID = #{record.serialnumberId,jdbcType=INTEGER},
+      ProduceDate = #{record.producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{record.failuredate,jdbcType=TIMESTAMP},
+      Number = #{record.number,jdbcType=INTEGER},
+      Count = #{record.count,jdbcType=INTEGER},
+      ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      HitShelvesNumber = #{record.hitshelvesnumber,jdbcType=REAL},
+      HitShelvesCount = #{record.hitshelvescount,jdbcType=REAL},
+      LocationName = #{record.locationname,jdbcType=VARCHAR},
+      HitShelvesMan = #{record.hitshelvesman,jdbcType=VARCHAR},
+      HitShelvesRemark = #{record.hitshelvesremark,jdbcType=VARCHAR},
+      HitShelvesDate = #{record.hitshelvesdate,jdbcType=TIMESTAMP},
+      Remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsImhitshelveslist" >
+    update wms_imhitshelveslist
+    <set >
+      <if test="imhitshelveslistsNumber != null" >
+        IMHitShelvesLists_Number = #{imhitshelveslistsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="locationsId != null" >
+        Locations_ID = #{locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        GoodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="registration != null" >
+        Registration = #{registration,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiationtype != null" >
+        SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbatchnumber != null" >
+        SecondBatchNumber = #{secondbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnumberId != null" >
+        SerialNumber_ID = #{serialnumberId,jdbcType=INTEGER},
+      </if>
+      <if test="producedate != null" >
+        ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failuredate != null" >
+        FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="count != null" >
+        Count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate = #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="hitshelvesnumber != null" >
+        HitShelvesNumber = #{hitshelvesnumber,jdbcType=REAL},
+      </if>
+      <if test="hitshelvescount != null" >
+        HitShelvesCount = #{hitshelvescount,jdbcType=REAL},
+      </if>
+      <if test="locationname != null" >
+        LocationName = #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesman != null" >
+        HitShelvesMan = #{hitshelvesman,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesremark != null" >
+        HitShelvesRemark = #{hitshelvesremark,jdbcType=VARCHAR},
+      </if>
+      <if test="hitshelvesdate != null" >
+        HitShelvesDate = #{hitshelvesdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where IMHitShelvesLists_ID = #{imhitshelveslistsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsImhitshelveslist" >
+    update wms_imhitshelveslist
+    set IMHitShelvesLists_Number = #{imhitshelveslistsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{goodsId,jdbcType=INTEGER},
+      Locations_ID = #{locationsId,jdbcType=INTEGER},
+      GoodsName = #{goodsname,jdbcType=VARCHAR},
+      Registration = #{registration,jdbcType=VARCHAR},
+      SpecifiationType = #{specifiationtype,jdbcType=VARCHAR},
+      BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      SecondBatchNumber = #{secondbatchnumber,jdbcType=VARCHAR},
+      SerialNumber_ID = #{serialnumberId,jdbcType=INTEGER},
+      ProduceDate = #{producedate,jdbcType=TIMESTAMP},
+      FailureDate = #{failuredate,jdbcType=TIMESTAMP},
+      Number = #{number,jdbcType=INTEGER},
+      Count = #{count,jdbcType=INTEGER},
+      ConversionRate = #{conversionrate,jdbcType=REAL},
+      HitShelvesNumber = #{hitshelvesnumber,jdbcType=REAL},
+      HitShelvesCount = #{hitshelvescount,jdbcType=REAL},
+      LocationName = #{locationname,jdbcType=VARCHAR},
+      HitShelvesMan = #{hitshelvesman,jdbcType=VARCHAR},
+      HitShelvesRemark = #{hitshelvesremark,jdbcType=VARCHAR},
+      HitShelvesDate = #{hitshelvesdate,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where IMHitShelvesLists_ID = #{imhitshelveslistsId,jdbcType=INTEGER}
+  </update>
+</mapper>

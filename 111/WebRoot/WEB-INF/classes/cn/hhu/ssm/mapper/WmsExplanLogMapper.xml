@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsExplanLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsExplanLog" >
+    <id column="EXPlan_LogID" property="explanLogid" jdbcType="INTEGER" />
+    <result column="EXPlan_ID" property="explanId" jdbcType="INTEGER" />
+    <result column="EXPlan_PreModifiedState" property="explanPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="EXPlan_ModifiedState" property="explanModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EXPlan_LogID, EXPlan_ID, EXPlan_PreModifiedState, EXPlan_ModifiedState, Employee_ID, 
+    ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsExplanLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_explan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_explan_log
+    where EXPlan_LogID = #{explanLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_explan_log
+    where EXPlan_LogID = #{explanLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsExplanLogExample" >
+    delete from wms_explan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsExplanLog" >
+    insert into wms_explan_log (EXPlan_LogID, EXPlan_ID, EXPlan_PreModifiedState, 
+      EXPlan_ModifiedState, Employee_ID, ModifyMan, 
+      ModifiedDate)
+    values (#{explanLogid,jdbcType=INTEGER}, #{explanId,jdbcType=INTEGER}, #{explanPremodifiedstate,jdbcType=VARCHAR}, 
+      #{explanModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsExplanLog" >
+    insert into wms_explan_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="explanLogid != null" >
+        EXPlan_LogID,
+      </if>
+      <if test="explanId != null" >
+        EXPlan_ID,
+      </if>
+      <if test="explanPremodifiedstate != null" >
+        EXPlan_PreModifiedState,
+      </if>
+      <if test="explanModifiedstate != null" >
+        EXPlan_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="explanLogid != null" >
+        #{explanLogid,jdbcType=INTEGER},
+      </if>
+      <if test="explanId != null" >
+        #{explanId,jdbcType=INTEGER},
+      </if>
+      <if test="explanPremodifiedstate != null" >
+        #{explanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="explanModifiedstate != null" >
+        #{explanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsExplanLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_explan_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_explan_log
+    <set >
+      <if test="record.explanLogid != null" >
+        EXPlan_LogID = #{record.explanLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.explanId != null" >
+        EXPlan_ID = #{record.explanId,jdbcType=INTEGER},
+      </if>
+      <if test="record.explanPremodifiedstate != null" >
+        EXPlan_PreModifiedState = #{record.explanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.explanModifiedstate != null" >
+        EXPlan_ModifiedState = #{record.explanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_explan_log
+    set EXPlan_LogID = #{record.explanLogid,jdbcType=INTEGER},
+      EXPlan_ID = #{record.explanId,jdbcType=INTEGER},
+      EXPlan_PreModifiedState = #{record.explanPremodifiedstate,jdbcType=VARCHAR},
+      EXPlan_ModifiedState = #{record.explanModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsExplanLog" >
+    update wms_explan_log
+    <set >
+      <if test="explanId != null" >
+        EXPlan_ID = #{explanId,jdbcType=INTEGER},
+      </if>
+      <if test="explanPremodifiedstate != null" >
+        EXPlan_PreModifiedState = #{explanPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="explanModifiedstate != null" >
+        EXPlan_ModifiedState = #{explanModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EXPlan_LogID = #{explanLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsExplanLog" >
+    update wms_explan_log
+    set EXPlan_ID = #{explanId,jdbcType=INTEGER},
+      EXPlan_PreModifiedState = #{explanPremodifiedstate,jdbcType=VARCHAR},
+      EXPlan_ModifiedState = #{explanModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where EXPlan_LogID = #{explanLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

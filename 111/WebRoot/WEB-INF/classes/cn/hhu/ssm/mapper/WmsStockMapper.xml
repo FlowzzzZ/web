@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsStockMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsStock" >
+    <id column="Stocks_ID" property="stocksId" jdbcType="INTEGER" />
+    <result column="Stocks_Number" property="stocksNumber" jdbcType="VARCHAR" />
+    <result column="Locations_ID" property="locationsId" jdbcType="INTEGER" />
+    <result column="Locations_Number" property="locationsNumber" jdbcType="VARCHAR" />
+    <result column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="GoodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="Quantity" property="quantity" jdbcType="REAL" />
+    <result column="Weight" property="weight" jdbcType="REAL" />
+    <result column="NetWeight" property="netweight" jdbcType="REAL" />
+    <result column="Volume" property="volume" jdbcType="REAL" />
+    <result column="PayableTon" property="payableton" jdbcType="REAL" />
+    <result column="RemainPickQuantity" property="remainpickquantity" jdbcType="REAL" />
+    <result column="IsLocked" property="islocked" jdbcType="INTEGER" />
+    <result column="StockStatus" property="stockstatus" jdbcType="INTEGER" />
+    <result column="IsAddGoods" property="isaddgoods" jdbcType="INTEGER" />
+    <result column="StockInstruction" property="stockinstruction" jdbcType="VARCHAR" />
+    <result column="MakeOrderDate" property="makeorderdate" jdbcType="TIMESTAMP" />
+    <result column="MakeOrderMan" property="makeorderman" jdbcType="INTEGER" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="INTEGER" />
+    <result column="IsQualified" property="isqualified" jdbcType="INTEGER" />
+    <result column="MaxStorage" property="maxstorage" jdbcType="INTEGER" />
+    <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Stocks_ID, Stocks_Number, Locations_ID, Locations_Number, Goods_ID, GoodsName, Quantity, 
+    Weight, NetWeight, Volume, PayableTon, RemainPickQuantity, IsLocked, StockStatus, 
+    IsAddGoods, StockInstruction, MakeOrderDate, MakeOrderMan, IsDeleted, IsQualified, 
+    MaxStorage, BatchNumber
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_stock
+    where Stocks_ID = #{stocksId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_stock
+    where Stocks_ID = #{stocksId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsStockExample" >
+    delete from wms_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsStock" >
+    insert into wms_stock (Stocks_ID, Stocks_Number, Locations_ID, 
+      Locations_Number, Goods_ID, GoodsName, 
+      Quantity, Weight, NetWeight, 
+      Volume, PayableTon, RemainPickQuantity, 
+      IsLocked, StockStatus, IsAddGoods, 
+      StockInstruction, MakeOrderDate, MakeOrderMan, 
+      IsDeleted, IsQualified, MaxStorage, 
+      BatchNumber)
+    values (#{stocksId,jdbcType=INTEGER}, #{stocksNumber,jdbcType=VARCHAR}, #{locationsId,jdbcType=INTEGER}, 
+      #{locationsNumber,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=REAL}, #{weight,jdbcType=REAL}, #{netweight,jdbcType=REAL}, 
+      #{volume,jdbcType=REAL}, #{payableton,jdbcType=REAL}, #{remainpickquantity,jdbcType=REAL}, 
+      #{islocked,jdbcType=INTEGER}, #{stockstatus,jdbcType=INTEGER}, #{isaddgoods,jdbcType=INTEGER}, 
+      #{stockinstruction,jdbcType=VARCHAR}, #{makeorderdate,jdbcType=TIMESTAMP}, #{makeorderman,jdbcType=INTEGER}, 
+      #{isdeleted,jdbcType=INTEGER}, #{isqualified,jdbcType=INTEGER}, #{maxstorage,jdbcType=INTEGER}, 
+      #{batchnumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsStock" >
+    insert into wms_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stocksId != null" >
+        Stocks_ID,
+      </if>
+      <if test="stocksNumber != null" >
+        Stocks_Number,
+      </if>
+      <if test="locationsId != null" >
+        Locations_ID,
+      </if>
+      <if test="locationsNumber != null" >
+        Locations_Number,
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="goodsname != null" >
+        GoodsName,
+      </if>
+      <if test="quantity != null" >
+        Quantity,
+      </if>
+      <if test="weight != null" >
+        Weight,
+      </if>
+      <if test="netweight != null" >
+        NetWeight,
+      </if>
+      <if test="volume != null" >
+        Volume,
+      </if>
+      <if test="payableton != null" >
+        PayableTon,
+      </if>
+      <if test="remainpickquantity != null" >
+        RemainPickQuantity,
+      </if>
+      <if test="islocked != null" >
+        IsLocked,
+      </if>
+      <if test="stockstatus != null" >
+        StockStatus,
+      </if>
+      <if test="isaddgoods != null" >
+        IsAddGoods,
+      </if>
+      <if test="stockinstruction != null" >
+        StockInstruction,
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate,
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="isqualified != null" >
+        IsQualified,
+      </if>
+      <if test="maxstorage != null" >
+        MaxStorage,
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stocksId != null" >
+        #{stocksId,jdbcType=INTEGER},
+      </if>
+      <if test="stocksNumber != null" >
+        #{stocksNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationsId != null" >
+        #{locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="locationsNumber != null" >
+        #{locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=REAL},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="netweight != null" >
+        #{netweight,jdbcType=REAL},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=REAL},
+      </if>
+      <if test="payableton != null" >
+        #{payableton,jdbcType=REAL},
+      </if>
+      <if test="remainpickquantity != null" >
+        #{remainpickquantity,jdbcType=REAL},
+      </if>
+      <if test="islocked != null" >
+        #{islocked,jdbcType=INTEGER},
+      </if>
+      <if test="stockstatus != null" >
+        #{stockstatus,jdbcType=INTEGER},
+      </if>
+      <if test="isaddgoods != null" >
+        #{isaddgoods,jdbcType=INTEGER},
+      </if>
+      <if test="stockinstruction != null" >
+        #{stockinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="makeorderdate != null" >
+        #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isqualified != null" >
+        #{isqualified,jdbcType=INTEGER},
+      </if>
+      <if test="maxstorage != null" >
+        #{maxstorage,jdbcType=INTEGER},
+      </if>
+      <if test="batchnumber != null" >
+        #{batchnumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsStockExample" resultType="java.lang.Integer" >
+    select count(*) from wms_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_stock
+    <set >
+      <if test="record.stocksId != null" >
+        Stocks_ID = #{record.stocksId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stocksNumber != null" >
+        Stocks_Number = #{record.stocksNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationsId != null" >
+        Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationsNumber != null" >
+        Locations_Number = #{record.locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsname != null" >
+        GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null" >
+        Quantity = #{record.quantity,jdbcType=REAL},
+      </if>
+      <if test="record.weight != null" >
+        Weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.netweight != null" >
+        NetWeight = #{record.netweight,jdbcType=REAL},
+      </if>
+      <if test="record.volume != null" >
+        Volume = #{record.volume,jdbcType=REAL},
+      </if>
+      <if test="record.payableton != null" >
+        PayableTon = #{record.payableton,jdbcType=REAL},
+      </if>
+      <if test="record.remainpickquantity != null" >
+        RemainPickQuantity = #{record.remainpickquantity,jdbcType=REAL},
+      </if>
+      <if test="record.islocked != null" >
+        IsLocked = #{record.islocked,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockstatus != null" >
+        StockStatus = #{record.stockstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.isaddgoods != null" >
+        IsAddGoods = #{record.isaddgoods,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockinstruction != null" >
+        StockInstruction = #{record.stockinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makeorderdate != null" >
+        MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.makeorderman != null" >
+        MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.isqualified != null" >
+        IsQualified = #{record.isqualified,jdbcType=INTEGER},
+      </if>
+      <if test="record.maxstorage != null" >
+        MaxStorage = #{record.maxstorage,jdbcType=INTEGER},
+      </if>
+      <if test="record.batchnumber != null" >
+        BatchNumber = #{record.batchnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_stock
+    set Stocks_ID = #{record.stocksId,jdbcType=INTEGER},
+      Stocks_Number = #{record.stocksNumber,jdbcType=VARCHAR},
+      Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      Locations_Number = #{record.locationsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      Quantity = #{record.quantity,jdbcType=REAL},
+      Weight = #{record.weight,jdbcType=REAL},
+      NetWeight = #{record.netweight,jdbcType=REAL},
+      Volume = #{record.volume,jdbcType=REAL},
+      PayableTon = #{record.payableton,jdbcType=REAL},
+      RemainPickQuantity = #{record.remainpickquantity,jdbcType=REAL},
+      IsLocked = #{record.islocked,jdbcType=INTEGER},
+      StockStatus = #{record.stockstatus,jdbcType=INTEGER},
+      IsAddGoods = #{record.isaddgoods,jdbcType=INTEGER},
+      StockInstruction = #{record.stockinstruction,jdbcType=VARCHAR},
+      MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{record.isdeleted,jdbcType=INTEGER},
+      IsQualified = #{record.isqualified,jdbcType=INTEGER},
+      MaxStorage = #{record.maxstorage,jdbcType=INTEGER},
+      BatchNumber = #{record.batchnumber,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsStock" >
+    update wms_stock
+    <set >
+      <if test="stocksNumber != null" >
+        Stocks_Number = #{stocksNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="locationsId != null" >
+        Locations_ID = #{locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="locationsNumber != null" >
+        Locations_Number = #{locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        GoodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        Quantity = #{quantity,jdbcType=REAL},
+      </if>
+      <if test="weight != null" >
+        Weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="netweight != null" >
+        NetWeight = #{netweight,jdbcType=REAL},
+      </if>
+      <if test="volume != null" >
+        Volume = #{volume,jdbcType=REAL},
+      </if>
+      <if test="payableton != null" >
+        PayableTon = #{payableton,jdbcType=REAL},
+      </if>
+      <if test="remainpickquantity != null" >
+        RemainPickQuantity = #{remainpickquantity,jdbcType=REAL},
+      </if>
+      <if test="islocked != null" >
+        IsLocked = #{islocked,jdbcType=INTEGER},
+      </if>
+      <if test="stockstatus != null" >
+        StockStatus = #{stockstatus,jdbcType=INTEGER},
+      </if>
+      <if test="isaddgoods != null" >
+        IsAddGoods = #{isaddgoods,jdbcType=INTEGER},
+      </if>
+      <if test="stockinstruction != null" >
+        StockInstruction = #{stockinstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=INTEGER},
+      </if>
+      <if test="isqualified != null" >
+        IsQualified = #{isqualified,jdbcType=INTEGER},
+      </if>
+      <if test="maxstorage != null" >
+        MaxStorage = #{maxstorage,jdbcType=INTEGER},
+      </if>
+      <if test="batchnumber != null" >
+        BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Stocks_ID = #{stocksId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsStock" >
+    update wms_stock
+    set Stocks_Number = #{stocksNumber,jdbcType=VARCHAR},
+      Locations_ID = #{locationsId,jdbcType=INTEGER},
+      Locations_Number = #{locationsNumber,jdbcType=VARCHAR},
+      Goods_ID = #{goodsId,jdbcType=INTEGER},
+      GoodsName = #{goodsname,jdbcType=VARCHAR},
+      Quantity = #{quantity,jdbcType=REAL},
+      Weight = #{weight,jdbcType=REAL},
+      NetWeight = #{netweight,jdbcType=REAL},
+      Volume = #{volume,jdbcType=REAL},
+      PayableTon = #{payableton,jdbcType=REAL},
+      RemainPickQuantity = #{remainpickquantity,jdbcType=REAL},
+      IsLocked = #{islocked,jdbcType=INTEGER},
+      StockStatus = #{stockstatus,jdbcType=INTEGER},
+      IsAddGoods = #{isaddgoods,jdbcType=INTEGER},
+      StockInstruction = #{stockinstruction,jdbcType=VARCHAR},
+      MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{isdeleted,jdbcType=INTEGER},
+      IsQualified = #{isqualified,jdbcType=INTEGER},
+      MaxStorage = #{maxstorage,jdbcType=INTEGER},
+      BatchNumber = #{batchnumber,jdbcType=VARCHAR}
+    where Stocks_ID = #{stocksId,jdbcType=INTEGER}
+  </update>
+</mapper>

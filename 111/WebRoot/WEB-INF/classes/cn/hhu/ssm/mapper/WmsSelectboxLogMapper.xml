@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsSelectboxLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsSelectboxLog" >
+    <id column="SelectBox_LogID" property="selectboxLogid" jdbcType="INTEGER" />
+    <result column="SelectBox_ID" property="selectboxId" jdbcType="INTEGER" />
+    <result column="SelectBox_PreModifiedState" property="selectboxPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="SelectBox_ModifiedState" property="selectboxModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SelectBox_LogID, SelectBox_ID, SelectBox_PreModifiedState, SelectBox_ModifiedState, 
+    Employee_ID, ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsSelectboxLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_selectbox_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_selectbox_log
+    where SelectBox_LogID = #{selectboxLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_selectbox_log
+    where SelectBox_LogID = #{selectboxLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsSelectboxLogExample" >
+    delete from wms_selectbox_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsSelectboxLog" >
+    insert into wms_selectbox_log (SelectBox_LogID, SelectBox_ID, SelectBox_PreModifiedState, 
+      SelectBox_ModifiedState, Employee_ID, ModifyMan, 
+      ModifiedDate)
+    values (#{selectboxLogid,jdbcType=INTEGER}, #{selectboxId,jdbcType=INTEGER}, #{selectboxPremodifiedstate,jdbcType=VARCHAR}, 
+      #{selectboxModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsSelectboxLog" >
+    insert into wms_selectbox_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectboxLogid != null" >
+        SelectBox_LogID,
+      </if>
+      <if test="selectboxId != null" >
+        SelectBox_ID,
+      </if>
+      <if test="selectboxPremodifiedstate != null" >
+        SelectBox_PreModifiedState,
+      </if>
+      <if test="selectboxModifiedstate != null" >
+        SelectBox_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectboxLogid != null" >
+        #{selectboxLogid,jdbcType=INTEGER},
+      </if>
+      <if test="selectboxId != null" >
+        #{selectboxId,jdbcType=INTEGER},
+      </if>
+      <if test="selectboxPremodifiedstate != null" >
+        #{selectboxPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="selectboxModifiedstate != null" >
+        #{selectboxModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsSelectboxLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_selectbox_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_selectbox_log
+    <set >
+      <if test="record.selectboxLogid != null" >
+        SelectBox_LogID = #{record.selectboxLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.selectboxId != null" >
+        SelectBox_ID = #{record.selectboxId,jdbcType=INTEGER},
+      </if>
+      <if test="record.selectboxPremodifiedstate != null" >
+        SelectBox_PreModifiedState = #{record.selectboxPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selectboxModifiedstate != null" >
+        SelectBox_ModifiedState = #{record.selectboxModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_selectbox_log
+    set SelectBox_LogID = #{record.selectboxLogid,jdbcType=INTEGER},
+      SelectBox_ID = #{record.selectboxId,jdbcType=INTEGER},
+      SelectBox_PreModifiedState = #{record.selectboxPremodifiedstate,jdbcType=VARCHAR},
+      SelectBox_ModifiedState = #{record.selectboxModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsSelectboxLog" >
+    update wms_selectbox_log
+    <set >
+      <if test="selectboxId != null" >
+        SelectBox_ID = #{selectboxId,jdbcType=INTEGER},
+      </if>
+      <if test="selectboxPremodifiedstate != null" >
+        SelectBox_PreModifiedState = #{selectboxPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="selectboxModifiedstate != null" >
+        SelectBox_ModifiedState = #{selectboxModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SelectBox_LogID = #{selectboxLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsSelectboxLog" >
+    update wms_selectbox_log
+    set SelectBox_ID = #{selectboxId,jdbcType=INTEGER},
+      SelectBox_PreModifiedState = #{selectboxPremodifiedstate,jdbcType=VARCHAR},
+      SelectBox_ModifiedState = #{selectboxModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where SelectBox_LogID = #{selectboxLogid,jdbcType=INTEGER}
+  </update>
+</mapper>

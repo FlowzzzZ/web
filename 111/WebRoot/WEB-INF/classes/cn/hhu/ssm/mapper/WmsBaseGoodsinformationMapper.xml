@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsBaseGoodsinformationMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsBaseGoodsinformation" >
+    <id column="GoodsInformation_ID" property="goodsinformationId" jdbcType="INTEGER" />
+    <result column="Shipper_ID" property="shipperId" jdbcType="INTEGER" />
+    <result column="ShipperAuthorization_ID" property="shipperauthorizationId" jdbcType="INTEGER" />
+    <result column="Goods_Number" property="goodsNumber" jdbcType="VARCHAR" />
+    <result column="GoodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="Registration_ID" property="registrationId" jdbcType="INTEGER" />
+    <result column="RegistrationCode" property="registrationcode" jdbcType="VARCHAR" />
+    <result column="Specifiation" property="specifiation" jdbcType="VARCHAR" />
+    <result column="Type" property="type" jdbcType="VARCHAR" />
+    <result column="Unit" property="unit" jdbcType="VARCHAR" />
+    <result column="ConversionRate" property="conversionrate" jdbcType="REAL" />
+    <result column="Length" property="length" jdbcType="REAL" />
+    <result column="Width" property="width" jdbcType="REAL" />
+    <result column="High" property="high" jdbcType="REAL" />
+    <result column="ProductLine" property="productline" jdbcType="INTEGER" />
+    <result column="Catalog_ID" property="catalogId" jdbcType="INTEGER" />
+    <result column="ManageClassification" property="manageclassification" jdbcType="INTEGER" />
+    <result column="PackagingRequirement" property="packagingrequirement" jdbcType="VARCHAR" />
+    <result column="StorageRequirement" property="storagerequirement" jdbcType="VARCHAR" />
+    <result column="Producer_ID" property="producerId" jdbcType="INTEGER" />
+    <result column="Producer_Name" property="producerName" jdbcType="VARCHAR" />
+    <result column="Suppliers_ID" property="suppliersId" jdbcType="INTEGER" />
+    <result column="SuppliersAuthorization_ID" property="suppliersauthorizationId" jdbcType="INTEGER" />
+    <result column="SuppliersSale_ID" property="supplierssaleId" jdbcType="INTEGER" />
+    <result column="FirstBusiness" property="firstbusiness" jdbcType="INTEGER" />
+    <result column="MakeOrderDate" property="makeorderdate" jdbcType="TIMESTAMP" />
+    <result column="MakeOrderMan" property="makeorderman" jdbcType="INTEGER" />
+    <result column="IsDeleted" property="isdeleted" jdbcType="BIT" />
+    <result column="IsReview" property="isreview" jdbcType="BIT" />
+    <result column="IsSale" property="issale" jdbcType="BIT" />
+    <result column="PackagingUnit" property="packagingunit" jdbcType="VARCHAR" />
+    <result column="GoodsBarCode" property="goodsbarcode" jdbcType="VARCHAR" />
+    <result column="GoodsSpecies" property="goodsspecies" jdbcType="INTEGER" />
+    <result column="Origin" property="origin" jdbcType="VARCHAR" />
+    <result column="GoodsDescribation" property="goodsdescribation" jdbcType="VARCHAR" />
+    <result column="StorageTransportationRequirement" property="storagetransportationrequirement" jdbcType="VARCHAR" />
+    <result column="STMaxTemperature" property="stmaxtemperature" jdbcType="REAL" />
+    <result column="STMinTemperature" property="stmintemperature" jdbcType="REAL" />
+    <result column="ColdChainProductIdentification" property="coldchainproductidentification" jdbcType="INTEGER" />
+    <result column="IsHomemade" property="ishomemade" jdbcType="INTEGER" />
+    <result column="SterilizingBatchNumber" property="sterilizingbatchnumber" jdbcType="VARCHAR" />
+    <result column="SMaxTemperature" property="smaxtemperature" jdbcType="REAL" />
+    <result column="SMinTemperature" property="smintemperature" jdbcType="REAL" />
+    <result column="SMaxHumidity" property="smaxhumidity" jdbcType="REAL" />
+    <result column="SMinHumidity" property="sminhumidity" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GoodsInformation_ID, Shipper_ID, ShipperAuthorization_ID, Goods_Number, GoodsName, 
+    Registration_ID, RegistrationCode, Specifiation, Type, Unit, ConversionRate, Length, 
+    Width, High, ProductLine, Catalog_ID, ManageClassification, PackagingRequirement, 
+    StorageRequirement, Producer_ID, Producer_Name, Suppliers_ID, SuppliersAuthorization_ID, 
+    SuppliersSale_ID, FirstBusiness, MakeOrderDate, MakeOrderMan, IsDeleted, IsReview, 
+    IsSale, PackagingUnit, GoodsBarCode, GoodsSpecies, Origin, GoodsDescribation, StorageTransportationRequirement, 
+    STMaxTemperature, STMinTemperature, ColdChainProductIdentification, IsHomemade, SterilizingBatchNumber, 
+    SMaxTemperature, SMinTemperature, SMaxHumidity, SMinHumidity
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_base_goodsinformation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_base_goodsinformation
+    where GoodsInformation_ID = #{goodsinformationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_base_goodsinformation
+    where GoodsInformation_ID = #{goodsinformationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformationExample" >
+    delete from wms_base_goodsinformation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformation" >
+    insert into wms_base_goodsinformation (GoodsInformation_ID, Shipper_ID, ShipperAuthorization_ID, 
+      Goods_Number, GoodsName, Registration_ID, 
+      RegistrationCode, Specifiation, Type, 
+      Unit, ConversionRate, Length, 
+      Width, High, ProductLine, 
+      Catalog_ID, ManageClassification, PackagingRequirement, 
+      StorageRequirement, Producer_ID, Producer_Name, 
+      Suppliers_ID, SuppliersAuthorization_ID, 
+      SuppliersSale_ID, FirstBusiness, MakeOrderDate, 
+      MakeOrderMan, IsDeleted, IsReview, 
+      IsSale, PackagingUnit, GoodsBarCode, 
+      GoodsSpecies, Origin, GoodsDescribation, 
+      StorageTransportationRequirement, STMaxTemperature, 
+      STMinTemperature, ColdChainProductIdentification, 
+      IsHomemade, SterilizingBatchNumber, SMaxTemperature, 
+      SMinTemperature, SMaxHumidity, SMinHumidity
+      )
+    values (#{goodsinformationId,jdbcType=INTEGER}, #{shipperId,jdbcType=INTEGER}, #{shipperauthorizationId,jdbcType=INTEGER}, 
+      #{goodsNumber,jdbcType=VARCHAR}, #{goodsname,jdbcType=VARCHAR}, #{registrationId,jdbcType=INTEGER}, 
+      #{registrationcode,jdbcType=VARCHAR}, #{specifiation,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{conversionrate,jdbcType=REAL}, #{length,jdbcType=REAL}, 
+      #{width,jdbcType=REAL}, #{high,jdbcType=REAL}, #{productline,jdbcType=INTEGER}, 
+      #{catalogId,jdbcType=INTEGER}, #{manageclassification,jdbcType=INTEGER}, #{packagingrequirement,jdbcType=VARCHAR}, 
+      #{storagerequirement,jdbcType=VARCHAR}, #{producerId,jdbcType=INTEGER}, #{producerName,jdbcType=VARCHAR}, 
+      #{suppliersId,jdbcType=INTEGER}, #{suppliersauthorizationId,jdbcType=INTEGER}, 
+      #{supplierssaleId,jdbcType=INTEGER}, #{firstbusiness,jdbcType=INTEGER}, #{makeorderdate,jdbcType=TIMESTAMP}, 
+      #{makeorderman,jdbcType=INTEGER}, #{isdeleted,jdbcType=BIT}, #{isreview,jdbcType=BIT}, 
+      #{issale,jdbcType=BIT}, #{packagingunit,jdbcType=VARCHAR}, #{goodsbarcode,jdbcType=VARCHAR}, 
+      #{goodsspecies,jdbcType=INTEGER}, #{origin,jdbcType=VARCHAR}, #{goodsdescribation,jdbcType=VARCHAR}, 
+      #{storagetransportationrequirement,jdbcType=VARCHAR}, #{stmaxtemperature,jdbcType=REAL}, 
+      #{stmintemperature,jdbcType=REAL}, #{coldchainproductidentification,jdbcType=INTEGER}, 
+      #{ishomemade,jdbcType=INTEGER}, #{sterilizingbatchnumber,jdbcType=VARCHAR}, #{smaxtemperature,jdbcType=REAL}, 
+      #{smintemperature,jdbcType=REAL}, #{smaxhumidity,jdbcType=REAL}, #{sminhumidity,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformation" >
+    insert into wms_base_goodsinformation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsinformationId != null" >
+        GoodsInformation_ID,
+      </if>
+      <if test="shipperId != null" >
+        Shipper_ID,
+      </if>
+      <if test="shipperauthorizationId != null" >
+        ShipperAuthorization_ID,
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number,
+      </if>
+      <if test="goodsname != null" >
+        GoodsName,
+      </if>
+      <if test="registrationId != null" >
+        Registration_ID,
+      </if>
+      <if test="registrationcode != null" >
+        RegistrationCode,
+      </if>
+      <if test="specifiation != null" >
+        Specifiation,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="unit != null" >
+        Unit,
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate,
+      </if>
+      <if test="length != null" >
+        Length,
+      </if>
+      <if test="width != null" >
+        Width,
+      </if>
+      <if test="high != null" >
+        High,
+      </if>
+      <if test="productline != null" >
+        ProductLine,
+      </if>
+      <if test="catalogId != null" >
+        Catalog_ID,
+      </if>
+      <if test="manageclassification != null" >
+        ManageClassification,
+      </if>
+      <if test="packagingrequirement != null" >
+        PackagingRequirement,
+      </if>
+      <if test="storagerequirement != null" >
+        StorageRequirement,
+      </if>
+      <if test="producerId != null" >
+        Producer_ID,
+      </if>
+      <if test="producerName != null" >
+        Producer_Name,
+      </if>
+      <if test="suppliersId != null" >
+        Suppliers_ID,
+      </if>
+      <if test="suppliersauthorizationId != null" >
+        SuppliersAuthorization_ID,
+      </if>
+      <if test="supplierssaleId != null" >
+        SuppliersSale_ID,
+      </if>
+      <if test="firstbusiness != null" >
+        FirstBusiness,
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate,
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan,
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted,
+      </if>
+      <if test="isreview != null" >
+        IsReview,
+      </if>
+      <if test="issale != null" >
+        IsSale,
+      </if>
+      <if test="packagingunit != null" >
+        PackagingUnit,
+      </if>
+      <if test="goodsbarcode != null" >
+        GoodsBarCode,
+      </if>
+      <if test="goodsspecies != null" >
+        GoodsSpecies,
+      </if>
+      <if test="origin != null" >
+        Origin,
+      </if>
+      <if test="goodsdescribation != null" >
+        GoodsDescribation,
+      </if>
+      <if test="storagetransportationrequirement != null" >
+        StorageTransportationRequirement,
+      </if>
+      <if test="stmaxtemperature != null" >
+        STMaxTemperature,
+      </if>
+      <if test="stmintemperature != null" >
+        STMinTemperature,
+      </if>
+      <if test="coldchainproductidentification != null" >
+        ColdChainProductIdentification,
+      </if>
+      <if test="ishomemade != null" >
+        IsHomemade,
+      </if>
+      <if test="sterilizingbatchnumber != null" >
+        SterilizingBatchNumber,
+      </if>
+      <if test="smaxtemperature != null" >
+        SMaxTemperature,
+      </if>
+      <if test="smintemperature != null" >
+        SMinTemperature,
+      </if>
+      <if test="smaxhumidity != null" >
+        SMaxHumidity,
+      </if>
+      <if test="sminhumidity != null" >
+        SMinHumidity,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsinformationId != null" >
+        #{goodsinformationId,jdbcType=INTEGER},
+      </if>
+      <if test="shipperId != null" >
+        #{shipperId,jdbcType=INTEGER},
+      </if>
+      <if test="shipperauthorizationId != null" >
+        #{shipperauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null" >
+        #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="registrationcode != null" >
+        #{registrationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiation != null" >
+        #{specifiation,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=REAL},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=REAL},
+      </if>
+      <if test="high != null" >
+        #{high,jdbcType=REAL},
+      </if>
+      <if test="productline != null" >
+        #{productline,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="manageclassification != null" >
+        #{manageclassification,jdbcType=INTEGER},
+      </if>
+      <if test="packagingrequirement != null" >
+        #{packagingrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="storagerequirement != null" >
+        #{storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="producerId != null" >
+        #{producerId,jdbcType=INTEGER},
+      </if>
+      <if test="producerName != null" >
+        #{producerName,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliersId != null" >
+        #{suppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="suppliersauthorizationId != null" >
+        #{suppliersauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierssaleId != null" >
+        #{supplierssaleId,jdbcType=INTEGER},
+      </if>
+      <if test="firstbusiness != null" >
+        #{firstbusiness,jdbcType=INTEGER},
+      </if>
+      <if test="makeorderdate != null" >
+        #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="isreview != null" >
+        #{isreview,jdbcType=BIT},
+      </if>
+      <if test="issale != null" >
+        #{issale,jdbcType=BIT},
+      </if>
+      <if test="packagingunit != null" >
+        #{packagingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbarcode != null" >
+        #{goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsspecies != null" >
+        #{goodsspecies,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsdescribation != null" >
+        #{goodsdescribation,jdbcType=VARCHAR},
+      </if>
+      <if test="storagetransportationrequirement != null" >
+        #{storagetransportationrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="stmaxtemperature != null" >
+        #{stmaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="stmintemperature != null" >
+        #{stmintemperature,jdbcType=REAL},
+      </if>
+      <if test="coldchainproductidentification != null" >
+        #{coldchainproductidentification,jdbcType=INTEGER},
+      </if>
+      <if test="ishomemade != null" >
+        #{ishomemade,jdbcType=INTEGER},
+      </if>
+      <if test="sterilizingbatchnumber != null" >
+        #{sterilizingbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="smaxtemperature != null" >
+        #{smaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="smintemperature != null" >
+        #{smintemperature,jdbcType=REAL},
+      </if>
+      <if test="smaxhumidity != null" >
+        #{smaxhumidity,jdbcType=REAL},
+      </if>
+      <if test="sminhumidity != null" >
+        #{sminhumidity,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformationExample" resultType="java.lang.Integer" >
+    select count(*) from wms_base_goodsinformation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_base_goodsinformation
+    <set >
+      <if test="record.goodsinformationId != null" >
+        GoodsInformation_ID = #{record.goodsinformationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipperId != null" >
+        Shipper_ID = #{record.shipperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shipperauthorizationId != null" >
+        ShipperAuthorization_ID = #{record.shipperauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNumber != null" >
+        Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null" >
+        GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationId != null" >
+        Registration_ID = #{record.registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationcode != null" >
+        RegistrationCode = #{record.registrationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specifiation != null" >
+        Specifiation = #{record.specifiation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        Type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        Unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conversionrate != null" >
+        ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      </if>
+      <if test="record.length != null" >
+        Length = #{record.length,jdbcType=REAL},
+      </if>
+      <if test="record.width != null" >
+        Width = #{record.width,jdbcType=REAL},
+      </if>
+      <if test="record.high != null" >
+        High = #{record.high,jdbcType=REAL},
+      </if>
+      <if test="record.productline != null" >
+        ProductLine = #{record.productline,jdbcType=INTEGER},
+      </if>
+      <if test="record.catalogId != null" >
+        Catalog_ID = #{record.catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="record.manageclassification != null" >
+        ManageClassification = #{record.manageclassification,jdbcType=INTEGER},
+      </if>
+      <if test="record.packagingrequirement != null" >
+        PackagingRequirement = #{record.packagingrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storagerequirement != null" >
+        StorageRequirement = #{record.storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producerId != null" >
+        Producer_ID = #{record.producerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.producerName != null" >
+        Producer_Name = #{record.producerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suppliersId != null" >
+        Suppliers_ID = #{record.suppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="record.suppliersauthorizationId != null" >
+        SuppliersAuthorization_ID = #{record.suppliersauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.supplierssaleId != null" >
+        SuppliersSale_ID = #{record.supplierssaleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstbusiness != null" >
+        FirstBusiness = #{record.firstbusiness,jdbcType=INTEGER},
+      </if>
+      <if test="record.makeorderdate != null" >
+        MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.makeorderman != null" >
+        MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="record.isdeleted != null" >
+        IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      </if>
+      <if test="record.isreview != null" >
+        IsReview = #{record.isreview,jdbcType=BIT},
+      </if>
+      <if test="record.issale != null" >
+        IsSale = #{record.issale,jdbcType=BIT},
+      </if>
+      <if test="record.packagingunit != null" >
+        PackagingUnit = #{record.packagingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsbarcode != null" >
+        GoodsBarCode = #{record.goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsspecies != null" >
+        GoodsSpecies = #{record.goodsspecies,jdbcType=INTEGER},
+      </if>
+      <if test="record.origin != null" >
+        Origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsdescribation != null" >
+        GoodsDescribation = #{record.goodsdescribation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storagetransportationrequirement != null" >
+        StorageTransportationRequirement = #{record.storagetransportationrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stmaxtemperature != null" >
+        STMaxTemperature = #{record.stmaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="record.stmintemperature != null" >
+        STMinTemperature = #{record.stmintemperature,jdbcType=REAL},
+      </if>
+      <if test="record.coldchainproductidentification != null" >
+        ColdChainProductIdentification = #{record.coldchainproductidentification,jdbcType=INTEGER},
+      </if>
+      <if test="record.ishomemade != null" >
+        IsHomemade = #{record.ishomemade,jdbcType=INTEGER},
+      </if>
+      <if test="record.sterilizingbatchnumber != null" >
+        SterilizingBatchNumber = #{record.sterilizingbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smaxtemperature != null" >
+        SMaxTemperature = #{record.smaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="record.smintemperature != null" >
+        SMinTemperature = #{record.smintemperature,jdbcType=REAL},
+      </if>
+      <if test="record.smaxhumidity != null" >
+        SMaxHumidity = #{record.smaxhumidity,jdbcType=REAL},
+      </if>
+      <if test="record.sminhumidity != null" >
+        SMinHumidity = #{record.sminhumidity,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_base_goodsinformation
+    set GoodsInformation_ID = #{record.goodsinformationId,jdbcType=INTEGER},
+      Shipper_ID = #{record.shipperId,jdbcType=INTEGER},
+      ShipperAuthorization_ID = #{record.shipperauthorizationId,jdbcType=INTEGER},
+      Goods_Number = #{record.goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{record.goodsname,jdbcType=VARCHAR},
+      Registration_ID = #{record.registrationId,jdbcType=INTEGER},
+      RegistrationCode = #{record.registrationcode,jdbcType=VARCHAR},
+      Specifiation = #{record.specifiation,jdbcType=VARCHAR},
+      Type = #{record.type,jdbcType=VARCHAR},
+      Unit = #{record.unit,jdbcType=VARCHAR},
+      ConversionRate = #{record.conversionrate,jdbcType=REAL},
+      Length = #{record.length,jdbcType=REAL},
+      Width = #{record.width,jdbcType=REAL},
+      High = #{record.high,jdbcType=REAL},
+      ProductLine = #{record.productline,jdbcType=INTEGER},
+      Catalog_ID = #{record.catalogId,jdbcType=INTEGER},
+      ManageClassification = #{record.manageclassification,jdbcType=INTEGER},
+      PackagingRequirement = #{record.packagingrequirement,jdbcType=VARCHAR},
+      StorageRequirement = #{record.storagerequirement,jdbcType=VARCHAR},
+      Producer_ID = #{record.producerId,jdbcType=INTEGER},
+      Producer_Name = #{record.producerName,jdbcType=VARCHAR},
+      Suppliers_ID = #{record.suppliersId,jdbcType=INTEGER},
+      SuppliersAuthorization_ID = #{record.suppliersauthorizationId,jdbcType=INTEGER},
+      SuppliersSale_ID = #{record.supplierssaleId,jdbcType=INTEGER},
+      FirstBusiness = #{record.firstbusiness,jdbcType=INTEGER},
+      MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{record.isdeleted,jdbcType=BIT},
+      IsReview = #{record.isreview,jdbcType=BIT},
+      IsSale = #{record.issale,jdbcType=BIT},
+      PackagingUnit = #{record.packagingunit,jdbcType=VARCHAR},
+      GoodsBarCode = #{record.goodsbarcode,jdbcType=VARCHAR},
+      GoodsSpecies = #{record.goodsspecies,jdbcType=INTEGER},
+      Origin = #{record.origin,jdbcType=VARCHAR},
+      GoodsDescribation = #{record.goodsdescribation,jdbcType=VARCHAR},
+      StorageTransportationRequirement = #{record.storagetransportationrequirement,jdbcType=VARCHAR},
+      STMaxTemperature = #{record.stmaxtemperature,jdbcType=REAL},
+      STMinTemperature = #{record.stmintemperature,jdbcType=REAL},
+      ColdChainProductIdentification = #{record.coldchainproductidentification,jdbcType=INTEGER},
+      IsHomemade = #{record.ishomemade,jdbcType=INTEGER},
+      SterilizingBatchNumber = #{record.sterilizingbatchnumber,jdbcType=VARCHAR},
+      SMaxTemperature = #{record.smaxtemperature,jdbcType=REAL},
+      SMinTemperature = #{record.smintemperature,jdbcType=REAL},
+      SMaxHumidity = #{record.smaxhumidity,jdbcType=REAL},
+      SMinHumidity = #{record.sminhumidity,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformation" >
+    update wms_base_goodsinformation
+    <set >
+      <if test="shipperId != null" >
+        Shipper_ID = #{shipperId,jdbcType=INTEGER},
+      </if>
+      <if test="shipperauthorizationId != null" >
+        ShipperAuthorization_ID = #{shipperauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null" >
+        GoodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null" >
+        Registration_ID = #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="registrationcode != null" >
+        RegistrationCode = #{registrationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="specifiation != null" >
+        Specifiation = #{specifiation,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        Unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="conversionrate != null" >
+        ConversionRate = #{conversionrate,jdbcType=REAL},
+      </if>
+      <if test="length != null" >
+        Length = #{length,jdbcType=REAL},
+      </if>
+      <if test="width != null" >
+        Width = #{width,jdbcType=REAL},
+      </if>
+      <if test="high != null" >
+        High = #{high,jdbcType=REAL},
+      </if>
+      <if test="productline != null" >
+        ProductLine = #{productline,jdbcType=INTEGER},
+      </if>
+      <if test="catalogId != null" >
+        Catalog_ID = #{catalogId,jdbcType=INTEGER},
+      </if>
+      <if test="manageclassification != null" >
+        ManageClassification = #{manageclassification,jdbcType=INTEGER},
+      </if>
+      <if test="packagingrequirement != null" >
+        PackagingRequirement = #{packagingrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="storagerequirement != null" >
+        StorageRequirement = #{storagerequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="producerId != null" >
+        Producer_ID = #{producerId,jdbcType=INTEGER},
+      </if>
+      <if test="producerName != null" >
+        Producer_Name = #{producerName,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliersId != null" >
+        Suppliers_ID = #{suppliersId,jdbcType=INTEGER},
+      </if>
+      <if test="suppliersauthorizationId != null" >
+        SuppliersAuthorization_ID = #{suppliersauthorizationId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierssaleId != null" >
+        SuppliersSale_ID = #{supplierssaleId,jdbcType=INTEGER},
+      </if>
+      <if test="firstbusiness != null" >
+        FirstBusiness = #{firstbusiness,jdbcType=INTEGER},
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="isdeleted != null" >
+        IsDeleted = #{isdeleted,jdbcType=BIT},
+      </if>
+      <if test="isreview != null" >
+        IsReview = #{isreview,jdbcType=BIT},
+      </if>
+      <if test="issale != null" >
+        IsSale = #{issale,jdbcType=BIT},
+      </if>
+      <if test="packagingunit != null" >
+        PackagingUnit = #{packagingunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsbarcode != null" >
+        GoodsBarCode = #{goodsbarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsspecies != null" >
+        GoodsSpecies = #{goodsspecies,jdbcType=INTEGER},
+      </if>
+      <if test="origin != null" >
+        Origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsdescribation != null" >
+        GoodsDescribation = #{goodsdescribation,jdbcType=VARCHAR},
+      </if>
+      <if test="storagetransportationrequirement != null" >
+        StorageTransportationRequirement = #{storagetransportationrequirement,jdbcType=VARCHAR},
+      </if>
+      <if test="stmaxtemperature != null" >
+        STMaxTemperature = #{stmaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="stmintemperature != null" >
+        STMinTemperature = #{stmintemperature,jdbcType=REAL},
+      </if>
+      <if test="coldchainproductidentification != null" >
+        ColdChainProductIdentification = #{coldchainproductidentification,jdbcType=INTEGER},
+      </if>
+      <if test="ishomemade != null" >
+        IsHomemade = #{ishomemade,jdbcType=INTEGER},
+      </if>
+      <if test="sterilizingbatchnumber != null" >
+        SterilizingBatchNumber = #{sterilizingbatchnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="smaxtemperature != null" >
+        SMaxTemperature = #{smaxtemperature,jdbcType=REAL},
+      </if>
+      <if test="smintemperature != null" >
+        SMinTemperature = #{smintemperature,jdbcType=REAL},
+      </if>
+      <if test="smaxhumidity != null" >
+        SMaxHumidity = #{smaxhumidity,jdbcType=REAL},
+      </if>
+      <if test="sminhumidity != null" >
+        SMinHumidity = #{sminhumidity,jdbcType=REAL},
+      </if>
+    </set>
+    where GoodsInformation_ID = #{goodsinformationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsBaseGoodsinformation" >
+    update wms_base_goodsinformation
+    set Shipper_ID = #{shipperId,jdbcType=INTEGER},
+      ShipperAuthorization_ID = #{shipperauthorizationId,jdbcType=INTEGER},
+      Goods_Number = #{goodsNumber,jdbcType=VARCHAR},
+      GoodsName = #{goodsname,jdbcType=VARCHAR},
+      Registration_ID = #{registrationId,jdbcType=INTEGER},
+      RegistrationCode = #{registrationcode,jdbcType=VARCHAR},
+      Specifiation = #{specifiation,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      Unit = #{unit,jdbcType=VARCHAR},
+      ConversionRate = #{conversionrate,jdbcType=REAL},
+      Length = #{length,jdbcType=REAL},
+      Width = #{width,jdbcType=REAL},
+      High = #{high,jdbcType=REAL},
+      ProductLine = #{productline,jdbcType=INTEGER},
+      Catalog_ID = #{catalogId,jdbcType=INTEGER},
+      ManageClassification = #{manageclassification,jdbcType=INTEGER},
+      PackagingRequirement = #{packagingrequirement,jdbcType=VARCHAR},
+      StorageRequirement = #{storagerequirement,jdbcType=VARCHAR},
+      Producer_ID = #{producerId,jdbcType=INTEGER},
+      Producer_Name = #{producerName,jdbcType=VARCHAR},
+      Suppliers_ID = #{suppliersId,jdbcType=INTEGER},
+      SuppliersAuthorization_ID = #{suppliersauthorizationId,jdbcType=INTEGER},
+      SuppliersSale_ID = #{supplierssaleId,jdbcType=INTEGER},
+      FirstBusiness = #{firstbusiness,jdbcType=INTEGER},
+      MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      IsDeleted = #{isdeleted,jdbcType=BIT},
+      IsReview = #{isreview,jdbcType=BIT},
+      IsSale = #{issale,jdbcType=BIT},
+      PackagingUnit = #{packagingunit,jdbcType=VARCHAR},
+      GoodsBarCode = #{goodsbarcode,jdbcType=VARCHAR},
+      GoodsSpecies = #{goodsspecies,jdbcType=INTEGER},
+      Origin = #{origin,jdbcType=VARCHAR},
+      GoodsDescribation = #{goodsdescribation,jdbcType=VARCHAR},
+      StorageTransportationRequirement = #{storagetransportationrequirement,jdbcType=VARCHAR},
+      STMaxTemperature = #{stmaxtemperature,jdbcType=REAL},
+      STMinTemperature = #{stmintemperature,jdbcType=REAL},
+      ColdChainProductIdentification = #{coldchainproductidentification,jdbcType=INTEGER},
+      IsHomemade = #{ishomemade,jdbcType=INTEGER},
+      SterilizingBatchNumber = #{sterilizingbatchnumber,jdbcType=VARCHAR},
+      SMaxTemperature = #{smaxtemperature,jdbcType=REAL},
+      SMinTemperature = #{smintemperature,jdbcType=REAL},
+      SMaxHumidity = #{smaxhumidity,jdbcType=REAL},
+      SMinHumidity = #{sminhumidity,jdbcType=REAL}
+    where GoodsInformation_ID = #{goodsinformationId,jdbcType=INTEGER}
+  </update>
+</mapper>

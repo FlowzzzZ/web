@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsLocationMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsLocation" >
+    <id column="Locations_ID" property="locationsId" jdbcType="INTEGER" />
+    <result column="Locations_Number" property="locationsNumber" jdbcType="VARCHAR" />
+    <result column="ParentArea_ID" property="parentareaId" jdbcType="INTEGER" />
+    <result column="LocationAttribute" property="locationattribute" jdbcType="VARCHAR" />
+    <result column="Shelves" property="shelves" jdbcType="INTEGER" />
+    <result column="LayersNumber" property="layersnumber" jdbcType="INTEGER" />
+    <result column="Goods_ID" property="goodsId" jdbcType="INTEGER" />
+    <result column="Goods_Number" property="goodsNumber" jdbcType="REAL" />
+    <result column="PiciSL" property="picisl" jdbcType="REAL" />
+    <result column="MaxWeight" property="maxweight" jdbcType="REAL" />
+    <result column="MaxVolumn" property="maxvolumn" jdbcType="REAL" />
+    <result column="IsUsed" property="isused" jdbcType="INTEGER" />
+    <result column="MakeOrderDate" property="makeorderdate" jdbcType="TIMESTAMP" />
+    <result column="MakeOrderMan" property="makeorderman" jdbcType="INTEGER" />
+    <result column="ColumnCount" property="columncount" jdbcType="INTEGER" />
+    <result column="AreaName" property="areaname" jdbcType="VARCHAR" />
+    <result column="LocationName" property="locationname" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Locations_ID, Locations_Number, ParentArea_ID, LocationAttribute, Shelves, LayersNumber, 
+    Goods_ID, Goods_Number, PiciSL, MaxWeight, MaxVolumn, IsUsed, MakeOrderDate, MakeOrderMan, 
+    ColumnCount, AreaName, LocationName, Remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsLocationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_location
+    where Locations_ID = #{locationsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_location
+    where Locations_ID = #{locationsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsLocationExample" >
+    delete from wms_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsLocation" >
+    insert into wms_location (Locations_ID, Locations_Number, ParentArea_ID, 
+      LocationAttribute, Shelves, LayersNumber, 
+      Goods_ID, Goods_Number, PiciSL, 
+      MaxWeight, MaxVolumn, IsUsed, 
+      MakeOrderDate, MakeOrderMan, ColumnCount, 
+      AreaName, LocationName, Remark
+      )
+    values (#{locationsId,jdbcType=INTEGER}, #{locationsNumber,jdbcType=VARCHAR}, #{parentareaId,jdbcType=INTEGER}, 
+      #{locationattribute,jdbcType=VARCHAR}, #{shelves,jdbcType=INTEGER}, #{layersnumber,jdbcType=INTEGER}, 
+      #{goodsId,jdbcType=INTEGER}, #{goodsNumber,jdbcType=REAL}, #{picisl,jdbcType=REAL}, 
+      #{maxweight,jdbcType=REAL}, #{maxvolumn,jdbcType=REAL}, #{isused,jdbcType=INTEGER}, 
+      #{makeorderdate,jdbcType=TIMESTAMP}, #{makeorderman,jdbcType=INTEGER}, #{columncount,jdbcType=INTEGER}, 
+      #{areaname,jdbcType=VARCHAR}, #{locationname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsLocation" >
+    insert into wms_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="locationsId != null" >
+        Locations_ID,
+      </if>
+      <if test="locationsNumber != null" >
+        Locations_Number,
+      </if>
+      <if test="parentareaId != null" >
+        ParentArea_ID,
+      </if>
+      <if test="locationattribute != null" >
+        LocationAttribute,
+      </if>
+      <if test="shelves != null" >
+        Shelves,
+      </if>
+      <if test="layersnumber != null" >
+        LayersNumber,
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID,
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number,
+      </if>
+      <if test="picisl != null" >
+        PiciSL,
+      </if>
+      <if test="maxweight != null" >
+        MaxWeight,
+      </if>
+      <if test="maxvolumn != null" >
+        MaxVolumn,
+      </if>
+      <if test="isused != null" >
+        IsUsed,
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate,
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan,
+      </if>
+      <if test="columncount != null" >
+        ColumnCount,
+      </if>
+      <if test="areaname != null" >
+        AreaName,
+      </if>
+      <if test="locationname != null" >
+        LocationName,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="locationsId != null" >
+        #{locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="locationsNumber != null" >
+        #{locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentareaId != null" >
+        #{parentareaId,jdbcType=INTEGER},
+      </if>
+      <if test="locationattribute != null" >
+        #{locationattribute,jdbcType=VARCHAR},
+      </if>
+      <if test="shelves != null" >
+        #{shelves,jdbcType=INTEGER},
+      </if>
+      <if test="layersnumber != null" >
+        #{layersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=REAL},
+      </if>
+      <if test="picisl != null" >
+        #{picisl,jdbcType=REAL},
+      </if>
+      <if test="maxweight != null" >
+        #{maxweight,jdbcType=REAL},
+      </if>
+      <if test="maxvolumn != null" >
+        #{maxvolumn,jdbcType=REAL},
+      </if>
+      <if test="isused != null" >
+        #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="makeorderdate != null" >
+        #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="columncount != null" >
+        #{columncount,jdbcType=INTEGER},
+      </if>
+      <if test="areaname != null" >
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null" >
+        #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsLocationExample" resultType="java.lang.Integer" >
+    select count(*) from wms_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_location
+    <set >
+      <if test="record.locationsId != null" >
+        Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationsNumber != null" >
+        Locations_Number = #{record.locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentareaId != null" >
+        ParentArea_ID = #{record.parentareaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.locationattribute != null" >
+        LocationAttribute = #{record.locationattribute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shelves != null" >
+        Shelves = #{record.shelves,jdbcType=INTEGER},
+      </if>
+      <if test="record.layersnumber != null" >
+        LayersNumber = #{record.layersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsId != null" >
+        Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsNumber != null" >
+        Goods_Number = #{record.goodsNumber,jdbcType=REAL},
+      </if>
+      <if test="record.picisl != null" >
+        PiciSL = #{record.picisl,jdbcType=REAL},
+      </if>
+      <if test="record.maxweight != null" >
+        MaxWeight = #{record.maxweight,jdbcType=REAL},
+      </if>
+      <if test="record.maxvolumn != null" >
+        MaxVolumn = #{record.maxvolumn,jdbcType=REAL},
+      </if>
+      <if test="record.isused != null" >
+        IsUsed = #{record.isused,jdbcType=INTEGER},
+      </if>
+      <if test="record.makeorderdate != null" >
+        MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.makeorderman != null" >
+        MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="record.columncount != null" >
+        ColumnCount = #{record.columncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaname != null" >
+        AreaName = #{record.areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationname != null" >
+        LocationName = #{record.locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_location
+    set Locations_ID = #{record.locationsId,jdbcType=INTEGER},
+      Locations_Number = #{record.locationsNumber,jdbcType=VARCHAR},
+      ParentArea_ID = #{record.parentareaId,jdbcType=INTEGER},
+      LocationAttribute = #{record.locationattribute,jdbcType=VARCHAR},
+      Shelves = #{record.shelves,jdbcType=INTEGER},
+      LayersNumber = #{record.layersnumber,jdbcType=INTEGER},
+      Goods_ID = #{record.goodsId,jdbcType=INTEGER},
+      Goods_Number = #{record.goodsNumber,jdbcType=REAL},
+      PiciSL = #{record.picisl,jdbcType=REAL},
+      MaxWeight = #{record.maxweight,jdbcType=REAL},
+      MaxVolumn = #{record.maxvolumn,jdbcType=REAL},
+      IsUsed = #{record.isused,jdbcType=INTEGER},
+      MakeOrderDate = #{record.makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{record.makeorderman,jdbcType=INTEGER},
+      ColumnCount = #{record.columncount,jdbcType=INTEGER},
+      AreaName = #{record.areaname,jdbcType=VARCHAR},
+      LocationName = #{record.locationname,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsLocation" >
+    update wms_location
+    <set >
+      <if test="locationsNumber != null" >
+        Locations_Number = #{locationsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="parentareaId != null" >
+        ParentArea_ID = #{parentareaId,jdbcType=INTEGER},
+      </if>
+      <if test="locationattribute != null" >
+        LocationAttribute = #{locationattribute,jdbcType=VARCHAR},
+      </if>
+      <if test="shelves != null" >
+        Shelves = #{shelves,jdbcType=INTEGER},
+      </if>
+      <if test="layersnumber != null" >
+        LayersNumber = #{layersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        Goods_ID = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_Number = #{goodsNumber,jdbcType=REAL},
+      </if>
+      <if test="picisl != null" >
+        PiciSL = #{picisl,jdbcType=REAL},
+      </if>
+      <if test="maxweight != null" >
+        MaxWeight = #{maxweight,jdbcType=REAL},
+      </if>
+      <if test="maxvolumn != null" >
+        MaxVolumn = #{maxvolumn,jdbcType=REAL},
+      </if>
+      <if test="isused != null" >
+        IsUsed = #{isused,jdbcType=INTEGER},
+      </if>
+      <if test="makeorderdate != null" >
+        MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="makeorderman != null" >
+        MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      </if>
+      <if test="columncount != null" >
+        ColumnCount = #{columncount,jdbcType=INTEGER},
+      </if>
+      <if test="areaname != null" >
+        AreaName = #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="locationname != null" >
+        LocationName = #{locationname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Locations_ID = #{locationsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsLocation" >
+    update wms_location
+    set Locations_Number = #{locationsNumber,jdbcType=VARCHAR},
+      ParentArea_ID = #{parentareaId,jdbcType=INTEGER},
+      LocationAttribute = #{locationattribute,jdbcType=VARCHAR},
+      Shelves = #{shelves,jdbcType=INTEGER},
+      LayersNumber = #{layersnumber,jdbcType=INTEGER},
+      Goods_ID = #{goodsId,jdbcType=INTEGER},
+      Goods_Number = #{goodsNumber,jdbcType=REAL},
+      PiciSL = #{picisl,jdbcType=REAL},
+      MaxWeight = #{maxweight,jdbcType=REAL},
+      MaxVolumn = #{maxvolumn,jdbcType=REAL},
+      IsUsed = #{isused,jdbcType=INTEGER},
+      MakeOrderDate = #{makeorderdate,jdbcType=TIMESTAMP},
+      MakeOrderMan = #{makeorderman,jdbcType=INTEGER},
+      ColumnCount = #{columncount,jdbcType=INTEGER},
+      AreaName = #{areaname,jdbcType=VARCHAR},
+      LocationName = #{locationname,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR}
+    where Locations_ID = #{locationsId,jdbcType=INTEGER}
+  </update>
+</mapper>

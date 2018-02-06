@@ -1,0 +1,19 @@
+ body {
+            padding-top: 50px;
+            padding-bottom: 40px;
+            color: #5a5a5a;
+        }
+        toolbar{
+        	margin-top: 70px;
+        }
+		
+		 div.loader .loader-inner {  
+            position: absolute;  
+            left: 50%;  
+            margin: 20px 0 50px -76px;  
+  
+            text-align: center;  
+        }  
+        div.loader>.ball-pulse>div {  
+            background-color: #2f96b4;  
+        }  

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hhu.ssm.mapper.WmsBaseShipperLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.hhu.ssm.po.WmsBaseShipperLog" >
+    <id column="Client_LogID" property="clientLogid" jdbcType="INTEGER" />
+    <result column="Client_ID" property="clientId" jdbcType="INTEGER" />
+    <result column="Client_PreModifiedState" property="clientPremodifiedstate" jdbcType="VARCHAR" />
+    <result column="Client_ModifiedState" property="clientModifiedstate" jdbcType="VARCHAR" />
+    <result column="Employee_ID" property="employeeId" jdbcType="INTEGER" />
+    <result column="ModifyMan" property="modifyman" jdbcType="VARCHAR" />
+    <result column="ModifiedDate" property="modifieddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Client_LogID, Client_ID, Client_PreModifiedState, Client_ModifiedState, Employee_ID, 
+    ModifyMan, ModifiedDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hhu.ssm.po.WmsBaseShipperLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wms_base_shipper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from wms_base_shipper_log
+    where Client_LogID = #{clientLogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from wms_base_shipper_log
+    where Client_LogID = #{clientLogid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.hhu.ssm.po.WmsBaseShipperLogExample" >
+    delete from wms_base_shipper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.hhu.ssm.po.WmsBaseShipperLog" >
+    insert into wms_base_shipper_log (Client_LogID, Client_ID, Client_PreModifiedState, 
+      Client_ModifiedState, Employee_ID, ModifyMan, 
+      ModifiedDate)
+    values (#{clientLogid,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, #{clientPremodifiedstate,jdbcType=VARCHAR}, 
+      #{clientModifiedstate,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, #{modifyman,jdbcType=VARCHAR}, 
+      #{modifieddate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.hhu.ssm.po.WmsBaseShipperLog" >
+    insert into wms_base_shipper_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clientLogid != null" >
+        Client_LogID,
+      </if>
+      <if test="clientId != null" >
+        Client_ID,
+      </if>
+      <if test="clientPremodifiedstate != null" >
+        Client_PreModifiedState,
+      </if>
+      <if test="clientModifiedstate != null" >
+        Client_ModifiedState,
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID,
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan,
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clientLogid != null" >
+        #{clientLogid,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="clientPremodifiedstate != null" >
+        #{clientPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="clientModifiedstate != null" >
+        #{clientModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.hhu.ssm.po.WmsBaseShipperLogExample" resultType="java.lang.Integer" >
+    select count(*) from wms_base_shipper_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wms_base_shipper_log
+    <set >
+      <if test="record.clientLogid != null" >
+        Client_LogID = #{record.clientLogid,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientId != null" >
+        Client_ID = #{record.clientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.clientPremodifiedstate != null" >
+        Client_PreModifiedState = #{record.clientPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientModifiedstate != null" >
+        Client_ModifiedState = #{record.clientModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null" >
+        Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifyman != null" >
+        ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifieddate != null" >
+        ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wms_base_shipper_log
+    set Client_LogID = #{record.clientLogid,jdbcType=INTEGER},
+      Client_ID = #{record.clientId,jdbcType=INTEGER},
+      Client_PreModifiedState = #{record.clientPremodifiedstate,jdbcType=VARCHAR},
+      Client_ModifiedState = #{record.clientModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{record.employeeId,jdbcType=INTEGER},
+      ModifyMan = #{record.modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{record.modifieddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.hhu.ssm.po.WmsBaseShipperLog" >
+    update wms_base_shipper_log
+    <set >
+      <if test="clientId != null" >
+        Client_ID = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="clientPremodifiedstate != null" >
+        Client_PreModifiedState = #{clientPremodifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="clientModifiedstate != null" >
+        Client_ModifiedState = #{clientModifiedstate,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        Employee_ID = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyman != null" >
+        ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      </if>
+      <if test="modifieddate != null" >
+        ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Client_LogID = #{clientLogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.hhu.ssm.po.WmsBaseShipperLog" >
+    update wms_base_shipper_log
+    set Client_ID = #{clientId,jdbcType=INTEGER},
+      Client_PreModifiedState = #{clientPremodifiedstate,jdbcType=VARCHAR},
+      Client_ModifiedState = #{clientModifiedstate,jdbcType=VARCHAR},
+      Employee_ID = #{employeeId,jdbcType=INTEGER},
+      ModifyMan = #{modifyman,jdbcType=VARCHAR},
+      ModifiedDate = #{modifieddate,jdbcType=TIMESTAMP}
+    where Client_LogID = #{clientLogid,jdbcType=INTEGER}
+  </update>
+</mapper>
