@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -25,23 +23,23 @@
 		<script type="text/javascript">
 			var basePath = "<%=basePath %>";
 		</script>
-
-		<!--jquery优先导入-->
+		<!--jquery-->
 		<script src="Tools/bootstrap-table-develop/docs/assets/js/jquery-3.2.1.js"></script>
 		<!--bootstrap-->
 		<script src="Tools/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-		<!--bootstraptable-->
+		<!--bootstrap-table-->
 		<script src="Tools/bootstrap-table-develop/src/bootstrap-table.js"></script>
+		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>
 		<script src="Tools/bootstrap-table-develop/src/extensions/toolbar/bootstrap-table-toolbar.js"></script>
 		<script src="Tools/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
-		<!--jquery-ui-->
-		<script src="Tools/jquery-ui-1.12.1/jquery-ui.js"></script>
-		<<!--tableExport-->
-		<script src="Tools/printThis-master/printThis.js"></script>
-		<!--export-->
-		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>
+		<!--tableExport-->
+		<script src="Tools/tableExport.jquery.plugin-master/tableExport.js"></script>
+		<!--datetimepicker-->
+		<script src="Tools/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+		<script src="Tools/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 		<!--js-->
-		<script src="js/exhistory/exhistory.js"></script>
+		<script src="js/exdetail/exdetail.js"></script>
+		<script src="js/exdetail/exdetaildatepicker.js"></script>
 
 	</head>
 
@@ -90,23 +88,17 @@
 		</nav>
 
 		<div id="toolbar" class="btn-group">
-			<button id="btn_search" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+			<button id="btn_copy" type="button" class="btn btn-default">
+ 				<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>复制
+ 			</button>
+			<button id="btn_delete" type="button" class="btn btn-default">
+ 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
  			</button>
 			<button id="btn_refresh" type="button" class="btn btn-default">
  				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
  			</button>
-			<button id="btn_export" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
- 			</button>
-			<button id="btn_followExport" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>同行单打印
- 			</button>
-			<button id="btn_pickExport" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>拣货单打印
- 			</button>
-			<button id="btn_express" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-file" aria-hidden="true"></span>快递导出
+			<button id="btn_print" type="button" class="btn btn-default">
+ 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>打印
  			</button>
 
 		</div>
@@ -118,8 +110,93 @@
 
 		<!--模态框-->
 
+		<!--批号-->
+		<div class="modal fade" id="batchnumber" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:1000px">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title " id="myModalLabelAdd">当前可用库存</h4>
+
+					</div>
+
+					<div class="modal-body ">
+						<table id="batchnumberTable" data-toggle="table" data-url="data1.json">
+							<thead>
+								<tr>
+									<th data-field="goodsId">
+										代码
+									</th>
+									<th data-field="goodsname" data-width="200px" data-valign="top">
+										商品
+									</th>
+									<!--data-field未知-->
+									<th data-field="kuwei" >
+										库位
+									</th>
+									<!--data-field未知-->
+									<th data-field="kucun">
+										库存
+									</th>
+									<!--data-field未知-->
+									<th data-field="suoding" >
+										锁定	
+									</th>
+									<!--data-field未知-->
+									<th data-field="单位">
+										单位
+									</th>
+									
+									<th data-field="goodsId" >
+										规格
+									</th>
+									<th data-field="registration">
+										注册证
+									</th>
+									<th data-field="batchnumber" >
+										批号
+									</th>
+									<th data-field="producedate">
+										生产日期
+									</th>
+									<th data-field="failuredate" >
+										失效日期
+									</th>
+									<th data-field="serialNumber">
+										序列码
+									</th>
+									<th data-field="packingunit">
+										包装单位
+									</th>
+									<th data-field="conversionrate">
+										换算率
+									</th>
+									<!--data-field未知-->
+									<th data-field="jianshu">
+										件数
+									</th>
+									<th data-field="origin">
+										产地
+									</th>
+									<th data-field="goodsbarcode">
+										条码
+									</th>
+									<th data-field="goodsstatus">
+										状态
+									</th>
+									
+								</tr>
+							</thead>
+						</table>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 		<!--搜索界面-->
-		<div class="modal fade" id="search" tabindex="-1" role="dialog">
+		<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document" style="width:500x">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -130,44 +207,42 @@
 					<div class="modal-body ">
 
 						<div class="form-group row">
-							<div class="col-md-3">
-								<label for="exhistoryNumer">出库历史编号</label>
+							<div class="col-md-2">
+								<label for="customername1">客户名称</label>
 
 							</div>
-							<div class="col-md-9">
-								<input type="text" name="exhistoryNumer" class="form-control " id="exhistoryNumer" placeholder="出库历史编号">
-							</div>
-
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-3">
-								<label for="principalname">委托方企业名称</label>
-							</div>
-							<div class="col-md-9">
-								<select name="principalname" class="form-control able-delete principalname" id="principalname">
-								</select>
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-3">
-								<label for="receivingcustomername">收货客户名称</label>
-
-							</div>
-							<div class="col-md-9">
-								<input type="text" name="receivingcustomername" class="form-control " id="receivingcustomername" placeholder="收货客户名称">
+							<div class="col-md-10">
+								<input type="text" name="customername1" class="form-control " id="customername1" placeholder="客户名称">
 							</div>
 
 						</div>
 
 						<div class="form-group row">
-							<div class="col-md-3">
-								<label for="receivingaddress">收货地址</label>
+							<div class="col-md-2">
+								<label for="customernumber1">客户单号</label>
 
 							</div>
-							<div class="col-md-9">
-								<input type="text" name="receivingaddress" class="form-control " id="receivingaddress" placeholder="收货地址">
+							<div class="col-md-10">
+								<input type="text" name="customernumber1" class="form-control " id="customernumber1" placeholder="客户单号">
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="ENDate">录入日期</label>
+
+							</div>
+
+							<div class="col-md-4">
+								<input type="text" name="ENDate1" class="form-control ENDate" id="ENDate1" placeholder="录入日期">
+
+							</div>
+							<div class="col-md-2 text-center vertical-middle-sm">
+								<label for="ENDate">至</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" name="ENDate2" class="form-control ENDate" id="ENDate2" placeholder="录入日期">
 							</div>
 
 						</div>
@@ -180,37 +255,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!--同行+拣货单-->
-		<div class="modal " id="followPickExport" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document" style="width:300px">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
-						<h5 class="modal-title hidden" id="myModalLabelFollow">随货同行单打印</h5>
-						<h5 class="modal-title hidden" id="myModalLabelPick">拣货单打印</h5>
-					</div>
-
-					<div class="modal-body ">
-
-						<div class="form-group row">
-							<div class="col-md-9">
-
-								<input type="text" name="exhistoryNumer" class="form-control " id="exhistoryNumer" placeholder="请输入出库编号">
-							</div>
-							<div class="col-md-3">
-								<button type="button" class="btn btn-default" id="beginPrint">打印</button>
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		
 
 	</body>
 

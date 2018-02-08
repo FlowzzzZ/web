@@ -668,13 +668,13 @@ var ButtonInit = function() {
 
 		});
 		
-		//导出
-//		$('#btn_export').click(function(){
-//			$('#table').tableExport({ 
-//				type: 'excel', 
-//				escape: 'false',
-//				exportDataType: 'all'})
-//		})
+		//导出(现在只是当前页导出，之后再完善)
+		$('#btn_export').click(function(){
+			$('#table').tableExport({ 
+				type: 'excel', 
+				escape: 'false',
+				exportDataType: 'all'})
+		})
 	};
 
 	return oInit;

@@ -12,8 +12,8 @@
 		String basePath = request.getContextPath();
 		%>
 		<!--bootstrap-->
-		<link href="Tools/bootstrap-table-develop/docs/assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
-		<!--bootstrap-->
+		<link href="Tools/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" />
+		<!--bootstrap-table-->
 		<link href="Tools/bootstrap-table-develop/dist/bootstrap-table.css" rel="stylesheet">
 		<!--toolbar-->
 		<link href="css/toolbar.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 		<!--jquery-->
 		<script src="Tools/bootstrap-table-develop/docs/assets/js/jquery-3.2.1.js"></script>
 		<!--bootstrap-->
-		<script src="Tools/bootstrap-table-develop/docs/assets/bootstrap/js/bootstrap.js"></script>
+		<script src="Tools/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 		<!--bootstrap-table-->
 		<script src="Tools/bootstrap-table-develop/src/bootstrap-table.js"></script>
 		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>

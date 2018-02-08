@@ -29,7 +29,7 @@ var TableInit = function() {
 			cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 			pagination: true, //是否显示分页（*）
 			sortable: true, //是否启用排序
-			sortName: 'explanId',//排序类型
+			sortName: 'exorderId',//排序类型
 			sortOrder: "asc", //排序方式
 			queryParams: oTableInit.queryParams, //传递参数（*）
 			sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
@@ -45,7 +45,7 @@ var TableInit = function() {
 		    
 			minimumCountColumns: 2, //最少允许的列数
 			clickToSelect: true, //是否启用点击选中行
-			uniqueId: "explanId", //每一行的唯一标识，一般为主键列
+			uniqueId: "exorderId", //每一行的唯一标识，一般为主键列
 			
 			
 			cardView: false, //是否显示详细视图
