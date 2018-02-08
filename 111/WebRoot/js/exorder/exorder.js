@@ -90,6 +90,13 @@ var TableInit = function() {
 //					formatter: function(value, row, index) {
 //						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
 //					}//单元格内显示的方式
+				},  {
+					//仅展示时候使用
+					field: 'clientname',
+					title: '货主',
+					align: "center",
+					valign: "middle",
+
 				}, {
 					field: 'planId',
 					title: '计划序号',
@@ -218,6 +225,12 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					// visible:false	
+				},{
+					field: 'servicename',
+					title: '客服名称',
+					align: "center",
+					valign: "middle",
+
 				}, {
 					field: 'contactman',
 					title: '联系人',
@@ -294,6 +307,11 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 
+				},{
+					field: 'storehousename',
+					title: '仓库名称',
+					align: "center",
+					valign: "middle",
 				},{
 					field: 'expresscompany',
 					title: '快递公司',
@@ -422,6 +440,7 @@ var formatData = function(data) {
 	for(var i = 0; i < exorder.length; i++) {
 
 		var d = {
+			'clientname': explans[i].clientname,//需要传过来
 			'exorderId': exorder[i].exorderId,
 			'exorderNumber': exorder[i].exorderNumber,
 			'shipperId': exorder[i].shipperId,
@@ -448,6 +467,7 @@ var formatData = function(data) {
 			'makeorderdate': exorder[i].makeorderdate,
 			'makeorderman': exorder[i].makeorderman,
 			'storehouseId': exorder[i].storehouseId,
+			'storehousename': explans[i].storehousename,
 			'expresscompany': exorder[i].expresscompany,
 			'shippingmethod': exorder[i].shippingmethod,
 			'clearingform': exorder[i].clearingform,
@@ -474,44 +494,53 @@ var ButtonInit = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table')
 
-		//删除
+		//刷新
 
-		 //获取所选行的ID
-		$('#btn_delete').click(function() {
-			var ids = $.map($table.bootstrapTable('getSelections'), function(row) {
-				return row.explanId;
-			});
-
-			//返回的数组类型的数据，要转换格式
-			var product = {
-				"explanIds": ids.join(',')
-			}
-			
-			$.ajax({
-				type: "post",
-				url: basePath + "/WmsExplan/deleteexorder.action",
-				dataType: "json",
-				data: product,
-				success: function(data) {
-
-					if(data !== null) {
-
-						alert("删除成功!");
-						//刷新表格
-						$("#table").bootstrapTable('refresh', {
+		 
+		$('#btn_refresh').click(function() {
+			$table.bootstrapTable('refresh', {
 							url: basePath + "/WmsExplan/queryExplanByCriteria.action",
-							silent: true
+							
 						});
+		});
+		
+		
+		//完成
+		$('#btn_complete').click(function() {
+			//do sth
+		});
+		
+		//快递导出
+		$('#btn_export').click(function() {
+//	$('#table').tableExport({ 
+//				type: 'excel', 
+//				escape: 'false',
+//				exportDataType: 'all'})
+//		})
+		});
+		
+		
+		
+		//动态加载右侧下拉框
+		$.ajax({
+				type: "post",
+				url: basePath + "/WmsExplan/queryAllShipper.action",
+				contentType: "application/json",
+				
+				success: function(data) {
+					var shipperList = data.data;
+					if(data.errcode == 0) {
+						$("#clientname").append('<option value="0" >===请选择===</option>');
+						for(var i = 0; i < shipperList.length; i++) {
+							$("#clientname").append('<option value="' + shipperList[i].clientId + '">' + shipperList[i].clientname + '</option> ');
+						}
+
+						$('#clientname option:eq(' + row.shipperId + ')').attr('selected', 'selected');
 
 					}
-				},
-				error: function(err) {
-					alert('服务器异常，请稍后再试');
-					console.log("error：", err.statusText);
+
 				}
 			});
-		});
-
 		
 		
 		//编辑
@@ -532,11 +561,14 @@ var ButtonInit = function() {
 			$(".able-delete").children('option').remove();
 			$("input[name='isbonded']").prop("checked", false);
 			$("input[name='issupervision']").prop("checked", false);
-
+			$("input[name='ischecked']").prop("checked", false);
 			//给modal赋值
-			$('#explanNumber').val(row.explanNumber);
-			$('#explanId').val(row.explanId);
-
+			$('#exorderId').val(row.exorderId);
+			$('#exorderNumber').val(row.exorderNumber);
+			//id在select的value里
+			$('#clientname').val(row.shipperId);
+			$('#planId').val(row.planId);
+			$('#infosource').val(row.infosource);
 			$('#customerId').val(row.customerId);
 			$('#customername').val(row.customername);
 			$('#fromaddress').val(row.fromaddress);
@@ -550,6 +582,12 @@ var ButtonInit = function() {
 			} else if(row.isbonded == 1) {
 				$("input[name='isbonded']").prop("checked", true);
 			};
+			
+			if(row.ischecked == 0) {
+				$("input[name='ischecked']").prop("checked", false);
+			} else if(row.isbonded == 1) {
+				$("input[name='ischecked']").prop("checked", true);
+			};
 
 			$('#storagetransportationrequirement').val(row.storagetransportationrequirement);
 
@@ -559,22 +597,23 @@ var ButtonInit = function() {
 				$("input[name='issupervision']").prop("checked", true);
 			};
 			$('#customernumber').val(row.customernumber);
-			$('#serviceId').val(row.serviceId);
 			$('#contactman').val(row.contactman);
 			$('#contacttel').val(row.contacttel);
-			$('#planstatus option:eq(' + row.planstatus + ')').attr('selected', 'selected');
-
-			$('#exorderquantity').val(row.exorderquantity);
+			$('#exstatus option:eq(' + row.planstatus + ')').attr('selected', 'selected');
+			$('#exbarcode').val(row.exbarcode);
+			$('#placementarea').val(row.placementarea);
+			$('#pickman').val(row.pickman);
 			$('#remark').val(row.remark);
-			$('#makeorderman').val(row.makeorderman);
 			$('#makeorderdate').val(row.makeorderdate);
+			$('#makeorderman').val(row.makeorderman);
 			$('#storehouseId').val(row.storehouseId);
-
-			$('#express').val(row.express);
+			$('#expresscompany').val(row.expresscompany);
 			$('#shippingmethod').val(row.shippingmethod);
 			$('#clearingform').val(row.clearingform);
 			$('#expressnumber').val(row.expressnumber);
-			$('#clientname').val(row.clientname);
+			$('#serviceId').val(row.serviceId);
+			
+			
 			
 			//动态加载下拉框
 			$.ajax({
@@ -765,7 +804,7 @@ var ButtonInit = function() {
 var addProduct = function() {
 	//提交的数据
 	var product = {
-		
+		//add方法添加使用 text()方法，编辑时不需要
 		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
 		exorderNumber: $("#exorderNumber").val(),
 		shipperId: $("#clientname").val(),
@@ -803,6 +842,7 @@ var addProduct = function() {
 		})(),
 		customernumber: $("#customernumber").val(),
 		serviceId: $("#servicename").val(),
+		servicename: $('#servicename option:eq(' + $("#servicename").val() + ')').text(),
 		contactman: $("#contactman").val(),
 		contacttel: $("#contacttel").val(),
 		exstatus: $("#exstatus option:selected").val(),
@@ -812,6 +852,7 @@ var addProduct = function() {
 		makeorderdate: $("#makeorderdate").val(),
 		makeorderman: $("#makeorderman").val(),
 		storehouseId: $("#storehouseId").val(),
+		storehousename: $('#storehouseId option:eq(' + $("#storehouseId").val() + ')').text(),
 		expresscompany: $("#expresscompany").val(),
 		shippingmethod: $("#shippingmethod").val(),
 		clearingform: $("#clearingform").val(),
@@ -849,18 +890,30 @@ var editProduct = function() {
 	
 	//提交数据
 	var product = {
-		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
-		explanId: $("#explanId").val(),
-		explanNumber: $("#explanNumber").val(),
+		
+		
+		exorderNumber: $("#exorderNumber").val(),
 		shipperId: $("#clientname").val(),
+		planId: $("#planId").val(),
+		infosource: $("#infosource").val(),
 		customerId: $("#customerId").val(),
 		customername: $("#customername").val(),
 		fromaddress: $("#fromaddress").val(),
+
 		toaddress: $("#toaddress").val(),
 		exdate: $("#exdate").val(),
 		businesstype: $("#businesstype option:selected").val(),
 		isbonded: (function() {
 			if($('#isbonded').is(':checked')) {
+
+				
+				return 1
+			} else return 0;
+		})(),
+		ischecked: (function() {
+			if($('#ischecked').is(':checked')) {
+
+				
 				return 1
 			} else return 0;
 		})(),
@@ -868,34 +921,34 @@ var editProduct = function() {
 		storagetransportationrequirement: $("#storagetransportationrequirement").val(),
 		issupervision: (function() {
 			if($('#issupervision').is(':checked')) {
+
+				
 				return 1
 			} else return 0;
 		})(),
 		customernumber: $("#customernumber").val(),
 		serviceId: $("#servicename").val(),
+		
 		contactman: $("#contactman").val(),
 		contacttel: $("#contacttel").val(),
-
-		planstatus: $("#planstatus option:selected").val(),
-		exorderquantity: $("#exorderquantity").val(),
+		exstatus: $("#exstatus option:selected").val(),
+		exbarcode: $("#exbarcode").val(),
+		placementarea: $("#placementarea").val(),
 		remark: $("#remark").val(),
 		makeorderdate: $("#makeorderdate").val(),
 		makeorderman: $("#makeorderman").val(),
 		storehouseId: $("#storehouseId").val(),
-		express: $("#express").val(),
+		expresscompany: $("#expresscompany").val(),
 		shippingmethod: $("#shippingmethod").val(),
 		clearingform: $("#clearingform").val(),
 		expressnumber: $("#expressnumber").val()
 
 	};
-
 	$.ajax({
-
 		type: "post",
-		url: basePath + "/WmsExplan/editExplan.action",
+		url: basePath + "/WmsExplan/addExplan.action",
 		contentType: "application/json",
 		data: JSON.stringify(product),
-
 		success: function(data) {
 
 			if(data !== null) {
@@ -914,7 +967,7 @@ var editProduct = function() {
 			alert('服务器异常，请稍后再试！');
 			console.log("error：", err.statusText);
 		}
-	})
+	});
 };
 
 //提交搜索

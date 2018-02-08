@@ -386,7 +386,7 @@
 						</div>
 						<div class="form-group row">
 							<div class="col-md-2">	
-								<label for="storehouseId">仓库序号</label>
+								<label for="storehouseId">仓库名称</label>
 							</div>
 							<div class="col-md-10">
 							<select name="storehouseId" class="form-control able-delete storehouseId" id="storehouseId">

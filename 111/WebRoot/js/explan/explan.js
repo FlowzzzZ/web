@@ -283,8 +283,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 
-				},
-				{
+				},{
 					field: 'storehousename',
 					title: '仓库名称',
 					align: "center",
@@ -715,6 +714,7 @@ var addProduct = function() {
 		})(),
 		customernumber: $("#customernumber").val(),
 		serviceId: $("#servicename").val(),
+		servicename: $('#servicename option:eq(' + $("#servicename").val() + ')').text(),
 		contactman: $("#contactman").val(),
 		contacttel: $("#contacttel").val(),
 		planstatus: $("#planstatus option:selected").val(),
@@ -723,6 +723,8 @@ var addProduct = function() {
 		makeorderdate: $("#makeorderdate").val(),
 		makeorderman: $("#makeorderman").val(),
 		storehouseId: $("#storehouseId").val(),
+		storehousename: $('#storehouseId option:eq(' + $("#storehouseId").val() + ')').text(),
+		
 		express: $("#express").val(),
 		shippingmethod: $("#shippingmethod").val(),
 		clearingform: $("#clearingform").val(),
