@@ -390,167 +390,135 @@ var ButtonInit = function() {
 };
 
 //增加保存
-var addProduct = function() {
-	//提交的数据
-	var product = {
+var list = function() {
+	$('#listTable').bootstrapTable({
+				//			url: basePath + "/Wmsexdetail/queryAllexdetail.action", //url一般是请求后台的url地址,调用ajax获取数据。
+				method: "post", //使用post请求到服务器获取数据
+				dataType: "JSON", //发送数据类型
+				contentType: 'application/json', //接收数据类型
 
-		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
-		explanNumber: $("#explanNumber").val(),
-		shipperId: $("#clientname").val(),
-		customerId: $("#customerId").val(),
-		customername: $("#customername").val(),
-		fromaddress: $("#fromaddress").val(),
+				striped: true, //是否显示行间隔色
+				cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+				pagination: true, //是否显示分页（*）
+				sortable: true, //是否启用排序
+				sortName: 'pickdetailId ', //排序类型
+				sortOrder: "asc", //排序方式
+				queryParams: listTable.queryParams, //传递参数（*）
+				sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+				pageNumber: 1, //初始化加载第一页，默认第一页
+				pageSize: 10, //每页的记录行数（*）
+				pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+				minimumCountColumns: 2, //最少允许的列数
+				uniqueId: "pickdetailId ", //每一行的唯一标识，一般为主键列
+				sortStable: true, //是否可排序
+				//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+				responseHandler: function(res) {
+					console.log(formatData(res));
+					return formatData(res);
+				},
 
-		toaddress: $("#toaddress").val(),
-		exdate: $("#exdate").val(),
-		businesstype: $("#businesstype option:selected").val(),
-		isbonded: (function() {
-			if($('#isbonded').is(':checked')) {
+				//列名
+				columns: [{
+					field: 'goodsname',
+					title: '商品名称',
+					align: "center",
+					valign: "middle",
 
-				return 1
-			} else return 0;
-		})(),
+				}, {
+					field: 'specifiationtype', 
+					title: '规格型号',
+					align: "center",
+					valign: "middle",
 
-		storagetransportationrequirement: $("#storagetransportationrequirement").val(),
-		issupervision: (function() {
-			if($('#issupervision').is(':checked')) {
+				}, {
+					field: 'kuwei', //未知
+					title: '库位',
+					align: "center",
+					valign: "middle",
 
-				return 1
-			} else return 0;
-		})(),
-		customernumber: $("#customernumber").val(),
-		serviceId: $("#servicename").val(),
-		servicename: $('#servicename option:eq(' + $("#servicename").val() + ')').text(),
-		contactman: $("#contactman").val(),
-		contacttel: $("#contacttel").val(),
-		planstatus: $("#planstatus option:selected").val(),
-		exorderquantity: $("#exorderquantity").val(),
-		remark: $("#remark").val(),
-		makeorderdate: $("#makeorderdate").val(),
-		makeorderman: $("#makeorderman").val(),
-		storehouseId: $("#storehouseId").val(),
-		storehousename: $('#storehouseId option:eq(' + $("#storehouseId").val() + ')').text(),
+				}, {
+					field: 'cunhuoshuliang', //未知
+					title: '存货数量',
+					align: "center",
+					valign: "middle",
 
-		express: $("#express").val(),
-		shippingmethod: $("#shippingmethod").val(),
-		clearingform: $("#clearingform").val(),
-		expressnumber: $("#expressnumber").val()
+				}, {
 
-	};
-	$.ajax({
-		type: "post",
-		url: basePath + "/WmsExplan/addExplan.action",
-		contentType: "application/json",
-		data: JSON.stringify(product),
-		success: function(data) {
+					field: 'daijian', //未知
+					title: '待检',
+					align: "center",
+					valign: "middle",
 
-			if(data !== null) {
+				}, {
+					field: 'weight',
+					title: '重量',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}, {
+					field: 'netweight',
+					title: '净重',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'volume',
+					title: '体积',
+					align: "center",
+					valign: "middle",
 
-				alert("增加成功");
+				}, {
+					field: 'payableton',
+					title: '计费吨',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'xiajia',//说明
+					title: '下架',
+					align: "center",
+					valign: "middle",
 
-				$("#table").bootstrapTable("append", product);
+				}, {
+					field: 'pickinstruction',
+					title: '说明',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'picktime',
+					title: '拣货时间',
+					align: "center",
+					valign: "middle",
+				} 
+				],
+				data: [{
 
-				$("#myModal").modal('hide');
+				}]
 
-			}
-		},
-		error: function(err) {
-			alert('服务器异常，请稍后再试！');
-			console.log("error：", err.statusText);
-		}
-	});
+			});
+			listTable.queryParams = function(params) {
+
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					pageSize: params.limit, //页面大小
+					page: (params.offset / params.limit) + 1, //页码
+					orderBy: "pickdetailId ",
+					sortOrder: params.order,
+
+				};
+
+				return temp;
+
+			};
+			
+			
+			$('#list').modal('show');
 }
 
 //编辑保存
-var editProduct = function() {
-
-	//提交数据
-	var product = {
-		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
-		explanId: $("#explanId").val(),
-		explanNumber: $("#explanNumber").val(),
-		shipperId: $("#clientname").val(),
-		customerId: $("#customerId").val(),
-		customername: $("#customername").val(),
-		fromaddress: $("#fromaddress").val(),
-		toaddress: $("#toaddress").val(),
-		exdate: $("#exdate").val(),
-		businesstype: $("#businesstype option:selected").val(),
-		isbonded: (function() {
-			if($('#isbonded').is(':checked')) {
-				return 1
-			} else return 0;
-		})(),
-
-		storagetransportationrequirement: $("#storagetransportationrequirement").val(),
-		issupervision: (function() {
-			if($('#issupervision').is(':checked')) {
-				return 1
-			} else return 0;
-		})(),
-		customernumber: $("#customernumber").val(),
-		serviceId: $("#servicename").val(),
-		contactman: $("#contactman").val(),
-		contacttel: $("#contacttel").val(),
-
-		planstatus: $("#planstatus option:selected").val(),
-		exorderquantity: $("#exorderquantity").val(),
-		remark: $("#remark").val(),
-		makeorderdate: $("#makeorderdate").val(),
-		makeorderman: $("#makeorderman").val(),
-		storehouseId: $("#storehouseId").val(),
-		express: $("#express").val(),
-		shippingmethod: $("#shippingmethod").val(),
-		clearingform: $("#clearingform").val(),
-		expressnumber: $("#expressnumber").val()
-
-	};
-
-	$.ajax({
-
-		type: "post",
-		url: basePath + "/WmsExplan/editExplan.action",
-		contentType: "application/json",
-		data: JSON.stringify(product),
-
-		success: function(data) {
-
-			if(data !== null) {
-
-				alert('修改成功');
-
-				$("#table").bootstrapTable('refresh', {
-					url: basePath + "/WmsExplan/queryExplanByCriteria.action",
-					silent: true
-				});
-				$("#myModal").modal('hide');
-
-			}
-		},
-		error: function(err) {
-			alert('服务器异常，请稍后再试！');
-			console.log("error：", err.statusText);
-		}
-	})
+var pick = function() {
+	//打印拣货单	
 };
 
 //提交搜索
-var searchProduct = function() {
-	//在搜索前将页面跳至第一页，防止无法显示（eg.搜索结果只有两页数据，你在第三页进行搜索，结果会无法显示）
-	$('#table').bootstrapTable('selectPage', 1);
-	//提交的数据
-	var product = {
-
-		customername: $("#customername1").val(),
-		customernumber: $("#customernumber1").val(),
-		startTime: $("#ENDate1").val(),
-		endTime: $("#ENDate2").val(),
-		orderBy: "explanId",
-
-	};
-
-	$("#table").bootstrapTable('refresh', {
-		url: basePath + "/WmsExplan/queryExplanByCriteria.action?"
-	})
+var check = function() {
+	//打印出库复核检验单
 
 };

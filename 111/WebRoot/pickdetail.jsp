@@ -170,6 +170,24 @@
 				</div>
 		</div>
 		
+		<!--拣货清单-->
+		<div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:1000px">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title ">拣货清单</h4>
+
+					</div>
+
+					<table id="listTable" class="table">
+
+					</table>
+
+				</div>
+			</div>
+		</div>
+		
 	</body>
 
 </html>
