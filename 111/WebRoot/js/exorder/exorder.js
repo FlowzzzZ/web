@@ -14,53 +14,45 @@ $(function() {
 var TableInit = function() {
 	var oTableInit = new Object();
 	//初始化Table
-	
+
 	oTableInit.Init = function() {
-		
+
 		$('#table').bootstrapTable({
-//			url: basePath + "/WmsExplan/queryAllExplan.action", //url一般是请求后台的url地址,调用ajax获取数据。
+			//			url: basePath + "/WmsExplan/queryAllExplan.action", //url一般是请求后台的url地址,调用ajax获取数据。
 			method: "post", //使用post请求到服务器获取数据
-			dataType: "JSON",//发送数据类型
-			contentType: 'application/json',//接收数据类型
-			
+			dataType: "JSON", //发送数据类型
+			contentType: 'application/json', //接收数据类型
+
 			toolbar: '#toolbar', //工具按钮用哪个容器
-			checkboxHeader: false,//取消表格头的复选框
+			checkboxHeader: false, //取消表格头的复选框
 			striped: true, //是否显示行间隔色
 			cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 			pagination: true, //是否显示分页（*）
 			sortable: true, //是否启用排序
-			sortName: 'exorderId',//排序类型
+			sortName: 'exorderId', //排序类型
 			sortOrder: "asc", //排序方式
 			queryParams: oTableInit.queryParams, //传递参数（*）
 			sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
 			pageNumber: 1, //初始化加载第一页，默认第一页
 			pageSize: 10, //每页的记录行数（*）
 			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
-			
-			
-			
-			
-		    
-		    
-		    
+
 			minimumCountColumns: 2, //最少允许的列数
 			clickToSelect: true, //是否启用点击选中行
 			uniqueId: "exorderId", //每一行的唯一标识，一般为主键列
-			
-			
+
 			cardView: false, //是否显示详细视图
-			sortStable: true,//是否可排序
+			sortStable: true, //是否可排序
 			//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
 			responseHandler: function(res) {
 				console.log(formatData(res));
 				return formatData(res);
 			},
-			
+
 			//列名
 			columns: [{
-					
+
 					checkbox: true,
-					
 
 				},
 				{
@@ -77,20 +69,20 @@ var TableInit = function() {
 					title: '出库单编号',
 					align: "center",
 					valign: "middle",
-					
-//					formatter: function(value, row, index) {
-//						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
-//					}//单元格内显示的方式
-				},{
+
+					//					formatter: function(value, row, index) {
+					//						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
+					//					}//单元格内显示的方式
+				}, {
 					field: 'shipperId',
 					title: '货主序号',
 					align: "center",
 					valign: "middle",
-					
-//					formatter: function(value, row, index) {
-//						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
-//					}//单元格内显示的方式
-				},  {
+
+					//					formatter: function(value, row, index) {
+					//						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
+					//					}//单元格内显示的方式
+				}, {
 					//仅展示时候使用
 					field: 'clientname',
 					title: '货主',
@@ -104,7 +96,7 @@ var TableInit = function() {
 					valign: "middle",
 
 				}, {
-					
+
 					field: 'infosource',
 					title: '信息来源',
 					align: "center",
@@ -196,7 +188,7 @@ var TableInit = function() {
 						}
 					}
 
-				},{
+				}, {
 					field: 'storagetransportationrequirement',
 					title: '储运要求',
 					align: "center",
@@ -225,7 +217,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					// visible:false	
-				},{
+				}, {
 					field: 'servicename',
 					title: '客服名称',
 					align: "center",
@@ -281,12 +273,12 @@ var TableInit = function() {
 					title: '摆放区域',
 					align: "center",
 					valign: "middle",
-				},{
+				}, {
 					field: 'pickman',
 					title: '拣货人',
 					align: "center",
 					valign: "middle",
-				},{
+				}, {
 					field: 'remark',
 					title: '备注',
 					align: "center",
@@ -307,12 +299,12 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 
-				},{
+				}, {
 					field: 'storehousename',
 					title: '仓库名称',
 					align: "center",
 					valign: "middle",
-				},{
+				}, {
 					field: 'expresscompany',
 					title: '快递公司',
 					align: "center",
@@ -339,56 +331,56 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-list"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a href="' + value + '" class="glyphicon glyphicon-list"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_chose',
 					title: '选货',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-pencil"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a class="glyphicon glyphicon-pencil" id="chose-modal"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_pick',
 					title: '拣货',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-hand-up"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a href="' + value + '" class="glyphicon glyphicon-hand-up"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_sequence',
 					title: '序列',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-barcode"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a href="' + value + '" class="glyphicon glyphicon-barcode"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_check',
 					title: '复核',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-check"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a href="' + value + '" class="glyphicon glyphicon-check"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_packing',
 					title: '装箱',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-shopping-cart"></a>';
-					}//单元格内显示的方式
-				},{
+						return '<a href="' + value + '" class="glyphicon glyphicon-shopping-cart"></a>';
+					} //单元格内显示的方式
+				}, {
 					field: 'oprate_express',
 					title: '快递',
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-bookmark"></a>';
-					}//单元格内显示的方式
+						return '<a href="' + value + '" class="glyphicon glyphicon-bookmark"></a>';
+					} //单元格内显示的方式
 				},
 				{
 					field: 'oprate_specifications',
@@ -396,21 +388,20 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="'+value+'" class="glyphicon glyphicon-print"></a>';
-					}//单元格内显示的方式
+						return '<a href="' + value + '" class="glyphicon glyphicon-print"></a>';
+					} //单元格内显示的方式
 				},
 			],
-			data:[{
-				
+			data: [{
+
 			}]
-			
+
 		});
 	};
-	
 
 	// 得到查询的参数
 	oTableInit.queryParams = function(params) {
-		
+
 		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			pageSize: params.limit, //页面大小
 			page: (params.offset / params.limit) + 1, //页码
@@ -418,18 +409,15 @@ var TableInit = function() {
 			sortOrder: params.order,
 			customername: $("#customername1").val(),
 			customernumber: $("#customernumber1").val(),
-			startTime : $("#ENDate1").val(),
-			endTime : $("#ENDate2").val(),
-			 
+			startTime: $("#ENDate1").val(),
+			endTime: $("#ENDate2").val(),
 
 		};
-		
+
 		console.log(temp);
-		
+
 		return temp;
-		
-		
-		
+
 	};
 	return oTableInit;
 };
@@ -440,7 +428,7 @@ var formatData = function(data) {
 	for(var i = 0; i < exorder.length; i++) {
 
 		var d = {
-			'clientname': explans[i].clientname,//需要传过来
+			'clientname': explans[i].clientname, //需要传过来
 			'exorderId': exorder[i].exorderId,
 			'exorderNumber': exorder[i].exorderNumber,
 			'shipperId': exorder[i].shipperId,
@@ -475,7 +463,6 @@ var formatData = function(data) {
 			'servicename': exorder[i].servicename, //po里没有但是已添加
 			'serviceId': exorder[i].serviceId,
 
-			
 		}
 		l.push(d)
 
@@ -489,65 +476,60 @@ var formatData = function(data) {
 
 var ButtonInit = function() {
 	var oInit = new Object();
-	
+
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table')
 
 		//刷新
 
-		 
 		$('#btn_refresh').click(function() {
 			$table.bootstrapTable('refresh', {
-							url: basePath + "/WmsExplan/queryExplanByCriteria.action",
-							
-						});
+				url: basePath + "/WmsExplan/queryExplanByCriteria.action",
+
+			});
 		});
-		
-		
+
 		//完成
 		$('#btn_complete').click(function() {
 			//do sth
 		});
-		
+
 		//快递导出
 		$('#btn_export').click(function() {
-//	$('#table').tableExport({ 
-//				type: 'excel', 
-//				escape: 'false',
-//				exportDataType: 'all'})
-//		})
+			//	$('#table').tableExport({ 
+			//				type: 'excel', 
+			//				escape: 'false',
+			//				exportDataType: 'all'})
+			//		})
 		});
-		
-		
-		
+
 		//动态加载右侧下拉框
 		$.ajax({
-				type: "post",
-				url: basePath + "/WmsExplan/queryAllShipper.action",
-				contentType: "application/json",
-				
-				success: function(data) {
-					var shipperList = data.data;
-					if(data.errcode == 0) {
-						$("#clientname").append('<option value="0" >===请选择===</option>');
-						for(var i = 0; i < shipperList.length; i++) {
-							$("#clientname").append('<option value="' + shipperList[i].clientId + '">' + shipperList[i].clientname + '</option> ');
-						}
+			type: "post",
+			url: basePath + "/WmsExplan/queryAllShipper.action",
+			contentType: "application/json",
 
-						$('#clientname option:eq(' + row.shipperId + ')').attr('selected', 'selected');
-
+			success: function(data) {
+				var shipperList = data.data;
+				if(data.errcode == 0) {
+					$("#clientname").append('<option value="0" >===请选择===</option>');
+					for(var i = 0; i < shipperList.length; i++) {
+						$("#clientname").append('<option value="' + shipperList[i].clientId + '">' + shipperList[i].clientname + '</option> ');
 					}
 
+					$('#clientname option:eq(' + row.shipperId + ')').attr('selected', 'selected');
+
 				}
-			});
-		
-		
+
+			}
+		});
+
 		//编辑
 		$('#btn_edit').click(function() {
 			//显示modal的标题
 			$('#myModalLabelAdd').addClass("hidden");
-			
+
 			$("#myModalLabelEdit").removeClass("hidden");
 			var row;
 			var sel = $table.bootstrapTable('getSelections');
@@ -582,7 +564,7 @@ var ButtonInit = function() {
 			} else if(row.isbonded == 1) {
 				$("input[name='isbonded']").prop("checked", true);
 			};
-			
+
 			if(row.ischecked == 0) {
 				$("input[name='ischecked']").prop("checked", false);
 			} else if(row.isbonded == 1) {
@@ -612,15 +594,13 @@ var ButtonInit = function() {
 			$('#clearingform').val(row.clearingform);
 			$('#expressnumber').val(row.expressnumber);
 			$('#serviceId').val(row.serviceId);
-			
-			
-			
+
 			//动态加载下拉框
 			$.ajax({
 				type: "post",
 				url: basePath + "/WmsExplan/queryAllShipper.action",
 				contentType: "application/json",
-				
+
 				success: function(data) {
 					var shipperList = data.data;
 					if(data.errcode == 0) {
@@ -686,11 +666,11 @@ var ButtonInit = function() {
 		});
 
 		//新建
-		$("#btn_add").click(function () {
+		$("#btn_add").click(function() {
 
 			//清空数据
 			$('#myModalLabelEdit').addClass("hidden");
-			
+
 			$("#myModalLabelAdd").removeClass("hidden");
 			$(".form-control").val('');
 			//防止动态下拉框多次加载
@@ -698,7 +678,7 @@ var ButtonInit = function() {
 			$("input[name='isbonded']").prop("checked", false);
 			$("input[name='issupervision']").prop("checked", false);
 			$("input[name='ischecked']").prop("checked", false);
-			
+
 			//动态加载下拉框
 			$.ajax({
 				type: "post",
@@ -755,16 +735,13 @@ var ButtonInit = function() {
 
 				}
 			});
-			
+
 			//解除按钮绑定
 			$("#btn_submit").unbind();
 			//给按钮添加新事件
 			$("#btn_submit").on("click", addProduct);
 			//展示modal
 			$('#myModal').modal('show');
-			
-			
-			
 
 		});
 
@@ -773,32 +750,204 @@ var ButtonInit = function() {
 			//清空modal数据
 			$(".form-control").val('');
 			$("#customername1").val('');
-				$("#customernumber1").val('');
-				$("#ENDate1").val('');
-				$("#ENDate2").val('');
+			$("#customernumber1").val('');
+			$("#ENDate1").val('');
+			$("#ENDate2").val('');
 
-				
-				//解除按钮绑定
-				$("#beginSearch").unbind();
-				//给按钮添加新事件
-				$("#beginSearch").on("click", searchProduct);
-				//展示modal
-				$('#search').modal('show');
+			//解除按钮绑定
+			$("#beginSearch").unbind();
+			//给按钮添加新事件
+			$("#beginSearch").on("click", searchProduct);
+			//展示modal
+			$('#search').modal('show');
 
 		});
-		
+
 		//导出
-//		$('#btn_export').click(function(){
-//			$('#table').tableExport({ 
-//				type: 'excel', 
-//				escape: 'false',
-//				exportDataType: 'all'})
-//		})
+		$('#btn_expressExport').click(function() {
+			$('#table').tableExport({
+				type: 'excel',
+				escape: 'false',
+				exportDataType: 'all'
+			})
+		});
+
+		//选货
+		$('#chose-modal').click(function() {
+			$('#choseTable').bootstrapTable({
+				//			url: basePath + "/Wmsexdetail/queryAllexdetail.action", //url一般是请求后台的url地址,调用ajax获取数据。
+				method: "post", //使用post请求到服务器获取数据
+				dataType: "JSON", //发送数据类型
+				contentType: 'application/json', //接收数据类型
+
+				striped: true, //是否显示行间隔色
+				cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+				pagination: true, //是否显示分页（*）
+				sortable: true, //是否启用排序
+				sortName: 'goodsId', //排序类型
+				sortOrder: "asc", //排序方式
+				queryParams: chose.queryParams, //传递参数（*）
+				sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+				pageNumber: 1, //初始化加载第一页，默认第一页
+				pageSize: 10, //每页的记录行数（*）
+				pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+				minimumCountColumns: 2, //最少允许的列数
+				uniqueId: "goodsId", //每一行的唯一标识，一般为主键列
+				sortStable: true, //是否可排序
+				//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+				responseHandler: function(res) {
+
+					return formatData(res);
+				},
+
+				//列名
+				columns: [{
+					field: 'ex', //未知
+					title: '出库',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'goodsId',
+					title: '代码',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'goodsname', //未知
+					title: '商品',
+					align: "center",
+					valign: "middle",
+					width: '200'
+
+				}, {
+					field: 'kuwei', //未知
+					title: '库位',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'kucun', //未知
+					title: '库存',
+					align: "center",
+					valign: "middle",
+
+				}, {
+
+					field: 'suoding',
+					title: '锁定',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'danwei',
+					title: '单位',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}, {
+					field: 'specifiationtype',
+					title: '规格',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}, {
+					field: 'registration',
+					title: '注册证',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'batchnumber',
+					title: '批号',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'producedate',
+					title: '生产日期',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'failuredate',
+					title: '失效日期',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'serialNumber',
+					title: '序列码',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'packingunit',
+					title: '包装单位',
+					align: "center",
+					valign: "middle",
+					// visible:false	
+				}, {
+					field: 'conversionrate',
+					title: '换算率',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'jianshu',
+					title: '件数',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'origin',
+					title: '产地',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'goodsbarcode',
+					title: '商品条码',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'goodsstatus',
+					title: '货品状态',
+					align: "center",
+					valign: "middle",
+				}],
+				data: [{
+					goodsId: "10086"
+				}]
+
+			});
+			chose.queryParams = function(params) {
+
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					pageSize: params.limit, //页面大小
+					page: (params.offset / params.limit) + 1, //页码
+					orderBy: "goodsId",
+					sortOrder: params.order,
+					goodsId: $("#goodsId").val(),
+					goodsname: $("#goodsname").val(),
+					batchnumber: $("#batchnumber").val(),
+					specifiationtype: $("#specifiationtype").val(),
+
+				};
+
+				return temp;
+
+			};
+			//解除按钮绑定
+			$("#btn_choseSearch").unbind();
+			$("#btn_choseAdd").unbind();
+			//给按钮添加新事件
+			$("#btn_choseSearch").on("click", choseSearch);
+			$("#btn_choseAdd").on("click", choseAdd);
+
+			$('#chose').modal('show');
+		});
+
 	};
 
 	return oInit;
 };
-
 
 //增加保存
 var addProduct = function() {
@@ -820,14 +969,12 @@ var addProduct = function() {
 		isbonded: (function() {
 			if($('#isbonded').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
 		ischecked: (function() {
 			if($('#ischecked').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
@@ -836,7 +983,6 @@ var addProduct = function() {
 		issupervision: (function() {
 			if($('#issupervision').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
@@ -869,7 +1015,7 @@ var addProduct = function() {
 			if(data !== null) {
 
 				alert("增加成功");
-				
+
 				$("#table").bootstrapTable("append", product);
 
 				$("#myModal").modal('hide');
@@ -883,15 +1029,12 @@ var addProduct = function() {
 	});
 }
 
-
 //编辑保存
 var editProduct = function() {
 
-	
 	//提交数据
 	var product = {
-		
-		
+
 		exorderNumber: $("#exorderNumber").val(),
 		shipperId: $("#clientname").val(),
 		planId: $("#planId").val(),
@@ -906,14 +1049,12 @@ var editProduct = function() {
 		isbonded: (function() {
 			if($('#isbonded').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
 		ischecked: (function() {
 			if($('#ischecked').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
@@ -922,13 +1063,12 @@ var editProduct = function() {
 		issupervision: (function() {
 			if($('#issupervision').is(':checked')) {
 
-				
 				return 1
 			} else return 0;
 		})(),
 		customernumber: $("#customernumber").val(),
 		serviceId: $("#servicename").val(),
-		
+
 		contactman: $("#contactman").val(),
 		contacttel: $("#contacttel").val(),
 		exstatus: $("#exstatus option:selected").val(),
@@ -954,7 +1094,7 @@ var editProduct = function() {
 			if(data !== null) {
 
 				alert('修改成功');
-				
+
 				$("#table").bootstrapTable('refresh', {
 					url: basePath + "/WmsExplan/queryExplanByCriteria.action",
 					silent: true
@@ -968,29 +1108,34 @@ var editProduct = function() {
 			console.log("error：", err.statusText);
 		}
 	});
+
+	//
 };
 
-//提交搜索
-var searchProduct = function() {
+//选货搜索
+var choseSearch = function() {
 	//在搜索前将页面跳至第一页，防止无法显示（eg.搜索结果只有两页数据，你在第三页进行搜索，结果会无法显示）
-	$('#table').bootstrapTable('selectPage', 1);
+	$('#choseTable').bootstrapTable('selectPage', 1);
 	//提交的数据
 	var product = {
 
-		customername: $("#customername1").val(),
-		customernumber: $("#customernumber1").val(),
-		startTime: $("#ENDate1").val(),
-		endTime: $("#ENDate2").val(),
-		orderBy: "explanId",
+		goodsId: $("#goodsId").val(),
+		goodsname: $("#goodsname").val(),
+		batchnumber: $("#batchnumber").val(),
+		specifiationtype: $("#specifiationtype").val(),
+		orderBy: "goodsId",
 
 	};
-	
-	$("#table").bootstrapTable('refresh',
-			{
-			url: basePath + "/WmsExplan/queryExplanByCriteria.action?"
-			}
-			)
-	
+
+	$("#choseTable").bootstrapTable('refresh', {
+//		url: basePath + "/WmsExplan/queryExplanByCriteria.action?"
+	})
+
+};
+
+//选货添加
+var choseSearch = function() {
+	//do sth
 	
 
 };

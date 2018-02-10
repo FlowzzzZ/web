@@ -125,7 +125,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-									return "<span class='glyphicon glyphicon-pencil' id='batchnumber-table'></span>"+"</br>"+value;
+									return "<a class='glyphicon glyphicon-tags' id='batchnumber-table'></a>"+"</br>"+value;
 					
 					}
 				}, {
@@ -139,7 +139,10 @@ var TableInit = function() {
 					title: '序列码',
 					align: "center",
 					valign: "middle",
+					formatter: function(value, row, index) {
+									return "<a class='glyphicon glyphicon-pencil'></a>"
 					
+					}
 				}, {
 					field: 'producedate',
 					title: '生产日期',
@@ -157,7 +160,10 @@ var TableInit = function() {
 					title: '出库数量',
 					align: "center",
 					valign: "middle",
+					formatter: function(value, row, index) {
+									return "<span class='glyphicon glyphicon-shopping-cart' id='exquantity-modal'></span>"+"</br>"+value;
 					
+					}
 
 				}, {
 					field: 'basicunit',
@@ -258,7 +264,7 @@ var TableInit = function() {
 
 	// 得到查询的参数
 	oTableInit.queryParams = function(params) {
-		window.a = (params.offset / params.limit) + 1;
+		
 		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			pageSize: params.limit, //页面大小
 			page: (params.offset / params.limit) + 1, //页码
@@ -272,7 +278,7 @@ var TableInit = function() {
 
 		};
 		
-		console.log(temp);
+		
 		
 		return temp;
 		
@@ -404,13 +410,223 @@ var ButtonInit = function() {
 		
 		//批号，点击弹出modal
 		$('#batchnumber-table').click(function(){
+			$('#batchnumberTable').bootstrapTable({
+//			url: basePath + "/Wmsexdetail/queryAllexdetail.action", //url一般是请求后台的url地址,调用ajax获取数据。
+			method: "post", //使用post请求到服务器获取数据
+			dataType: "JSON",//发送数据类型
+			contentType: 'application/json',//接收数据类型
 			
+			
+			
+			striped: true, //是否显示行间隔色
+			cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页（*）
+			sortable: true, //是否启用排序
+			sortName: 'goodsId',//排序类型
+			sortOrder: "asc", //排序方式
+			queryParams: batchnumberTable.queryParams, //传递参数（*）
+			sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+			pageNumber: 1, //初始化加载第一页，默认第一页
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			minimumCountColumns: 2, //最少允许的列数
+			uniqueId: "goodsId", //每一行的唯一标识，一般为主键列
+			sortStable: true,//是否可排序
+			//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+			responseHandler: function(res) {
+				console.log(formatData(res));
+				return formatData(res);//共用一组数据？
+			},
+			
+			//列名
+			columns: [
+				{
+					field: 'goodsId',
+					title: '代码',
+					align: "center",
+					valign: "middle",
+					
+
+				}, {
+					field: 'goodsname',//未知
+					title: '商品',
+					align: "center",
+					valign: "middle",
+					width: '200'
+					
+					
+				}, {
+					field: 'kuwei',//未知
+					title: '库位',
+					align: "center",
+					valign: "middle",
+					
+					
+				}, {
+					field: 'kucun',//未知
+					title: '库存',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					
+					field: 'suoding',
+					title: '锁定',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'danwei',
+					title: '单位',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}, {
+					field: 'specifiationtype',
+					title: '规格',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}, {
+					field: 'registration',
+					title: '注册证',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'batchnumber',
+					title: '批号',
+					align: "center",
+					valign: "middle",
+				},  {
+					field: 'producedate',
+					title: '生产日期',
+					align: "center",
+					valign: "middle",
+					
+
+				}, {
+					field: 'failuredate',
+					title: '失效日期',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'serialNumber',
+					title: '序列码',
+					align: "center",
+					valign: "middle",
+					
+				}, {
+					field: 'packingunit',
+					title: '包装单位',
+					align: "center",
+					valign: "middle",
+					// visible:false	
+				},  {
+					field: 'conversionrate',
+					title: '换算率',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'jianshu',
+					title: '件数',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'origin',
+					title: '产地',
+					align: "center",
+					valign: "middle",
+				}, {
+					field: 'goodsbarcode',
+					title: '商品条码',
+					align: "center",
+					valign: "middle",
+					
+				},{
+					field: 'goodsstatus',
+					title: '货品状态',
+					align: "center",
+					valign: "middle",
+				}
+			],
+			data:[{
+				goodsId:"10086"
+			}]
+			
+		});
+		batchnumberTable.queryParams = function(params) {
+		
+		var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+			pageSize: params.limit, //页面大小
+			page: (params.offset / params.limit) + 1, //页码
+			orderBy: "goodsId",
+			sortOrder: params.order,
+			
+			 
+
+		};
+		
+		
+		
+		return temp;
+		
+		
+		
+	};
+		
+	
 			$('#batchnumber').modal('show');
 		})
 		
+		//出库数量
+		$('#exquantity-modal').click(function(){
+			$(".form-control").val('');
+			$("#btn_submit").on("click", editProduct);
+			$('#exquantity').modal('show');
+			$(".modal-backdrop").remove(); //移除modal背景，便于搜索时查看
+		})
 	};
 
 	return oInit;
 };
+var editProduct = function() {
 
+	
+	//提交数据
+	var product = {
+		
+		exdetailId: $("#explanId").val(),
+		
+		exquantity: $("#exquantity").val()
+
+	};
+
+	$.ajax({
+
+		type: "post",
+//		url: basePath + "/WmsExplan/editExplan.action",
+		contentType: "application/json",
+		data: JSON.stringify(product),
+
+		success: function(data) {
+
+			if(data !== null) {
+
+				alert('修改成功');
+				
+				$("#table").bootstrapTable('refresh', {
+//					url: basePath + "/WmsExplan/queryExplanByCriteria.action",
+					silent: true
+				});
+				$("#myModal").modal('hide');
+
+			}
+		},
+		error: function(err) {
+			alert('服务器异常，请稍后再试！');
+			console.log("error：", err.statusText);
+		}
+	})
+};
 

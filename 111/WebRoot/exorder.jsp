@@ -57,7 +57,7 @@
         				 <span class="icon-bar"></span>
         				 <span class="icon-bar"></span>
       				</button>
-					<a class="navbar-brand" href="#">仓储管理系统</a>
+					<a class="navbar-brand" href="#">上海嘉和诚康医疗器械有限公司</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -107,7 +107,7 @@
  					</button>
 				</div>
 				<div class="col-md-2">
-					<select name="clientname" id="clientname" style="margin-left: 450px;">
+					<select name="clientname" id="clientname" style="margin-left: 450px;height: 40px;width: 200px;">
 						<option>test</option>
 					</select>
 				</div>
@@ -480,67 +480,42 @@
 			</div>
 		</div>
 
-		<!--搜索界面-->
-		<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document" style="width:500x">
+		<!--当前可用库存-->
+		<div class="modal fade" id="chose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:1000px">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title" id="myModalLabel">搜索</h4>
-					</div>
-
-					<div class="modal-body ">
-
-						<div class="form-group row">
-							<div class="col-md-2">
-								<label for="customername1">客户名称</label>
-
-							</div>
-							<div class="col-md-10">
-								<input type="text" name="customername1" class="form-control " id="customername1" placeholder="客户名称">
-							</div>
-
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-2">
-								<label for="customernumber1">客户单号</label>
-
-							</div>
-							<div class="col-md-10">
-								<input type="text" name="customernumber1" class="form-control " id="customernumber1" placeholder="客户单号">
-							</div>
-
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-2">
-								<label for="ENDate">录入日期</label>
-
-							</div>
-
-							<div class="col-md-4">
-								<input type="text" name="ENDate1" class="form-control ENDate" id="ENDate1" placeholder="录入日期">
-
-							</div>
-							<div class="col-md-2 text-center vertical-middle-sm">
-								<label for="ENDate">至</label>
-							</div>
-							<div class="col-md-4">
-								<input type="text" name="ENDate2" class="form-control ENDate" id="ENDate2" placeholder="录入日期">
-							</div>
-
-						</div>
+						<h4 class="modal-title ">当前可用库存</h4>
 
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-						<button type="button" id="beginSearch" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索</button>
-					</div>
+
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label class="form-label">代码</label>
+							<input type="text" class="form-control" id="goodsId">
+							<label class="form-label">名称</label>
+							<input type="text" class="form-control" id="goodsname">
+							<label class="form-label">批号</label>
+							<input type="text" class="form-control" id="batchnumber">
+							<label class="form-label">规格</label>
+							<input type="text" class="form-control" id="specifiationtype">
+							<button id="btn_choseSearch" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索
+ 							</button>							
+ 							<button id="btn_choseAdd" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>添加
+ 							</button>
+						</div>
+					</form>
+
+					<table id="choseTable" class="table">
+
+					</table>
+
 				</div>
 			</div>
 		</div>
-
 	</body>
 
 </html>

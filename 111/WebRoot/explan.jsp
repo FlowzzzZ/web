@@ -62,7 +62,7 @@
         				 <span class="icon-bar"></span>
         				 <span class="icon-bar"></span>
       				</button>
-					<a class="navbar-brand" href="#">仓储管理系统</a>
+					<a class="navbar-brand" href="#">上海嘉和诚康医疗器械有限公司</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -137,7 +137,7 @@
 						
 							
   						<!-- 序号 -->	
-  						<input type="hidden" name="explanId" class="form-control " id="explanId"  " >	
+  						<input type="hidden" name="explanId" class="form-control " id="explanId" readonly="readonly" >	
   							
 							
 						

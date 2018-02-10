@@ -19,9 +19,11 @@
 		<link href="css/toolbar.css" rel="stylesheet">
 		<!--datetimepicker-->
 		<link href="Tools/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-
+		
+		
 		<script type="text/javascript">
-			var basePath = "<%=basePath %>";
+		
+		var basePath = "<%=basePath %>";
 		</script>
 		<!--jquery-->
 		<script src="Tools/bootstrap-table-develop/docs/assets/js/jquery-3.2.1.js"></script>
@@ -38,9 +40,12 @@
 		<script src="Tools/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 		<script src="Tools/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 		<!--js-->
-		<script src="js/exdetail/exdetail.js"></script>
-		<script src="js/exdetail/exdetaildatepicker.js"></script>
-
+		<script src="js/pickdetail/pickdetail.js"></script>
+		
+		
+		
+	    
+	    
 	</head>
 
 	<body>
@@ -62,6 +67,7 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					
 
 					<ul class="nav navbar-nav navbar-right">
 
@@ -73,7 +79,7 @@
 								<li>
 									<a href="#">更换账户</a>
 								</li>
-
+								
 								<li role="separator" class="divider"></li>
 								<li>
 									<a href="#">退出</a>
@@ -87,21 +93,7 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-		<div id="toolbar" class="btn-group">
-			<button id="btn_copy" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>复制
- 			</button>
-			<button id="btn_delete" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
- 			</button>
-			<button id="btn_refresh" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
- 			</button>
-			<button id="btn_print" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>打印
- 			</button>
 
-		</div>
 
 		<!--表格显示主体-->
 		<table id="table">
@@ -109,54 +101,73 @@
 		</table>
 
 		<!--模态框-->
-
-		<!--批号-->
-		<div class="modal fade" id="batchnumber" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		
+			
+		<!--拣货-->
+		<div class="modal fade" id="pick" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document" style="width:1000px">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title ">当前可用库存</h4>
+						<h4 class="modal-title ">拣货</h4>
 
 					</div>
 
-					<table id="batchnumberTable" class="table" >
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<button id="btn_choseSearch" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>拣货
+ 							</button>							
+ 							<button id="btn_choseAdd" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>取消
+ 							</button>
+ 							
+ 							<label class="form-label" style="margin-left: 500px;">待拣数量:</label>
+							<input type="text" class="form-control" id="specifiationtype" readonly="readonly">
+ 							
+ 							
+						</div>
+					</form>
+
+					<table id="pickTable" class="table">
 
 					</table>
 
 				</div>
 			</div>
 		</div>
-
-		<!--出库数量-->
 		
-		
-		<div class="modal " id="exquantity" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document" style="width:350px;top: 30%;" >
+		<!--双击拣货-->
+		<div class="modal " id="doublePick" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width:100px;top: 20%;right: 35%;" >
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
-						<h5 class="modal-title" id="myModalLabelFollow">出库数量</h5>
+						<h5 class="modal-title" id="myModalLabelFollow">拣货</h5>
 						
 					</div>
 
-					<div class="modal-body ">
+					<div class="modal-body " >
+						
+							<button style="margin-bottom: 30px;" type="button" id="btn_list" class="btn btn-primary" data-dismiss="modal"><span aria-hidden="true"></span>清单</button>		
+						
+						
+							<button style="margin-bottom: 30px;" type="button" id="btn_pick" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>拣货</button>
+						
+							<button style="margin-bottom: 30px;" type="button" id="btn_check" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>检验</button>
+						
+							<button style="margin-bottom: 30px;" type="button" id="btn_cancle" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>取消</button>
+						
+						
+						
+						
+							
 
-						<div class="form-group row">
-							<div class="col-md-9">
-
-								<input type="text" name="exquantity" class="form-control " id="exquantity">
-							</div>
-							<div class="col-md-3">
-								<button type="button" id="btn_submit" class="btn btn-primary btn_submit" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
-							</div>
-
-						</div>
+					</div>
 
 					</div>
 
 				</div>
-			</div>
 		</div>
 		
 	</body>
