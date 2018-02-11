@@ -19,11 +19,9 @@
 		<link href="css/toolbar.css" rel="stylesheet">
 		<!--datetimepicker-->
 		<link href="Tools/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-		
-		
+
 		<script type="text/javascript">
-		
-		var basePath = "<%=basePath %>";
+			var basePath = "<%=basePath %>";
 		</script>
 		<!--jquery-->
 		<script src="Tools/bootstrap-table-develop/docs/assets/js/jquery-3.2.1.js"></script>
@@ -40,12 +38,8 @@
 		<script src="Tools/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 		<script src="Tools/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 		<!--js-->
-		<script src="js/pickdetail/pickdetail.js"></script>
-		
-		
-		
-	    
-	    
+		<script src="js/excheck/excheck.js"></script>
+
 	</head>
 
 	<body>
@@ -67,7 +61,6 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					
 
 					<ul class="nav navbar-nav navbar-right">
 
@@ -79,7 +72,7 @@
 								<li>
 									<a href="#">更换账户</a>
 								</li>
-								
+
 								<li role="separator" class="divider"></li>
 								<li>
 									<a href="#">退出</a>
@@ -93,83 +86,41 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-
-
 		<!--表格显示主体-->
-		<table id="table" >
+		<table id="table">
 
 		</table>
 
 		<!--模态框-->
-		
-			
-		<!--拣货-->
-		<div class="modal fade" id="pick" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document" style="width:1000px">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title ">拣货</h4>
 
-					</div>
-
-					<form class="form-inline" role="form">
-						<div class="form-group">
-							<button id="btn_choseSearch" type="button" class="btn btn-default">
- 								<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>拣货
- 							</button>							
- 							<button id="btn_choseAdd" type="button" class="btn btn-default">
- 								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>取消
- 							</button>
- 							
- 							<label class="form-label" style="margin-left: 500px;">待拣数量:</label>
-							<input type="text" class="form-control" id="specifiationtype" readonly="readonly">
- 							
- 							
-						</div>
-					</form>
-
-					<table id="pickTable" class="table">
-
-					</table>
-
-				</div>
-			</div>
-		</div>
-		
-		<!--双击拣货-->
-		<div class="modal " id="doublePick" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document" style="width:100px;top: 20%;right: 35%;" >
+		<!--功能菜单-->
+		<div class="modal " id="menu" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width:110px;top: 20%;right: 35%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
 						<h5 class="modal-title" id="myModalLabelFollow">拣货</h5>
-						
-					</div>
-
-					<div class="modal-body " >
-						
-							<button style="margin-bottom: 30px;" type="button" id="btn_list" class="btn btn-primary" data-dismiss="modal"><span aria-hidden="true"></span>清单</button>		
-						
-						
-							<button style="margin-bottom: 30px;" type="button" id="btn_pick" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>拣货</button>
-						
-							<button style="margin-bottom: 30px;" type="button" id="btn_check" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>检验</button>
-						
-							<button style="margin-bottom: 30px;" type="button" id="btn_cancle" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>取消</button>
-						
-						
-						
-						
-							
 
 					</div>
 
+					<div class="modal-body ">
+
+						<button style="margin-bottom: 30px;" type="button" id="btn_checkReport" class="btn btn-primary" data-dismiss="modal"><span aria-hidden="true"></span>复核报告</button>
+
+						<button style="margin-bottom: 30px;" type="button" id="btn_checkFinish" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>复核完成</button>
+
+						<button style="margin-bottom: 30px;" type="button" id="btn_delete" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>删除选中</button>
+
+						<button style="margin-bottom: 30px;" type="button" id="btn_checkBack" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>复核回退</button>
+						
+						<button style="margin-bottom: 30px;" type="button" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>取消操作</button
 					</div>
 
 				</div>
+
+			</div>
 		</div>
-		
+
 		<!--拣货清单-->
 		<div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document" style="width:1000px">
@@ -187,7 +138,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</body>
 
 </html>

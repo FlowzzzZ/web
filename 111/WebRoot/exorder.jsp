@@ -107,7 +107,7 @@
  					</button>
 				</div>
 				<div class="col-md-2">
-					<select name="clientname" id="clientname" style="margin-left: 450px;height: 40px;width: 200px;">
+					<select name="clientname" id="clientname" style="margin-left: 400px;height: 40px;width: 200px;">
 						<option>test</option>
 					</select>
 				</div>
@@ -480,7 +480,7 @@
 			</div>
 		</div>
 
-		<!--当前可用库存-->
+		<!--选货-->
 		<div class="modal fade" id="chose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document" style="width:1000px">
 				<div class="modal-content">
@@ -502,8 +502,8 @@
 							<input type="text" class="form-control" id="specifiationtype">
 							<button id="btn_choseSearch" type="button" class="btn btn-default">
  								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>搜索
- 							</button>							
- 							<button id="btn_choseAdd" type="button" class="btn btn-default">
+ 							</button>
+							<button id="btn_choseAdd" type="button" class="btn btn-default">
  								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>添加
  							</button>
 						</div>
@@ -516,6 +516,58 @@
 				</div>
 			</div>
 		</div>
+
+		<!--序列-->
+		<div class="modal fade" id="sequence" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:500px">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title ">登记出库单的序列码</h4>
+
+					</div>
+
+					<div class="modal-body ">
+
+						<div class="col-md-2">
+							<label for="totalNumber">总数:</label>
+							<span id="totalNumber">
+						</span>
+
+						</div>
+						<div class="col-md-8 col-md-offset-2">
+							<button id="btn_sequenceCheck" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-check" aria-hidden="true"></span>复核
+ 						</button>
+							<button id="btn_sequenceComplete" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成
+ 						</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+						</button>
+							<button id="btn_sequenceRemove" type="button" class="btn btn-default">
+ 								<span class="glyphicon glyphicon-erase" aria-hidden="true"></span>清除
+ 						</button>
+
+						</div>
+
+						<div class="col-md-2">
+							<label for="batchnumber">批号</label>
+
+						</div>
+						<div class="col-md-10">
+							<select name="batchnumber" class="form-control able-delete " id="batchnumber">
+							</select>
+						</div>
+
+						<textarea style="width: 470px; height: 400px" id="textarea"></textarea>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 	</body>
 
 </html>

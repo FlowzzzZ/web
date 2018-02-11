@@ -355,7 +355,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-barcode"></a>';
+						return '<a class="glyphicon glyphicon-barcode" id="sequence-modal"></a>';
 					} //单元格内显示的方式
 				}, {
 					field: 'oprate_check',
@@ -944,6 +944,23 @@ var ButtonInit = function() {
 			$('#chose').modal('show');
 		});
 
+	
+		//序列
+		$('#sequence-modal').click(function() {
+			
+			//解除按钮绑定
+			$("#btn_sequenceCheck").unbind();
+			$("#btn_sequenceComplete").unbind();
+			$("#btn_sequenceRemove").unbind();
+			
+			//给按钮添加新事件
+			$("#btn_sequenceCheck").on("click", sequenceCheck);
+			$("#btn_sequenceComplete").on("click", sequenceComplete);
+			$("#btn_sequenceRemove").on("click", sequenceRemove);
+
+			$('#sequence').modal('show');
+		});
+	
 	};
 
 	return oInit;
@@ -1134,8 +1151,19 @@ var choseSearch = function() {
 };
 
 //选货添加
-var choseSearch = function() {
+var choseAdd = function() {
 	//do sth
-	
+};
 
+//序列复核
+var sequenceCheck = function() {
+	//do sth
+};
+//序列完成
+var sequenceComplete = function() {
+	//do sth
+};
+//序列清除
+var sequenceRemove = function() {
+	//do sth
 };

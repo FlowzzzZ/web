@@ -884,9 +884,11 @@
 
                 var title = text;
                 if (column.checkbox) {
-                    text = '';
+                    text='';
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<input name="btSelectAll" type="checkbox" />';
+//                      text = '<input name="btSelectAll" type="checkbox" id="myCheckboxHeader" />';
+						
+						text = '<img src="img/gear.jpg" width="70px" height="50px" id="myCheckboxHeader" />';
                     }
                     that.header.stateField = column.field;
                 }

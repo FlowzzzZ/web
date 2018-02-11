@@ -349,10 +349,12 @@ var ButtonInit = function() {
 			$(".form-control").val('');
 			$("#beginPrint").unbind();
 			$("#beginPrint").on("click", Export);
+			
 
 			$(document).on("show.bs.modal", ".modal", function() {
 				$(this).draggable({
-					handle: ".modal-header" // 只能点击头部拖动
+					handle: ".modal-header" ,// 只能点击头部拖动
+					
 				});
 				$(this).css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
 			});

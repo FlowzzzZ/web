@@ -161,7 +161,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-									return "<span class='glyphicon glyphicon-shopping-cart' id='exquantity-modal'></span>"+"</br>"+value;
+									return "<a class='glyphicon glyphicon-shopping-cart' id='exquantity-modal'></a>"+"</br>"+value;
 					
 					}
 
