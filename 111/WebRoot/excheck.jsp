@@ -34,6 +34,8 @@
 		<script src="Tools/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
 		<!--tableExport-->
 		<script src="Tools/tableExport.jquery.plugin-master/tableExport.js"></script>
+		<!--jquery-ui-->
+		<script src="Tools/jquery-ui-1.12.1/jquery-ui.js"></script>
 		<!--datetimepicker-->
 		<script src="Tools/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 		<script src="Tools/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
@@ -94,12 +96,12 @@
 		<!--模态框-->
 
 		<!--功能菜单-->
-		<div class="modal " id="menu" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document" style="width:110px;top: 20%;right: 35%;">
-				<div class="modal-content">
+		<div class="modal" id="menu" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width:110px;top: 20%;right:35%;">
+				<div class="modal-content" >
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
-						<h5 class="modal-title" id="myModalLabelFollow">拣货</h5>
+						<h5 class="modal-title" id="myModalLabelFollow">功能菜单</h5>
 
 					</div>
 
@@ -113,7 +115,7 @@
 
 						<button style="margin-bottom: 30px;" type="button" id="btn_checkBack" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>复核回退</button>
 						
-						<button style="margin-bottom: 30px;" type="button" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>取消操作</button
+						<button style="margin-bottom: 30px;" type="button" class="btn btn-primary " data-dismiss="modal"><span aria-hidden="true"></span>取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;&nbsp;&nbsp;</button>
 					</div>
 
 				</div>
@@ -121,23 +123,7 @@
 			</div>
 		</div>
 
-		<!--拣货清单-->
-		<div class="modal fade" id="list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document" style="width:1000px">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title ">拣货清单</h4>
-
-					</div>
-
-					<table id="listTable" class="table">
-
-					</table>
-
-				</div>
-			</div>
-		</div>
+		
 
 	</body>
 

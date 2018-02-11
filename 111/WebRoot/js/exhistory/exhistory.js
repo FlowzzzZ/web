@@ -270,7 +270,13 @@ var ButtonInit = function() {
 
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
-		var $table = $('#table')
+		var $table = $('#table');
+		$(document).on("show.bs.modal", ".modal", function() {
+				$('.modal-dialog').draggable({
+					handle: ".modal-header" // 只能点击头部拖动
+				});
+				$('#followPickExport').css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
+			});
 
 		//查询
 		$("#btn_search").click(function() {
@@ -332,12 +338,7 @@ var ButtonInit = function() {
 			$("#beginPrint").unbind();
 			$("#beginPrint").on("click", Export);
 
-			$(document).on("show.bs.modal", ".modal", function() {
-				$(this).draggable({
-					handle: ".modal-header" // 只能点击头部拖动
-				});
-				$(this).css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
-			});
+			
 			$('#followPickExport').modal('show');
 			$(".modal-backdrop").remove(); //移除modal背景，便于搜索时查看
 		})
@@ -351,13 +352,7 @@ var ButtonInit = function() {
 			$("#beginPrint").on("click", Export);
 			
 
-			$(document).on("show.bs.modal", ".modal", function() {
-				$(this).draggable({
-					handle: ".modal-header" ,// 只能点击头部拖动
-					
-				});
-				$(this).css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
-			});
+			
 			$('#followPickExport').modal('show');
 			$(".modal-backdrop").remove(); //移除modal背景，便于搜索时查看
 		})
