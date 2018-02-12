@@ -379,7 +379,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-bookmark"></a>';
+						return '<a class="glyphicon glyphicon-bookmark" id="expressRegister-modal"></a>';
 					} //单元格内显示的方式
 				},
 				{
@@ -960,6 +960,22 @@ var ButtonInit = function() {
 
 			$('#sequence').modal('show');
 		});
+		
+		
+		//快递
+		$('#expressRegister-modal').click(function() {
+			
+			//解除按钮绑定
+			$("#btn_save").unbind();
+			
+			
+			//给按钮添加新事件
+			
+			$("#btn_save").on("click", save);
+
+			$('#expressRegister').modal('show');
+		});
+		
 	
 	};
 
@@ -1166,4 +1182,8 @@ var sequenceComplete = function() {
 //序列清除
 var sequenceRemove = function() {
 	//do sth
+};
+
+
+var save = function() {
 };

@@ -1,9 +1,0 @@
-$doc.on('click', function(e) {
-            var pageX = e.pageX,
-                pageY = e.pageY;
-
-            $('#doublePick').css({
-                top: pageY,
-                left: pageX
-            });                    
-        });

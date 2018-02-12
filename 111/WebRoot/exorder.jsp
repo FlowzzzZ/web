@@ -568,6 +568,99 @@
 			</div>
 		</div>
 
+		<!--快递登记-->
+		<div class="modal fade" id="expressRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:500px">
+				<div class="modal-content">
+					<div class="modal-header">
+						
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h5class="modal-title ">快递登记</h4>
+						
+
+					</div>
+
+					<div class="modal-body ">
+						<div class="form-group row">
+							<div class="col-md-3">
+							<button type="button"  class="btn btn-primary" data-dismiss="modal" aria-label="Close" id="btn_save"><span aria-hidden="true">保存</span></button>
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="col-md-3">
+								<label for="clientname">运送方式</label>
+							</div>
+							<div class="col-md-9">
+								<select name="clientname" class="form-control able-delete clientname" id="clientname">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">
+								<label for="clientname">运输公司</label>
+							</div>
+							<div class="col-md-9">
+								<select name="clientname" class="form-control able-delete clientname" id="clientname">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">	
+								<label for="customerId">运单编号</label>
+							</div>
+							<div class="col-md-9">
+							<input type="text" name="customerId" class="form-control" id="customerId" placeholder="客户序号">
+							
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">
+								<label for="clientname">结算方式</label>
+							</div>
+							<div class="col-md-9">
+								<select name="clientname" class="form-control able-delete clientname" id="clientname">
+								</select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">	
+								<label for="customerId">联系人</label>
+							</div>
+							<div class="col-md-9">
+							<input type="text" name="customerId" class="form-control" id="customerId"  readonly="readonly">
+							
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">	
+								<label for="customerId">联系电话</label>
+							</div>
+							<div class="col-md-9">
+							<input type="text" name="customerId" class="form-control" id="customerId" readonly="readonly">
+							
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<div class="col-md-3">	
+								<label for="customerId">运送地址</label>
+							</div>
+							<div class="col-md-9">
+							<input type="text" name="customerId" class="form-control" id="customerId" readonly="readonly">
+							
+							</div>
+
+						</div>	
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 	</body>
 
 </html>
