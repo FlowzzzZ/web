@@ -18,7 +18,7 @@ var TableInit = function() {
 	oTableInit.Init = function() {
 
 		$('#table').bootstrapTable({
-			url: basePath + "/WmsExhistory/queryAllExhistory.action", //url一般是请求后台的url地址,调用ajax获取数据。
+//			url: basePath + "/WmsExhistory/queryAllExhistory.action", //url一般是请求后台的url地址,调用ajax获取数据。
 			method: "post", //使用post请求到服务器获取数据
 			dataType: "JSON", //发送数据类型
 			contentType: 'application/json', //接收数据类型
@@ -197,7 +197,8 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 				}
-			]
+			],
+			data:[{}]
 
 		});
 	};

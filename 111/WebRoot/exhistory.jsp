@@ -89,7 +89,7 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-		<div id="toolbar" class="btn-group">
+		<div id="toolbar" >
 			<button id="btn_search" type="button" class="btn btn-default">
  				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
  			</button>

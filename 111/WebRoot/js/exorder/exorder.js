@@ -739,6 +739,10 @@ var ButtonInit = function() {
 			//解除按钮绑定
 			$("#btn_submit").unbind();
 			//给按钮添加新事件
+			
+			$("#customername-modal").on("click", loadCustomerDate);
+			$("#fromaddress-modal").on("click", loadCustomerDate);
+			$("#toaddress-modal").on("click", loadCustomerDate);
 			$("#btn_submit").on("click", addProduct);
 			//展示modal
 			$('#myModal').modal('show');
@@ -1186,4 +1190,92 @@ var sequenceRemove = function() {
 
 
 var save = function() {
+};
+
+var loadCustomerDate=function(){
+	$('#customernameTable').bootstrapTable({
+//			url: basePath + "/WmsExhistory/queryAllExhistory.action", //url一般是请求后台的url地址,调用ajax获取数据。
+			method: "post", //使用post请求到服务器获取数据
+			dataType: "JSON", //发送数据类型
+			contentType: 'application/json', //接收数据类型
+
+			
+			
+			striped: true, //是否显示行间隔色
+			cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true, //是否显示分页（*）
+			sortable: true, //是否启用排序
+			
+			queryParams: customernameTable.queryParams, //传递参数（*）
+			sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+			pageNumber: 1, //初始化加载第一页，默认第一页
+			pageSize: 10, //每页的记录行数（*）
+			pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+			
+			showRefresh: false, //是否显示刷新按钮
+			minimumCountColumns: 2, //最少允许的列数
+			clickToSelect: true, //是否启用点击选中行
+			
+
+			
+			cardView: false, //是否显示详细视图
+			sortStable: true, //是否可排序
+			//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+			responseHandler: function(res) {
+				console.log(formatData(res));
+				return formatData(res);
+			},
+
+			//列名
+			columns: [
+				{
+					field: 'customername',
+					title: '客户名称',
+					align: "center",
+					valign: "middle",
+					
+					// visible:false
+
+				}, {
+					field: 'toaddress',
+					title: '送货地址',
+					align: "center",
+					valign: "middle",
+					
+				}, {
+					field: 'contactman',
+					title: '联系人',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					
+					field: 'contacttel',
+					title: '电话',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'businessscope',
+					title: '经营范围',
+					align: "center",
+					valign: "middle",
+					// visible:false
+				}
+			],
+			data:[{}]
+
+		});
+		customernameTable.queryParams = function(params) {
+
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					pageSize: params.limit, //页面大小
+					page: (params.offset / params.limit) + 1, //页码
+					
+
+				};
+
+				return temp;
+
+			};
 };

@@ -88,8 +88,8 @@
 		</nav>
 
 		<div id="toolbar">
-			<div class="form-group row">
-				<div class="col-md-10">
+			
+			
 					<button id="btn_add" type="button" class="btn btn-default">
  						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
  					</button>
@@ -105,14 +105,14 @@
 					<button id="btn_expressExport" type="button" class="btn btn-default">
  						<span class="glyphicon glyphicon-export" aria-hidden="true"></span>快递导出
  					</button>
-				</div>
-				<div class="col-md-2">
-					<select name="clientname" id="clientname" style="margin-left: 400px;height: 40px;width: 200px;">
+			
+				
+					<select name="clientname" id="clientname" style="margin-left:750px;height: 40px;width: 200px;">
 						<option>test</option>
 					</select>
-				</div>
+				
 
-			</div>
+			
 
 		</div>
 
@@ -196,8 +196,12 @@
 							<div class="col-md-2">
 								<label for="customername">客户名称</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 								<input type="text" name="customername" class="form-control" id="customername" placeholder="客户名称">
+
+							</div>
+							<div class="col-md-2">
+								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="customername-modal">选择</a>
 
 							</div>
 						</div>
@@ -206,8 +210,12 @@
 							<div class="col-md-2">
 								<label for="fromaddress">发货地址</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 								<input type="text" name="fromaddress" class="form-control" id="fromaddress" placeholder="发货地址">
+
+							</div>
+							<div class="col-md-2">
+								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="fromaddress-modal">选择</a>
 
 							</div>
 
@@ -217,8 +225,12 @@
 							<div class="col-md-2">
 								<label for="toaddress">送货地址</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-8">
 								<input type="text" name="toaddress" class="form-control" id="toaddress" placeholder="送货地址">
+
+							</div>
+							<div class="col-md-2">
+								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="toaddress-modal">选择</a>
 
 							</div>
 
@@ -657,6 +669,21 @@
 
 					</div>
 
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal" id="choseCustomername" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
+			<div class="modal-dialog" role="document" style="width:500x">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title" id="myModalLabel">请选择客户</h4>
+					</div>
+					
+					<table id="customernameTable"></table>
+					
 				</div>
 			</div>
 		</div>
