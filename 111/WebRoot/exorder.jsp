@@ -19,7 +19,8 @@
 		<link href="css/toolbar.css" rel="stylesheet">
 		<!--datetimepicker-->
 		<link href="Tools/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css" rel="stylesheet" />
-
+		<!--checkboxstyle-->
+		<link href="css/checkboxstyle.css" rel="stylesheet"/>
 		<script type="text/javascript">
 			var basePath = "<%=basePath %>";
 		</script>
@@ -40,6 +41,10 @@
 		<!--js-->
 		<script src="js/exorder/exorder.js"></script>
 		<script src="js/exorder/exorderdatepicker.js"></script>
+		
+		
+		
+		
 
 	</head>
 
@@ -107,7 +112,7 @@
  					</button>
 			
 				
-					<select name="clientname" id="clientname" style="margin-left:750px;height: 40px;width: 200px;">
+					<select name="clientname" id="clientname" style="margin-left:750;height: 40px;width: 200px;">
 						<option>test</option>
 					</select>
 				
@@ -139,7 +144,7 @@
 						<input type="hidden" name="exorderId" class="form-control " id="exorderId">
 
 						<div class="form-group row">
-							<div class="col-md-2">
+							<div class="col-md-2" >
 								<label for="exorderNumber">出库单编号</label>
 
 							</div>
@@ -266,13 +271,17 @@
 							</div>
 
 						</div>
-						<div class="form-group row">
+						<div class="form-group row ">
 							<div class="col-md-2">
 								<label for="isbonded">是否保税</label>
 							</div>
-							<div class="col-md-10">
-
-								<input type="checkbox" name="isbonded" class="form-control" id="isbonded">
+							<div class="col-md-10 checkbox-style">
+								<input type="checkbox" name="isbonded" class="form-control  " id="isbonded ">
+								<!--必须要有-->
+								<label></label>
+								
+		                      
+		                   
 							</div>
 
 						</div>
@@ -280,19 +289,21 @@
 							<div class="col-md-2">
 								<label for="ischecked">是否复核</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-10 checkbox-style">
 
 								<input type="checkbox" name="ischecked" class="form-control" id="ischecked">
+								<!--必须要有-->
+								<label></label>
 							</div>
 
 						</div>
 						<div class="form-group row">
-							<div class="col-md-2">
+							<div class="col-md-2 " >
 								<label for="storagetransportationrequirement">储运要求</label>
 							</div>
 							<div class="col-md-10">
-
 								<input type="text" name="storagetransportationrequirement" class="form-control" id="storagetransportationrequirement" placeholder="储运要求">
+								
 							</div>
 
 						</div>
@@ -300,9 +311,11 @@
 							<div class="col-md-2">
 								<label for="issupervision">是否监管</label>
 							</div>
-							<div class="col-md-10">
+							<div class="col-md-10 checkbox-style">
 
 								<input type="checkbox" name="issupervision" class="form-control" id="issupervision" placeholder="是否监管">
+								<!--必须要有-->
+								<label></label>
 							</div>
 
 						</div>
@@ -414,7 +427,7 @@
 							</div>
 							<div class="col-md-10">
 
-								<input type="text" name="makeorderdate" class="form-control date-picker" id="makeorderdate" placeholder="制单日期">
+								<input type="datetime" name="makeorderdate" class="form-control date-picker" id="makeorderdate" placeholder="制单日期">
 							</div>
 
 						</div>
@@ -679,7 +692,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-						<h4 class="modal-title" id="myModalLabel">请选择客户</h4>
+						<h4 class="modal-title" id="myModalLabel">请选择</h4>
 					</div>
 					
 					<table id="customernameTable"></table>

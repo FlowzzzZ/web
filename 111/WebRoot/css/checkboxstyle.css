@@ -1,0 +1,50 @@
+
+/*
+将初始的checkbox的样式改变
+*/
+.checkbox-style input[type="checkbox"] {
+    opacity: 0;/*将初始的checkbox隐藏起来*/
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+   
+}
+/*
+设计新的checkbox，位置
+*/
+.checkbox-style label:before {
+    content: '';
+    position: absolute;
+    
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid #bbb;
+    background: #fff;
+}
+/*
+点击初始的checkbox，将新的checkbox关联起来
+*/
+.checkbox-style input[type="checkbox"]:checked +label:after {
+    position: absolute;
+    display: inline-block;
+    font-family: 'FontAwesome';
+    content: '\2714';
+    top:50%;
+    left: 50.5%;
+    font-size: 30px;
+    line-height: 1;
+    width: 16px;
+    height: 16px;
+    color: #333;
+}
+.checkbox-style label {
+    cursor: pointer;
+    line-height: 1.2;
+    font-weight: normal;/*改变了rememberme的字体*/
+    margin-bottom: 0;
+    text-align: left;
+ }   
+

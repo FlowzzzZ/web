@@ -53,9 +53,9 @@ var TableInit = function() {
 
 			//列名
 			columns: [{
-
-					checkbox: true
-
+					
+					checkbox: true,
+					
 				},
 				{
 					field: 'exhistoryId',
@@ -81,7 +81,7 @@ var TableInit = function() {
 					valign: "middle",
 
 				}, {
-					//仅展示时候使用
+					
 					field: 'priid',
 					title: '原序号',
 					align: "center",

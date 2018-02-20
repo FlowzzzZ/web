@@ -480,7 +480,12 @@ var ButtonInit = function() {
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table')
-
+		//在模态框叠加时，防止关闭上层modal后下层modal滚动条消失
+			$('#choseCustomername').on('hidden.bs.modal', function () {  
+          		document.getElementsByTagName('body')[0].className = 'modal-open';  
+    	});  
+		
+		
 		//刷新
 
 		$('#btn_refresh').click(function() {
@@ -678,7 +683,7 @@ var ButtonInit = function() {
 			$("input[name='isbonded']").prop("checked", false);
 			$("input[name='issupervision']").prop("checked", false);
 			$("input[name='ischecked']").prop("checked", false);
-
+			
 			//动态加载下拉框
 			$.ajax({
 				type: "post",
@@ -739,6 +744,8 @@ var ButtonInit = function() {
 			//解除按钮绑定
 			$("#btn_submit").unbind();
 			//给按钮添加新事件
+			
+						
 			
 			$("#customername-modal").on("click", loadCustomerDate);
 			$("#fromaddress-modal").on("click", loadCustomerDate);

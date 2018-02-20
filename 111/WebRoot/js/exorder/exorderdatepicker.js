@@ -16,8 +16,8 @@ $('.date-picker ').datetimepicker({
 	todayHighlight: 1,
 	startView: 2,
 	minView: 0,
-	forceParse: 0
-        
+	forceParse: 0,
+	
 		
 });
 
@@ -35,7 +35,8 @@ $('.ENDate').datetimepicker({
 	todayHighlight: 1,
 	startView: 2,
 	minView: 2,
-	forceParse: 0
+	forceParse: 0,
+	todayHighlight: true
 	
         
 		
