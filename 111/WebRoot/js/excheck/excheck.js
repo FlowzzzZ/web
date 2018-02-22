@@ -63,6 +63,15 @@ var TableInit = function() {
 					// visible:false
 
 				}, {
+					field: 'check',
+					title: '复核',
+					align: "center",
+					valign: "middle",
+					formatter: function(value, row, index) {
+									return "<span class='glyphicon glyphicon-play' id='check-modal'></span>"
+					
+					}
+				},{
 					field: 'excheckNumber',
 					title: '出库复核编号',
 					align: "center",
@@ -175,10 +184,23 @@ var ButtonInit = function() {
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table');
-		$(document).on("show.bs.modal", ".modal", function() {
-				$('.modal-dialog').draggable();
-		$('#menu').css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
-		});
+		//拖动
+    	$(document).on("show.bs.modal", ".modal", function() {
+				$('.modal-dialog').draggable({
+					handle: ".modal-header" // 只能点击头部拖动
+				});
+				$('#followPickExport').css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
+			});
+		//复核
+		$('#check-modal').click(function(){	
+			$(".form-control").val('');
+			$("#btn_submit").unbind();
+			$("#checkinfo").change(function(){
+				var Temp = $("#checkinfo option:selected").text()
+				$("#textarea").html(Temp);
+				})
+			$('#check').modal('show');
+		})
 		
 		
 		

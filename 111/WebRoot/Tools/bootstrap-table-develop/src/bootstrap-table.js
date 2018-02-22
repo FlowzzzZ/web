@@ -888,7 +888,7 @@
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
 //                      text = '<input name="btSelectAll" type="checkbox" id="myCheckboxHeader" />';
 						
-						text = '<img src="img/gear.jpg" width="70px" height="50px" id="myCheckboxHeader" />';
+						text = '<img src="img/gear.jpg"id="myCheckboxHeader" class="img-responsive"/>';
                     }
                     that.header.stateField = column.field;
                 }

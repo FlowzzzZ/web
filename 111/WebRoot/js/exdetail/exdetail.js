@@ -343,7 +343,14 @@ var ButtonInit = function() {
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table')
-
+		//拖动
+    	$(document).on("show.bs.modal", ".modal", function() {
+				$('.modal-dialog').draggable({
+					handle: ".modal-header" // 只能点击头部拖动
+				});
+				$('#followPickExport').css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
+			});
+		
 		//删除
 
 		 //获取所选行的ID

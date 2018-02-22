@@ -32,6 +32,8 @@
 		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>
 		<script src="Tools/bootstrap-table-develop/src/extensions/toolbar/bootstrap-table-toolbar.js"></script>
 		<script src="Tools/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
+		<!--jquery-ui-->
+		<script src="Tools/jquery-ui-1.12.1/jquery-ui.js"></script>
 		<!--tableExport-->
 		<script src="Tools/tableExport.jquery.plugin-master/tableExport.js"></script>
 		<!--datetimepicker-->
@@ -40,7 +42,6 @@
 		<!--js-->
 		<script src="js/packingcontent/packingcontent.js"></script>
 		<script src="js/packingcontent/packingcontentdatepicker.js"></script>
-		
 
 	</head>
 
@@ -92,9 +93,9 @@
 			<button id="btn_choseBox" type="button" class="btn btn-default">
  				<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>选箱
  			</button>
-			<button  id="btn_packingBox" type="button" class="btn btn-default">
- 				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>装箱
- 			</button>
+			<a href="#packing" id="btn_packingBox" type="button" class="btn btn-default">
+				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>装箱
+			</a>
 			<button id="btn_complete" type="button" class="btn btn-default">
  				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成
  			</button>
@@ -127,28 +128,170 @@
 					<table id="choseBoxTable">
 
 					</table>
-					
+
+				</div>
+			</div>
+		</div>
+
+		<!--装箱-->
+		<div class="modal fade" id="packing" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width:700px">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title ">装箱内容</h4>
+
+					</div>
+
+					<div class="modal-body ">
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="boxId">箱号</label>
+
+							</div>
+							<div class="col-md-8">
+								<input type="text" name="boxId" class="form-control btn btn-default" id="boxId" readonly="readonly">
+							</div>
+							<div class="col-md-2">
+								<a data-toggle="modal" class="form-control btn btn-default" id="btn_choseBoxes" href="#packing-modal">选择箱子</a>
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="boxtype">箱型</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" name="boxtype" class="form-control " id="boxtype" readonly="readonly">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="specificationtype">规格</label>
+
+							</div>
+							<div class="col-md-8">
+								<input type="text" name="specificationtype" class="form-control " id="specificationtype" readonly="readonly">
+							</div>
+							<div class="col-md-2">
+								<a data-toggle="modal" name="btn_choseGoods" class="form-control btn btn-default" id="btn_choseGoods"  href="#choseGoods-modal">货品选择</a>
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="batchnumber">批号</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" name="batchnumber" class="form-control" id="batchnumber" readonly="readonly">
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="serialNumber">序列号</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" name="serialNumber" class="form-control" id="serialNumber" readonly="readonly">
+
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="packingquantity">装箱数量</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" name="packingquantity" class="form-control" id="packingquantity" placeholder="装箱数量">
+
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="packinginstruction">装箱说明</label>
+							</div>
+							<div class="col-md-10">
+								<input type="text" name="packinginstruction" class="form-control" id="packinginstruction" placeholder="装箱说明">
+
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="makeorderdate">制单日期</label>
+							</div>
+							<div class="col-md-10">
+
+								<input type="text" name="makeorderdate" class="form-control date-picker" id="makeorderdate">
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-md-2">
+								<label for="makeorderman">制单人</label>
+							</div>
+							<div class="col-md-10">
+								<select name="makeorderman" class="form-control able-delete makeorderman" id="makeorderman">
+								</select>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+						<button type="button" id="btn_submit" class="btn btn-primary btn_submit" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+					</div>
 
 				</div>
 			</div>
 		</div>
 		
 			
-			
-			
+		<!--<!--装箱界面-->
+		<!--选择箱子-->
+		<div class="modal fade" id="packing-modal" tabindex="-1" role="dialog" data-backdrop="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title">包装箱</h4>
 
+					</div>
 
+					<table id="boxIdTable">
+						
+					</table>
+
+				</div>
+			</div>
+		</div>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		<!--货品选择-->
+		<div class="modal fade" id="choseGoods-modal" tabindex="-1" role="dialog" data-backdrop="false">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title ">出库明细</h4>
+
+					</div>
+
+					<table id="choseGoodsTable">
+
+					</table>
+
+				</div>
+			</div>
+		</div>
 
 	</body>
 

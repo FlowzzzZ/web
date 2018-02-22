@@ -94,6 +94,119 @@
 		</table>
 
 		<!--模态框-->
+		
+		
+		<!--出库复核-->
+		<div class="modal fade" id="check" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width:700px">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title ">出库复核</h4>
+
+					</div>
+
+					<div class="modal-body ">
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="checkman">复核人</label>
+
+						</div>
+						<div class="col-md-10">
+							<input type="text" name="checkman" class="form-control" id="checkman" readonly="readonly">
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="checknumber">复核件数</label>
+
+						</div>
+						
+						<div class="col-md-10">
+							<input type="text" name="checknumber" class="form-control" id="checknumber" readonly="readonly">
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="conversionrate">换算率</label>
+
+						</div>
+						<div class="col-md-10">
+							<input type="text" name="conversionrate" class="form-control" id="conversionrate" readonly="readonly">
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="checkquantity">复合数量</label>
+
+						</div>
+						<div class="col-md-10">
+							<input type="text" name="checkquantity" class="form-control" id="checkquantity" >
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="checkresult">复核结果</label>
+
+						</div>
+						<div class="col-md-10">
+							<select name="checkresult" class="form-control able-delete " id="checkresult">
+								<option value="">===请选择===</option>
+								<option value="">合格</option>
+								<option value="">部分合格</option>
+								<option value="">不合格</option>
+							</select>
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="qualifiednumber">合格数量</label>
+
+						</div>
+						<div class="col-md-10">
+							<input type="text" name="qualifiednumber" class="form-control" id="qualifiednumber" >
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="unqualifiednumber">不合格数量</label>
+
+						</div>
+						<div class="col-md-10">
+							<input type="text" name="unqualifiednumber" class="form-control" id="unqualifiednumber" >
+						</div>
+						</div>
+						<div class="form-group row" >
+						<div class="col-md-2">
+							<label for="checkinfo">检验说明</label>
+
+						</div>
+						
+						<div class="col-md-10">
+							<select name="checkinfo" class="form-control able-delete " id="checkinfo">
+								<option value="">===请选择===</option>
+								<option value="">未见异常，检查合格</option>
+								<option value="">近效期，包装外观未见异常</option>
+								<option value="">不合格：包装出现破损，污染，封口不牢，封条损坏等问题</option>
+								<option value="">不合格：标签脱落，字迹模糊不清或者标示内容与实物不符</option>
+								<option value="">不合格：医疗器械超过有效期</option>
+								<option value="">不合格：存在其他异常情况的医疗器械</option>
+							</select>
+						</div>
+						</div>
+
+						<textarea class="form-control" rows="3" id="textarea" ></textarea>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+						<button type="button" id="btn_submit" class="btn btn-primary btn_submit" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 
 		<!--功能菜单-->
 		<div class="modal" id="menu" tabindex="-1" role="dialog">

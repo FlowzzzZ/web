@@ -33,6 +33,8 @@
 		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>
 		<script src="Tools/bootstrap-table-develop/src/extensions/toolbar/bootstrap-table-toolbar.js"></script>
 		<script src="Tools/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
+		<!--jquery-ui-->
+		<script src="Tools/jquery-ui-1.12.1/jquery-ui.js"></script>
 		<!--tableExport-->
 		<script src="Tools/tableExport.jquery.plugin-master/tableExport.js"></script>
 		<!--datetimepicker-->
@@ -206,7 +208,7 @@
 
 							</div>
 							<div class="col-md-2">
-								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="customername-modal">选择</a>
+								<a  data-toggle="modal" href="#choseCustomername" class="form-control btn btn-default" id="customername-modal">选择</a>
 
 							</div>
 						</div>
@@ -220,7 +222,7 @@
 
 							</div>
 							<div class="col-md-2">
-								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="fromaddress-modal">选择</a>
+								<a  data-toggle="modal" href="#choseCustomername" class="form-control btn btn-default" id="fromaddress-modal">选择</a>
 
 							</div>
 
@@ -235,7 +237,7 @@
 
 							</div>
 							<div class="col-md-2">
-								<a style="text-align: center" data-toggle="modal" href="#choseCustomername" class="form-control" id="toaddress-modal">选择</a>
+								<a  data-toggle="modal" href="#choseCustomername" class="form-control btn btn-default" id="toaddress-modal">选择</a>
 
 							</div>
 
@@ -585,7 +587,7 @@
 							</select>
 						</div>
 
-						<textarea style="width: 470px; height: 400px" id="textarea"></textarea>
+						<textarea class="form-control" rows="12" id="textarea"></textarea>
 
 					</div>
 
@@ -688,7 +690,7 @@
 		
 		
 		<div class="modal" id="choseCustomername" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
-			<div class="modal-dialog" role="document" style="width:500x">
+			<div class="modal-dialog" role="document" style="width:500px">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>

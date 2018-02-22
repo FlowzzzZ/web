@@ -32,6 +32,8 @@
 		<script src="Tools/bootstrap-table-develop/src/extensions/export/bootstrap-table-export.js"></script>
 		<script src="Tools/bootstrap-table-develop/src/extensions/toolbar/bootstrap-table-toolbar.js"></script>
 		<script src="Tools/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js"></script>
+		<!--jquery-ui-->
+		<script src="Tools/jquery-ui-1.12.1/jquery-ui.js"></script>
 		<!--tableExport-->
 		<script src="Tools/tableExport.jquery.plugin-master/tableExport.js"></script>
 		<!--datetimepicker-->

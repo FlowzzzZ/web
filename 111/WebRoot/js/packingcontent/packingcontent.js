@@ -169,6 +169,14 @@ var ButtonInit = function() {
 	oInit.Init = function() {
 		//初始化页面上面的按钮事件
 		var $table = $('#table');
+		//拖动
+    	$(document).on("show.bs.modal", ".modal", function() {
+				$('.modal-dialog').draggable({
+					handle: ".modal-header" // 只能点击头部拖动
+				});
+				$('#followPickExport').css("overflow", "hidden"); // 防止出现滚动条，出现的话，你会把滚动条一起拖着走的
+			});
+		
 		
 
 
@@ -282,9 +290,14 @@ var ButtonInit = function() {
 
 
 			//解除按钮绑定
+			
+			
 			$("#btn_submit").unbind();
 			//给按钮添加新事件
+			$("#btn_choseBoxes").on("click", choseBox);
+			$("#btn_choseGoods").on("click", choseGoods);
 			$("#btn_submit").on("click", addProduct);
+			
 			//展示modal
 			$('#packing').modal('show');
 
@@ -374,49 +387,21 @@ var addProduct = function() {
 	//提交的数据
 	var product = {
 		
-		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
-		explanNumber: $("#explanNumber").val(),
-		shipperId: $("#clientname").val(),
-		customerId: $("#customerId").val(),
-		customername: $("#customername").val(),
-		fromaddress: $("#fromaddress").val(),
-
-		toaddress: $("#toaddress").val(),
-		exdate: $("#exdate").val(),
-		businesstype: $("#businesstype option:selected").val(),
-		isbonded: (function() {
-			if($('#isbonded').is(':checked')) {
-
-				
-				return 1
-			} else return 0;
-		})(),
-
-		storagetransportationrequirement: $("#storagetransportationrequirement").val(),
-		issupervision: (function() {
-			if($('#issupervision').is(':checked')) {
-
-				
-				return 1
-			} else return 0;
-		})(),
-		customernumber: $("#customernumber").val(),
-		serviceId: $("#servicename").val(),
-		servicename: $('#servicename option:eq(' + $("#servicename").val() + ')').text(),
-		contactman: $("#contactman").val(),
-		contacttel: $("#contacttel").val(),
-		planstatus: $("#planstatus option:selected").val(),
-		exorderquantity: $("#exorderquantity").val(),
-		remark: $("#remark").val(),
-		makeorderdate: $("#makeorderdate").val(),
-		makeorderman: $("#makeorderman").val(),
-		storehouseId: $("#storehouseId").val(),
-		storehousename: $('#storehouseId option:eq(' + $("#storehouseId").val() + ')').text(),
 		
-		express: $("#express").val(),
-		shippingmethod: $("#shippingmethod").val(),
-		clearingform: $("#clearingform").val(),
-		expressnumber: $("#expressnumber").val()
+		boxId: $("#boxId").val(),
+		boxtype: $("#boxtype").val(),
+		specificationtype: $("#specificationtype").val(),
+		batchnumber: $("#batchnumber").val(),
+		serialNumber: $("#serialNumber").val(),
+
+		packingquantity: $("#packingquantity").val(),
+		packinginstruction: $("#packinginstruction").val(),
+		
+		
+
+		makeorderdate: $("#makeorderdate").val(),
+		makeorderman: $("#makeorderman option:selected").val(),
+		
 
 	};
 	$.ajax({
@@ -444,101 +429,169 @@ var addProduct = function() {
 }
 
 
-//编辑保存
-var editProduct = function() {
 
-	
-	//提交数据
-	var product = {
-		clientname: $('#clientname option:eq(' + $("#clientname").val() + ')').text(),
-		explanId: $("#explanId").val(),
-		explanNumber: $("#explanNumber").val(),
-		shipperId: $("#clientname").val(),
-		customerId: $("#customerId").val(),
-		customername: $("#customername").val(),
-		fromaddress: $("#fromaddress").val(),
-		toaddress: $("#toaddress").val(),
-		exdate: $("#exdate").val(),
-		businesstype: $("#businesstype option:selected").val(),
-		isbonded: (function() {
-			if($('#isbonded').is(':checked')) {
-				return 1
-			} else return 0;
-		})(),
 
-		storagetransportationrequirement: $("#storagetransportationrequirement").val(),
-		issupervision: (function() {
-			if($('#issupervision').is(':checked')) {
-				return 1
-			} else return 0;
-		})(),
-		customernumber: $("#customernumber").val(),
-		serviceId: $("#servicename").val(),
-		contactman: $("#contactman").val(),
-		contacttel: $("#contacttel").val(),
 
-		planstatus: $("#planstatus option:selected").val(),
-		exorderquantity: $("#exorderquantity").val(),
-		remark: $("#remark").val(),
-		makeorderdate: $("#makeorderdate").val(),
-		makeorderman: $("#makeorderman").val(),
-		storehouseId: $("#storehouseId").val(),
-		express: $("#express").val(),
-		shippingmethod: $("#shippingmethod").val(),
-		clearingform: $("#clearingform").val(),
-		expressnumber: $("#expressnumber").val()
+var choseBox=function(){
+	$('#boxIdTable').bootstrapTable({
+				//			url: basePath + "/Wmsexdetail/queryAllexdetail.action", //url一般是请求后台的url地址,调用ajax获取数据。
+				method: "post", //使用post请求到服务器获取数据
+				dataType: "JSON", //发送数据类型
+				contentType: 'application/json', //接收数据类型
 
-	};
+				striped: true, //是否显示行间隔色
+				cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+				pagination: true, //是否显示分页（*）
+				sortable: true, //是否启用排序
+				sortName: 'boxNumber', //排序类型
+				sortOrder: "asc", //排序方式
+				queryParams: boxIdTable.queryParams, //传递参数（*）
+				sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+				pageNumber: 1, //初始化加载第一页，默认第一页
+				pageSize: 10, //每页的记录行数（*）
+				pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+				minimumCountColumns: 2, //最少允许的列数
+				uniqueId: "boxNumber", //每一行的唯一标识，一般为主键列
+				sortStable: true, //是否可排序
+				//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+				responseHandler: function(res) {
 
-	$.ajax({
+					return formatData(res);
+				},
 
-		type: "post",
-		url: basePath + "/WmsExplan/editExplan.action",
-		contentType: "application/json",
-		data: JSON.stringify(product),
+				//列名
+				columns: [{
+					field: 'boxNumber', 
+					title: '箱号',
+					align: "center",
+					valign: "middle",
 
-		success: function(data) {
+				}, {
+					field: 'boxtype',
+					title: '箱型',
+					align: "center",
+					valign: "middle",
 
-			if(data !== null) {
+				}, {
+					field: 'state', 
+					title: '状态',
+					align: "center",
+					valign: "middle",
+					width: '200'
 
-				alert('修改成功');
-				
-				$("#table").bootstrapTable('refresh', {
-					url: basePath + "/WmsExplan/queryExplanByCriteria.action",
-					silent: true
-				});
-				$("#myModal").modal('hide');
+				}, {
+					field: 'zhouzhuanxiang', //未知
+					title: '周转箱',
+					align: "center",
+					valign: "middle",
 
-			}
-		},
-		error: function(err) {
-			alert('服务器异常，请稍后再试！');
-			console.log("error：", err.statusText);
-		}
-	})
-};
+				}
+				],
+				data: [{
+					goodsId: "10086"
+				}]
 
-//提交搜索
-var searchProduct = function() {
-	//在搜索前将页面跳至第一页，防止无法显示（eg.搜索结果只有两页数据，你在第三页进行搜索，结果会无法显示）
-	$('#table').bootstrapTable('selectPage', 1);
-	//提交的数据
-	var product = {
+			});
+			boxIdTable.queryParams = function(params) {
 
-		customername: $("#customername1").val(),
-		customernumber: $("#customernumber1").val(),
-		startTime: $("#ENDate1").val(),
-		endTime: $("#ENDate2").val(),
-		orderBy: "explanId",
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					pageSize: params.limit, //页面大小
+					page: (params.offset / params.limit) + 1, //页码
+					orderBy: "boxNumber",
+					sortOrder: params.order,
+					
+				};
 
-	};
-	
-	$("#table").bootstrapTable('refresh',
-			{
-			url: basePath + "/WmsExplan/queryExplanByCriteria.action?"
-			}
-			)
-	
-	
+				return temp;
 
-};
+			};
+//			
+			
+			
+}
+var choseGoods=function(){
+	$('#choseGoodsTable').bootstrapTable({
+				//			url: basePath + "/Wmsexdetail/queryAllexdetail.action", //url一般是请求后台的url地址,调用ajax获取数据。
+				method: "post", //使用post请求到服务器获取数据
+				dataType: "JSON", //发送数据类型
+				contentType: 'application/json', //接收数据类型
+
+				striped: true, //是否显示行间隔色
+				cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+				pagination: true, //是否显示分页（*）
+				sortable: true, //是否启用排序
+				sortName: 'boxNumber', //排序类型
+				sortOrder: "asc", //排序方式
+				queryParams: choseGoodsTable.queryParams, //传递参数（*）
+				sidePagination: "server", //分页方式：client客户端分页，server服务端分页（*）当服务器分页时候注意传来数据的格式
+				pageNumber: 1, //初始化加载第一页，默认第一页
+				pageSize: 10, //每页的记录行数（*）
+				pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+				minimumCountColumns: 2, //最少允许的列数
+				uniqueId: "boxNumber", //每一行的唯一标识，一般为主键列
+				sortStable: true, //是否可排序
+				//将你从服务端收到的数据,转换为bootstrap-table 能接受的格式
+				responseHandler: function(res) {
+
+					return formatData(res);
+				},
+
+				//列名
+				columns: [{
+					field: 'goodsname', 
+					title: '名称',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'specifiationtype',
+					title: '规格',
+					align: "center",
+					valign: "middle",
+
+				}, {
+					field: 'batchnumber', 
+					title: '批号',
+					align: "center",
+					valign: "middle",
+					
+
+				}, {
+					field: 'serialNumber', 
+					title: '序列号',
+					align: "center",
+					valign: "middle",
+
+				},{
+					field: 'pickquantity',
+					title: '拣货数量',
+					align: "center",
+					valign: "middle",
+
+				},{
+					field: 'packingquantity',
+					title: '装箱数量',
+					align: "center",
+					valign: "middle",
+
+				}
+				],
+				data: [{
+					goodsId: "10086"
+				}]
+
+			});
+			choseGoodsTable.queryParams = function(params) {
+
+				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+					pageSize: params.limit, //页面大小
+					page: (params.offset / params.limit) + 1, //页码
+					orderBy: "boxNumber",
+					sortOrder: params.order,
+					
+				};
+
+				return temp;
+
+			};
+}
