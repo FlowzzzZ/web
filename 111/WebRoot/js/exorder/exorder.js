@@ -331,7 +331,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-list"></a>';
+						return '<a href="exdetail.jsp" class="glyphicon glyphicon-list"></a>';
 					} //单元格内显示的方式
 				}, {
 					field: 'oprate_chose',
@@ -347,7 +347,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-hand-up"></a>';
+						return '<a href="pickdetail.jsp" class="glyphicon glyphicon-hand-up"></a>';
 					} //单元格内显示的方式
 				}, {
 					field: 'oprate_sequence',
@@ -363,7 +363,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-check"></a>';
+						return '<a href="excheck.jsp" class="glyphicon glyphicon-check"></a>';
 					} //单元格内显示的方式
 				}, {
 					field: 'oprate_packing',
@@ -371,7 +371,7 @@ var TableInit = function() {
 					align: "center",
 					valign: "middle",
 					formatter: function(value, row, index) {
-						return '<a href="' + value + '" class="glyphicon glyphicon-shopping-cart"></a>';
+						return '<a href="packingcontent.jsp" class="glyphicon glyphicon-shopping-cart"></a>';
 					} //单元格内显示的方式
 				}, {
 					field: 'oprate_express',

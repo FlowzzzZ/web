@@ -114,7 +114,7 @@
  					</button>
 			
 				
-					<select name="clientname" id="clientname" style="margin-left:750;height: 40px;width: 200px;">
+					<select name="clientname" id="clientname" style="height: 40px;width: 200px;position: relative;left: 120%;" >
 						<option>test</option>
 					</select>
 				
@@ -546,7 +546,7 @@
 
 		<!--序列-->
 		<div class="modal fade" id="sequence" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document" style="width:500px">
+			<div class="modal-dialog" role="document" style="width:550px">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -555,11 +555,11 @@
 					</div>
 
 					<div class="modal-body ">
-
+				
 						<div class="col-md-2">
 							<label for="totalNumber">总数:</label>
 							<span id="totalNumber">
-						</span>
+							</span>
 
 						</div>
 						<div class="col-md-8 col-md-offset-2">
